@@ -1,0 +1,10 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+.DS_Store
+
+# Local env / secrets - never commit real Firebase keys
+.env
+src/config/firebase.local.js

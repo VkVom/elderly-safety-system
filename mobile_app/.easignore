@@ -1,0 +1,19 @@
+# Exclude heavy/unnecessary files from the EAS Build upload archive.
+# (EAS re-installs node_modules on the build server, so we never need to upload them.)
+node_modules/
+.expo/
+dist/
+web-build/
+
+# Build artifacts
+*.apk
+*.aab
+
+# Logs / scratch
+*.log
+_make_assets.py
+_validate.js
+
+# Nothing below mobile_app needs the Python side, but guard anyway in case of nesting:
+**/venv/
+**/__pycache__/

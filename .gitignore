@@ -216,3 +216,69 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- Elderly Safety System: project-specific ----
+# Model weights (downloaded automatically on first run)
+models/
+*.task
+*.pt
+*.onnx
+
+# Local test media (large binaries; keep the folder via .gitkeep)
+data/manual_test_videos/*
+!data/manual_test_videos/.gitkeep
+
+# Saved annotated frames from the visual inspection tool
+output/
+
+# Runtime alert logs from the escalation gateway
+logs/
+
+# Firebase service-account key (SECRET - never commit)
+firebase-service-account.json
+*-firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# Local Firebase / cloud credentials and signing material
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+mobile_app/google-services.json
+mobile_app/GoogleService-Info.plist
+
+# Node / Expo local state and native build output
+**/node_modules/
+**/.expo/
+**/.expo-shared/
+**/.parcel-cache/
+**/.turbo/
+**/.next/
+mobile_app/android/
+mobile_app/ios/
+mobile_app/dist/
+mobile_app/web-build/
+
+# Local datasets and generated feature arrays are too large for the source repo.
+# Keep only documentation and explicit directory placeholders in Git.
+data/raw_datasets/*
+!data/raw_datasets/
+!data/raw_datasets/DATASETS_README.md
+data/processed_features/*
+!data/processed_features/
+data/manual_test_videos/*
+!data/manual_test_videos/
+!data/manual_test_videos/.gitkeep
+*.mp4
+*.avi
+*.mov
+*.npy
+*.npz
+*.jpg
+*.jpeg
+*.png
+!mobile_app/assets/*.png

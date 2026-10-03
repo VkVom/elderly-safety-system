@@ -1,0 +1,18 @@
+# Phase 1 (M1) verified dependency set - latest versions, no conflicts.
+# M1 uses the modern MediaPipe Tasks API (PoseLandmarker), so mediapipe>=1.0.0
+# is required (the legacy mp.solutions.* API is not present in 1.x).
+
+opencv-python>=4.8.0
+mediapipe>=1.0.0
+ultralytics>=8.0.0
+numpy>=1.26.0
+scipy>=1.11.0
+torch>=2.2.0
+onnx>=1.16.0
+onnxruntime>=1.16.0
+streamlit>=1.32.0
+plotly>=5.18.0
+pandas>=2.0.0
+pillow>=10.0.0
+requests>=2.31.0
+firebase-admin>=6.5.0

@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "INSIGHT-Fall Safety",
+    "slug": "insight-fall-safety",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F8FAFC"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.insight.fallsafety"
+    },
+    "android": {
+      "package": "com.insight.fallsafety",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0D9488"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "792ec601-55f0-42ff-9456-1edfa21c2508"
+      }
+    },
+    "owner": "vkvom",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/792ec601-55f0-42ff-9456-1edfa21c2508"
+    }
+  }
+}
