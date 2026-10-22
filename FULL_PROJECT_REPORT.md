@@ -1,0 +1,948 @@
+# INSIGHT-Fall: Proactive Elderly Safety System
+## Complete Project Report — G14 Team
+
+---
+
+## Table of Contents
+
+1. [Project Overview](#1-project-overview)
+2. [System Architecture](#2-system-architecture)
+3. [Repository Layout](#3-repository-layout)
+4. [Module 1 — Perception Engine (M1)](#4-module-1--perception-engine-m1)
+5. [Module 2 — Kinematic Extractor (M2)](#5-module-2--kinematic-extractor-m2)
+6. [Module 3 — Temporal Neural Model (M3)](#6-module-3--temporal-neural-model-m3)
+7. [Module 4 — Decision State Machine (M4)](#7-module-4--decision-state-machine-m4)
+8. [Escalation Gateway](#8-escalation-gateway)
+9. [Live Runner (run_live.py)](#9-live-runner-run_livepy)
+10. [Dataset Pipeline](#10-dataset-pipeline)
+11. [Training & Evaluation](#11-training--evaluation)
+12. [Streamlit Dashboard](#12-streamlit-dashboard)
+13. [Mobile App — INSIGHT-Fall Safety](#13-mobile-app--insight-fall-safety)
+14. [Firebase / Cloud Backend](#14-firebase--cloud-backend)
+15. [Model Performance Metrics](#15-model-performance-metrics)
+16. [False-Alarm Suppression Design](#16-false-alarm-suppression-design)
+17. [Build & Deployment](#17-build--deployment)
+18. [Known Limitations & Next Steps](#18-known-limitations--next-steps)
+19. [Environment & Dependencies](#19-environment--dependencies)
+20. [Complete File Reference](#20-complete-file-reference)
+
+---
+
+## 1. Project Overview
+
+**INSIGHT-Fall** is a proactive, AI-powered fall-detection and alerting system designed for elderly residents in care settings. Unlike reactive systems that detect a fall after the person has hit the ground, INSIGHT-Fall anticipates falls in the pre-impact window (~0.5 s before impact) and immediately escalates to a linked caretaker's phone.
+
+### Core Design Goals
+- **Accuracy** — high sensitivity (low miss rate) with minimal false alarms
+- **Real-time** — 28–40 FPS live inference on a CPU laptop
+- **Privacy** — raw video frames are never stored or transmitted; only keypoint skeletons and derived features flow downstream
+- **Reliability** — Firestore-backed cloud alerts reach the caretaker phone even if the monitoring PC is across the building
+- **Role-based** — separate UX for Elder, Caretaker, and Volunteer roles
+
+### End-to-End Flow
+```
+Camera / IP stream
+      │
+      ▼
+  M1 Perception  ──── 33 skeleton keypoints + furniture bboxes
+      │
+      ▼
+  M2 Kinematics  ──── 72-D scale-normalised feature vector / frame
+      │
+      ▼
+  M3 Neural Model ─── P(fall) probability per 15-frame window (~0.5 s)
+      │
+      ▼
+  M4 State Machine ── deterministic fall confirmation (CONFIRMING window 2.5 s)
+      │
+      ▼
+  Escalation Gateway ─ writes alert doc to Firestore `alerts` collection
+      │
+      ▼
+  Mobile App ─────── caretaker's phone pops live modal (vibration + countdown)
+```
+
+---
+
+## 2. System Architecture
+
+### Pipeline Modules
+
+| Module | File | Responsibility |
+|--------|------|---------------|
+| M1 | `src/m1_perception.py` | MediaPipe PoseLandmarker (33 keypoints) + YOLOv8n furniture detection |
+| M2 | `src/m2_kinematics.py` | Scale-normalised 72-D kinematic feature vector |
+| M3 | `src/m3_temporal_model.py` | 1D-CNN + GRU fall probability classifier |
+| M4 | `src/m4_state_machine.py` | Deterministic state machine with false-alarm suppression |
+| ESC | `src/escalation.py` | Alert record builder, Firestore + local JSON sinks |
+
+### Supporting Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `run_live.py` | Main live runner — camera/video/IP stream → Firestore alerts |
+| `train_m3.py` | M3 training with full metrics report |
+| `evaluate_m3.py` | Train deployed (in-domain) model, produce metric JSON |
+| `extract_dataset_features.py` | Build `data/processed_features/` from Le2i + GMDCSA24 |
+| `export_onnx.py` | Export ONNX with parity verification |
+| `dashboard/app.py` | Streamlit live HUD for demo/testing |
+| `test_firebase_sync.py` | Write a mock alert to Firestore (no camera needed) |
+| `clear_firestore.py` | Clear `alerts` collection between test runs |
+| `test_m4_runner.py` | Run M4 scenarios headlessly |
+
+### Mobile App (React Native / Expo)
+
+- Location: `mobile_app/`
+- 3 role-based UX flows: Elder, Caretaker, Volunteer
+- Firebase Auth + Firestore real-time listeners
+- Built with EAS (Expo Application Services)
+- APK (v1.0.0): `https://expo.dev/artifacts/eas/sE801WDGRcxAUKbdJlnq0Zx4gv-eh2PVdVj4csxcpLw.apk`
+
+---
+
+## 3. Repository Layout
+
+```
+elderly-safety-system/
+├── src/
+│   ├── m1_perception.py        # M1 – camera & pose & furniture
+│   ├── m2_kinematics.py        # M2 – 72-D feature extraction
+│   ├── m3_temporal_model.py    # M3 – CNN+GRU model + buffer
+│   ├── m4_state_machine.py     # M4 – fall state machine
+│   └── escalation.py           # Alert gateway + Firestore sink
+│
+├── models/
+│   ├── m3_temporal_fall.pt     # Trained PyTorch weights
+│   ├── m3_temporal_fall.onnx   # ONNX runtime model (parity-checked)
+│   ├── m3_norm.npz             # Z-score normalisation stats
+│   ├── m3_metrics.json         # Full metric report (generated by evaluate_m3.py)
+│   ├── pose_landmarker_lite.task   # MediaPipe model
+│   └── yolov8n.pt              # YOLOv8 nano
+│
+├── data/
+│   ├── raw_datasets/
+│   │   ├── le2i_frames/        # Le2i dataset (train/val splits, ~120k frames)
+│   │   └── gmdcsa24/           # GMDCSA24 (4 subjects, Fall + ADL videos)
+│   └── processed_features/     # Extracted windows (X_train/val.npy, etc.)
+│
+├── mobile_app/
+│   ├── App.js
+│   ├── app.json                # Expo config (EAS projectId, adaptiveIcon teal)
+│   ├── eas.json
+│   ├── .easignore
+│   ├── package.json
+│   ├── assets/                 # icon.png, adaptive-icon.png, splash.png
+│   └── src/
+│       ├── config/firebase.js  # Firebase init + long-polling fix
+│       ├── context/AuthContext.js
+│       ├── navigation/AppNavigator.js
+│       ├── theme.js            # Design system (palette, type, spacing)
+│       ├── services/linking.js # Pairing code logic
+│       ├── components/         # Button, Card, TextField, BigButton, StatusBadge
+│       └── screens/
+│           ├── auth/           # Login, Signup, RoleSetup
+│           ├── elder/          # ElderHome, SOSModal, CancelAlert
+│           ├── caretaker/      # CaretakerHome, AlertModal, ActiveResponse,
+│           │                   # AlertHistory, ElderDetails
+│           └── volunteer/      # VolunteerHome, DispatchModal
+│
+├── dashboard/
+│   ├── app.py                  # Streamlit live HUD
+│   └── pipeline.py             # Pipeline wrapper for dashboard
+│
+├── logs/                       # alerts.json (local fallback)
+├── run_live.py
+├── train_m3.py
+├── evaluate_m3.py
+├── extract_dataset_features.py
+├── export_onnx.py
+├── test_firebase_sync.py
+├── test_m4_runner.py
+├── clear_firestore.py
+├── requirements.txt
+└── firebase-service-account.json  (gitignored – never commit)
+```
+
+---
+
+## 4. Module 1 — Perception Engine (M1)
+
+**File:** `src/m1_perception.py`
+
+### Responsibility
+M1 is the sole human authority. It ingests raw camera frames and outputs:
+- 33 3D skeletal keypoints (MediaPipe PoseLandmarker) — visibility-flagged
+- Furniture context bounding boxes (YOLOv8n) — bed, couch, chair only; person class deliberately dropped
+- Quality flags for downstream modules
+
+### Key Design Decisions
+
+**MediaPipe Tasks API (modern):** Uses `PoseLandmarker` (not the legacy `mp.solutions.pose`). The `.task` model is auto-downloaded on first use.
+
+**Single human authority:** Person detections from YOLO are explicitly discarded (`class_id == 0` dropped). Only furniture bounding boxes pass through. This is architecturally enforced — YOLO cannot influence human pose tracking.
+
+**Furniture context grouping:**
+```
+chair  → "seat"          (unusual to lie down on)
+couch  → "rest_surface"  (normal to lie on, suppresses false alarms)
+bed    → "rest_surface"  (normal to lie on, suppresses false alarms)
+```
+
+**FurnitureMemoryTracker:** Furniture is static. YOLO runs every 15 frames; memory persists boxes for 120 frames (~4 s). When a person sits/falls onto the furniture and occludes it, the cached box stays available for M4's suppression logic.
+
+**PerceptionTracker:** When pose is briefly lost (1–2 frames, e.g. during a floor impact), the last valid skeleton is held (marked `pose_status = "HELD"`). This prevents M2/M3 buffer resets on 1-frame flickers. After `hold_buffer_max = 2` frames, status becomes "LOST" and M2 resets — keeping the system honest.
+
+**Privacy principle:** `del frame_bgr` is called at the end of `process_frame`. No reference to raw RGB pixels is retained after the call returns.
+
+### Processing per frame
+```
+frame (BGR)
+  → cvtColor to RGB → MediaPipe → 33 keypoints (x, y, z, visibility)
+  → PerceptionTracker.evaluate_and_smooth() → smoothed keypoints + quality dict
+  → YOLOv8 (every 15th frame) → furniture detections → FurnitureMemoryTracker
+  → return (keypoints, furniture_boxes, quality_flags)
+```
+
+### Performance
+- MediaPipe Lite on CPU: ~10–15 ms/frame
+- YOLOv8n (every 15th frame): averaged ~2 ms/frame
+- No GPU required
+
+---
+
+## 5. Module 2 — Kinematic Extractor (M2)
+
+**File:** `src/m2_kinematics.py`
+
+### Responsibility
+Converts M1 keypoints into a fixed 72-D scale-normalised feature vector per frame that M3 can classify.
+
+### Feature Vector Layout (72 elements)
+
+| Indices | Content |
+|---------|---------|
+| 0–65 | 33 landmarks × (x, y) — hip-centred, scale-normalised |
+| 66 | Trunk tilt angle from vertical (radians) |
+| 67 | Hip-centre vertical velocity (normalised units/s) |
+| 68 | Hip-centre horizontal velocity |
+| 69 | Shoulder-centre vertical velocity |
+| 70 | Centre-of-mass vertical velocity |
+| 71 | Hip-centre jerk magnitude |
+
+### Scale Normalisation
+All positions are:
+1. Recentred on the hip midpoint (L_HIP + R_HIP / 2)
+2. Divided by torso length (shoulder-centre to hip-centre distance)
+
+This makes features invariant to the subject's distance from the camera and body size — critical for generalising across people and rooms.
+
+### Kinematic Derivation
+- **Velocities** are computed via finite difference against the previous valid frame, in the normalised (non-hip-centred) coordinate frame. This correctly captures body descent across the image rather than trivially measuring 0 velocity at the hip centre.
+- **Jerk** is the change in hip acceleration between consecutive frames, requiring 2 prior samples. Jerk spikes characterise hard floor impacts.
+
+### Honest Gap Handling
+When M1 reports pose LOST (keypoints = None), M2 calls `reset()` — clearing velocity history. It returns `valid=False` with a zero vector. This is the correct behaviour: stale velocities must never bridge a tracking gap.
+
+### Key Landmarks
+```python
+L_SHOULDER, R_SHOULDER = 11, 12
+L_HIP, R_HIP = 23, 24
+COM_LANDMARKS = [11, 12, 23, 24, 25, 26, 27, 28]  # shoulders, hips, knees, ankles
+```
+
+---
+
+## 6. Module 3 — Temporal Neural Model (M3)
+
+**File:** `src/m3_temporal_model.py`
+
+### Architecture: 1D-CNN + GRU
+
+```
+Input: (batch, 15, 72)   — 15 frames × 72 features (0.5 s at 30 FPS)
+
+Conv1D(72 → 64, kernel=3, padding=1) → BN → ReLU
+Conv1D(64 → 64, kernel=3, padding=1) → BN → ReLU
+
+GRU(64 → 64, num_layers=2, dropout=0.3)  — integrates trajectory
+
+Dropout(0.3) → Linear(64 → 32) → ReLU → Linear(32 → 1)
+
+Output: (batch, 1) raw logit → sigmoid → P(fall)
+```
+
+**Design rationale:**
+- 1D-CNN over the time axis catches short-burst velocity/jerk spikes marking fall onset
+- 2-layer GRU integrates the full trajectory across the 0.5 s window
+- Fixed batch=1 ONNX export — dynamic batch axis corrupts the GRU and yields constant ~0.5 output (documented footgun, guarded by `_verify_onnx_parity()`)
+
+### Model Size
+- Parameters: ~93,000 (lightweight, CPU-only inference)
+- Inference latency: ~0.09 ms/window on CPU
+
+### TemporalBufferManager
+Rolling deque of `SEQ_LEN = 15` consecutive valid M2 frames:
+- Returns a `(15, 72)` window only when full
+- Resets on any `valid=False` frame (no bridging across tracking gaps)
+
+### ONNX Export Guard
+```python
+# IMPORTANT: fixed batch=1, dynamo=False
+# Dynamic batch axis corrupts GRU → constant ~0.5 output (verified bug)
+torch.onnx.export(model, dummy, path, ..., dynamo=False)
+_verify_onnx_parity(model, path, ...)  # asserts max logit diff < 1e-3
+```
+
+The self-test exports to a **throwaway TEMP path** — never overwrites the trained model. (A prior regression was caused by the self-test overwriting `models/m3_temporal_fall.onnx` with an untrained model.)
+
+---
+
+## 7. Module 4 — Decision State Machine (M4)
+
+**File:** `src/m4_state_machine.py`
+
+### States
+
+```
+STAND_WALK              ← normal, default
+PRE_FALL                ← balance loss detected (latched 1.5 s)
+CONFIRMING              ← person went down; waiting to confirm it's a real fall
+FALL_IMPACT             ← confirmed fall (alert fired)
+POSE_LOST_WHILE_FALLEN  ← occluded fall (pose lost after PRE_FALL)
+POST_FALL_MONITOR       ← person down; monitoring for recovery or long-lie
+LONG_LIE_ALERT          ← prone > 10 s → secondary escalation
+```
+
+### State Transition Logic
+
+**PRE_FALL entry** (from STAND_WALK) — any of:
+- M3 probability > 0.40
+- Downward velocity > 1.2 units/s AND trunk tilt > 35°
+
+**CONFIRMING** (the key false-alarm fix):
+After detecting a fall candidate (impact or occluded), the engine waits `confirm_s = 2.5 s`.
+- If the person **gets back up** (tilt < 35°) within 2.5 s → silently return to STAND_WALK, **NO alert**
+- If the person **stays down** past 2.5 s → alert fires (`alert=True`)
+
+This single mechanism eliminates bending/exercise/stumble false alarms. The person must stay down for 2.5 s before any notification is sent.
+
+**Bed/couch suppression** (rest_surface):
+- If the person becomes horizontal AND `on_rest_surface = True` → `rest_suppressed = True`
+- Suppression is ACTIVE unless M3 probability > 0.70 AND vertical velocity > 1.2 units/s (a genuine fall onto the bed still passes through)
+
+### Tunable Thresholds (M4Config)
+| Parameter | Default | Meaning |
+|-----------|---------|---------|
+| `pre_fall_p` | 0.40 | M3 probability to enter PRE_FALL |
+| `pre_fall_vy` | 1.2 | Downward velocity (normalised/s) |
+| `pre_fall_tilt` | 35° | Tilt accompanying velocity trigger |
+| `pre_fall_latch_s` | 1.5 s | PRE_FALL memory duration |
+| `impact_p` | 0.70 | M3 probability for direct FALL_IMPACT |
+| `impact_tilt` | 60° | Near-horizontal threshold |
+| `impact_jerk` | 1500 | Hard impact jerk magnitude |
+| `confirm_s` | 2.5 s | Stay-down confirmation window |
+| `long_lie_s` | 10 s | Long-lie alert threshold |
+
+### `body_on_rest_surface()`
+```python
+# True if hip point is within (or slightly outside) any 'rest_surface' bounding box.
+# Margin of 20% of box size handles a reclining person whose hip sits just above
+# the detected mattress box.
+```
+
+---
+
+## 8. Escalation Gateway
+
+**File:** `src/escalation.py`
+
+### Alert Record Schema
+```json
+{
+  "alertId": "ALERT_a3f8c2e10b9d",
+  "elderId": "G1H0IbdS2jNwPkAFoJh0AU1LzEv1",
+  "elderName": "Eld",
+  "roomLocation": "200",
+  "eventType": "FALL_IMPACT",
+  "status": "CREATED",
+  "fallProbability": 0.94,
+  "postureState": "HORIZONTAL_FLOOR",
+  "furnitureContext": "open_floor",
+  "assignedCaretakerId": "muVzd5SCsZfszl5CARv89faE3lo2",
+  "acknowledgedBy": null,
+  "escalatedToVolunteers": false,
+  "escalationTimerStart": "2026-09-30T10:30:00+00:00",
+  "timestamp": "2026-09-30T10:30:00+00:00"
+}
+```
+
+### Alert Sinks
+
+**LocalJsonSink** — always active, no credentials needed
+- Appends to `logs/alerts.json`
+- Useful for offline testing / debugging
+
+**FirestoreSink** — active when `firebase-service-account.json` is present
+- Writes to `alerts/{alertId}` in Firestore
+- Mobile app's `onSnapshot` listeners detect the new doc within ~1 s
+
+### De-duplication
+Each `(event_type)` has a cooldown (default 10 s in `run_live.py`). Repeated FALL_IMPACT events within 10 s emit only one alert record.
+
+### Escalation Events
+```python
+ESCALATION_EVENTS = {"FALL_IMPACT", "POSE_LOST_WHILE_FALLEN", "LONG_LIE_ALERT", "MANUAL_SOS"}
+```
+PRE_FALL transitions do not emit alerts (they are internal state only).
+
+---
+
+## 9. Live Runner (run_live.py)
+
+### Usage
+```powershell
+# Webcam
+& .\venv\Scripts\python.exe run_live.py --camera --elder G1H0IbdS2jNwPkAFoJh0AU1LzEv1
+
+# Video file
+& .\venv\Scripts\python.exe run_live.py --video path/to/clip.mp4 --elder <UID>
+
+# IP Webcam (phone camera on same Wi-Fi)
+& .\venv\Scripts\python.exe run_live.py --url "http://192.168.1.5:8080/video" --elder <UID>
+
+# No Firestore (local JSON only)
+& .\venv\Scripts\python.exe run_live.py --camera --no-firestore
+
+# List all linked elders
+& .\venv\Scripts\python.exe run_live.py --list-elders
+```
+
+### Live HUD Overlay
+The OpenCV preview window shows:
+- Full MediaPipe skeleton (yellow edges, green/red joints)
+- YOLOv8 furniture bounding boxes (orange = cached, blue = fresh)
+- Semi-transparent telemetry panel: elder name/room, M4 state, P(fall) bar, trunk tilt bar, Vy bar, FPS
+- Red "EMERGENCY EVENT RECORDED" banner when a confirmed alert is recorded. This confirms event creation only; phone delivery is asynchronous and must be checked on the device.
+
+### Current Linked Accounts
+```
+Elder: "Eld"   UID: G1H0IbdS2jNwPkAFoJh0AU1LzEv1  Room: 200  Code: SAFE-Q7X9
+Caretaker: "Caret"  UID: muVzd5SCsZfszl5CARv89faE3lo2
+```
+
+---
+
+## 10. Dataset Pipeline
+
+### Datasets Used
+
+#### Le2i Fall Detection Dataset (primary, in-domain)
+- **Location:** `data/raw_datasets/le2i_frames/`
+- **Structure:** `{train,val}/{Blank,Stand,Lie,Likefall,Fall}/{clip}/NNN.jpg`
+- **Labels:** Fall → 1; Blank/Stand/Lie/Likefall → 0 (Likefall = hard negatives)
+- **Size after extraction:** 24,135 train windows / 7,766 val windows
+- **Fall windows:** 3,140 train / 851 val
+- **FPS assumed:** 25 FPS
+
+#### GMDCSA24 Dataset (secondary, OOD benchmark)
+- **Location:** `data/raw_datasets/gmdcsa24/Subject N/{Fall,ADL}/*.mp4`
+- **4 subjects:** Subjects 1–3 → train; Subject 4 → held-out OOD val
+- **ADL clips** contain sleeping, sitting, bed-reading, walking — exactly the activities that must NOT trigger alarms
+- **Fall clips** use kinematic auto-labelling (tilt ≥ 60° AND vy ≥ 2.0) because video-level labels are too coarse
+
+### Feature Extraction (`extract_dataset_features.py`)
+For each clip:
+1. Read frames in sorted order
+2. M1 (per-frame re-init) → skeleton keypoints
+3. M2 → 72-D feature vector
+4. Buffer: SEQ_LEN=15 consecutive valid frames → one (15, 72) window
+5. Label by class folder
+6. Any tracking gap resets the buffer (no bridging)
+
+Outputs saved to `data/processed_features/`:
+```
+X_train.npy  (N_train, 15, 72)
+y_train.npy  (N_train,)
+groups_train.npy  (N_train,)  — clip-level group IDs
+X_val.npy, y_val.npy, groups_val.npy
+norm_stats.json  — z-score mean/std from TRAIN only
+meta.json
+```
+
+---
+
+## 11. Training & Evaluation
+
+### Training Strategy (Deployed Model)
+
+**Decision: In-domain Le2i, not combined**
+
+Early experiment with combined Le2i + GMDCSA24 training gave F1 0.43 cross-subject due to:
+- GMDCSA24 Subject 4 is a genuinely hard OOD case (different camera angle, lighting, activity mix)
+- Kinematic auto-labelling of fall clips introduces noisy labels
+- Real deployment uses a FIXED camera for a SPECIFIC elder — in-domain performance is what matters
+
+The deployed model trains on **Le2i train split only** and is evaluated on Le2i val (in-domain) and GMDCSA24 Subject 4 (OOD).
+
+### Training Script (`train_m3.py`)
+```powershell
+& .\venv\Scripts\python.exe train_m3.py --epochs 60 --loss bce
+```
+- Loss: weighted BCE (`pos_weight = neg/pos`, accounts for class imbalance)
+- Optimizer: Adam (lr=1e-3, weight_decay=1e-4)
+- Scheduler: ReduceLROnPlateau on val AUC (factor=0.5, patience=5)
+- Best model saved by highest val AUC
+- Outputs: `models/m3_temporal_fall.pt`, `.onnx`, `m3_norm.npz`
+
+### Evaluation Script (`evaluate_m3.py`)
+Trains the deployed model AND produces the full metric report:
+```powershell
+& .\venv\Scripts\python.exe evaluate_m3.py
+```
+Outputs `models/m3_metrics.json` with in-domain + OOD results.
+
+---
+
+## 12. Streamlit Dashboard
+
+**File:** `dashboard/app.py`
+
+```powershell
+& .\venv\Scripts\python.exe -m streamlit run dashboard/app.py
+```
+
+Features:
+- Dropdown: select one of 3 test clips (chair fall, bed lie-down ADL, low-light fall)
+- Playback speed control (0.5×–4×), render throttle slider
+- Live annotated video (skeleton + furniture boxes)
+- M4 state badge (colour-coded)
+- P(fall) progress bar (green/yellow/red)
+- Trunk tilt, Vy, Jerk metric cards
+- Alert event log (last 10 alerts from `logs/dashboard_alerts.json`)
+- Performance: render decoupled from processing — every frame is processed, browser updated every N frames
+
+---
+
+## 13. Mobile App — INSIGHT-Fall Safety
+
+### Stack
+- React Native (Expo SDK 51)
+- Firebase JS SDK v10 (Auth + Firestore)
+- React Navigation v6
+- EAS Build (preview profile → APK)
+
+### App Configuration
+```json
+{
+  "name": "INSIGHT-Fall Safety",
+  "slug": "insight-fall-safety",
+  "version": "1.0.0",
+  "android": {
+    "package": "com.insight.fallsafety",
+    "adaptiveIcon": { "backgroundColor": "#0D9488" }
+  },
+  "extra": { "eas": { "projectId": "792ec601-55f0-42ff-9456-1edfa21c2508" } },
+  "owner": "vkvom"
+}
+```
+
+### Screens
+
+#### Auth Flow
+| Screen | File | Description |
+|--------|------|-------------|
+| LoginScreen | `screens/auth/LoginScreen.js` | Email/password sign-in with friendly error messages |
+| SignupScreen | `screens/auth/SignupScreen.js` | Role selection (elder/caretaker/volunteer) + pairing code generation for elders |
+| RoleSetupScreen | `screens/auth/RoleSetupScreen.js` | Elder: share pairing code, set room; Caretaker: enter code, confirm, link; Volunteer: ready message |
+
+#### Elder Flow
+| Screen | File | Description |
+|--------|------|-------------|
+| ElderHomeScreen | `screens/elder/ElderHomeScreen.js` | Pulsing shield "Safety Active", giant SOS button, caretaker call card, pairing code (if not linked) |
+| SOSModal | `screens/elder/SOSModal.js` | Manual SOS trigger (writes MANUAL_SOS alert to Firestore) |
+| CancelAlertScreen | `screens/elder/CancelAlertScreen.js` | "I'm OK" — elder cancels the escalation before timer expires |
+
+#### Caretaker Flow
+| Screen | File | Description |
+|--------|------|-------------|
+| CaretakerHomeScreen | `screens/caretaker/CaretakerHomeScreen.js` | Live alert list (onSnapshot), linked elder card, status banner ("All clear" or active alert count) |
+| CaretakerAlertModal | `screens/caretaker/CaretakerAlertModal.js` | Full-screen emergency: flashing header, vibration, 20 s countdown, alert telemetry table |
+| ActiveResponseScreen | `screens/caretaker/ActiveResponseScreen.js` | Post-acknowledge view; mark resolved |
+| AlertHistoryScreen | `screens/caretaker/AlertHistoryScreen.js` | Past alerts for the linked elder |
+| ElderDetailsScreen | `screens/caretaker/ElderDetailsScreen.js` | Elder profile: name, room, pairing code |
+
+#### Volunteer Flow
+| Screen | File | Description |
+|--------|------|-------------|
+| VolunteerHomeScreen | `screens/volunteer/VolunteerHomeScreen.js` | On-duty toggle, community alert feed |
+| VolunteerDispatchModal | `screens/volunteer/VolunteerDispatchModal.js` | Accept/decline an escalated emergency |
+
+### Key Implementation Details
+
+#### Firebase Config (`src/config/firebase.js`)
+```javascript
+// Login persistence across app restarts
+initializeAuth(app, { persistence: getReactNativePersistence(AsyncStorage) })
+
+// Firestore long-polling (CRITICAL for React Native)
+// Default WebChannel transport causes frequent "RPC Listen stream transport errored"
+// on mobile. Long-polling makes onSnapshot listeners reliable.
+initializeFirestore(app, { experimentalForceLongPolling: true })
+```
+
+#### AuthContext (`src/context/AuthContext.js`)
+- `onAuthStateChanged` → triggers profile subscription
+- `onSnapshot(doc(db, "users", uid))` → live profile updates
+- `profileLoaded` flag: distinguishes "loading" from "no profile" (orphan accounts)
+- `refreshProfile()` for after role setup changes
+
+#### AppNavigator (`src/navigation/AppNavigator.js`)
+Routing logic:
+```
+loading / profilePending → Loading screen (branded splash)
+no user / orphan         → AuthStack (Login → Signup → RoleSetup)
+role not set up          → RoleSetupOnly
+role = elder             → ElderStack
+role = caretaker         → CaretakerStack
+role = volunteer         → VolunteerStack
+```
+
+#### Pairing / Linking Service (`src/services/linking.js`)
+- Elders get a `SAFE-XXXX` pairing code at signup (no ambiguous chars: O/0/I/1)
+- Caretaker enters the code → `findElderByCode()` → confirm → `linkCaretakerByCode()`
+- Link writes both user docs atomically (Firestore `writeBatch`)
+- Elder doc gets: `caretakerId`, `caretakerName`, `caretakerPhone`
+- Caretaker doc gets: `assignedElderId`, `assignedElderName`, `assignedElderRoom`
+
+#### Design System (`src/theme.js`)
+- Palette: teal brand (#0D9488), red emergency (#DC2626), off-white bg (#F8FAFC)
+- Typography: body baseline 18px (accessibility — large for aging eyes)
+- Touch targets: elder screens use 64px minimum (vs standard 48px)
+- Teal emergency is structurally forbidden — red reserved exclusively for active alerts/SOS
+
+#### Live Alert Detection (CaretakerHomeScreen)
+```javascript
+const q = query(collection(db, "alerts"), where("elderId", "==", elderId));
+onSnapshot(q, (snap) => {
+  const list = snap docs where status === "CREATED"
+  // New alert not seen before → navigate to CaretakerAlertModal
+  if (!seenRef.current.has(alert.id)) {
+    navigation.navigate("CaretakerAlert", { alert });
+  }
+});
+```
+The `seenRef` prevents re-navigating to already-seen alerts on Firestore reconnect.
+
+#### CaretakerAlertModal
+- Vibration: `[0, 600, 300, 600]` repeating pattern on mount
+- Flashing red header (Animated.Value interpolation)
+- 20-second countdown timer
+- On expire: marks `escalatedToVolunteers: true`, navigates back
+- "I'm Coming": marks `status: "ACKNOWLEDGED"`, navigates to ActiveResponse
+
+### Branding / Logo
+- Custom logo generated with Pillow: teal shield (#0D9488) + checkmark + heart
+- `assets/icon.png`, `adaptive-icon.png`, `splash.png`, `favicon.png`
+- Adaptive icon background: `#0D9488`
+- Splash background: `#F8FAFC`
+- Loading screen: branded (teal, shield icon, "INSIGHT-Fall", tagline "Keeping watch, with care")
+
+---
+
+## 14. Firebase / Cloud Backend
+
+### Project
+- **Firebase Project:** `insight-fall-safety`
+- **Project ID:** `insight-fall-safety`
+- **App ID:** `1:542353623576:web:207dc95e1a599e8a50916d`
+
+### Collections
+
+#### `users/{uid}`
+```
+uid, name, email, phone, role (elder|caretaker|volunteer)
+pairingCode         (elders only, e.g. "SAFE-Q7X9")
+roomLocation        (elders)
+caretakerId         (elders, set when a caretaker links)
+caretakerName
+caretakerPhone
+assignedElderId     (caretakers)
+assignedElderName
+assignedElderRoom
+pushToken           (placeholder, for future FCM)
+createdAt
+```
+
+#### `alerts/{alertId}`
+```
+alertId, elderId, elderName, roomLocation
+eventType           (FALL_IMPACT | POSE_LOST_WHILE_FALLEN | LONG_LIE_ALERT | MANUAL_SOS)
+status              (CREATED | ACKNOWLEDGED | RESOLVED)
+fallProbability
+postureState        (HORIZONTAL_FLOOR | OBSCURED_LIKELY_DOWN | PROLONGED_LYING | UNKNOWN)
+furnitureContext    (open_floor | seat | rest_surface | manual)
+assignedCaretakerId
+acknowledgedBy      (caretaker UID, set on acknowledge)
+escalatedToVolunteers (bool)
+escalationTimerStart
+timestamp
+```
+
+### Security Rules
+Currently open test mode (allow all read/write). Production-hardening is a pending task.
+
+---
+
+## 15. Model Performance Metrics
+
+### Deployed Model: In-Domain (Le2i Val)
+
+| Metric | Value |
+|--------|-------|
+| ROC-AUC | **0.997** |
+| Accuracy | 0.983 |
+| Precision | 1.000 |
+| Recall | 0.957 |
+| Specificity | 1.000 |
+| F1 Score | **0.978** |
+
+**Confusion Matrix (threshold 0.5):**
+```
+TP=47   FP=0   FN=2   TN=69
+```
+Zero false positives on the Le2i validation set. Missed 2 fall windows out of 49.
+
+### Out-of-Distribution (GMDCSA24 Subject 4) — Honest Report
+
+| Metric | Value |
+|--------|-------|
+| ROC-AUC | 0.760 |
+| F1 Score | 0.290 |
+
+**Why it's lower:** Subject 4 is a completely unseen subject with different camera angle, lighting conditions, and activity mix. The kinematic auto-labelling of fall clips also introduces noise. OOD performance on a genuinely different setting is an honest representation of real-world generalisation challenges.
+
+### Runtime Performance
+
+| Metric | Value |
+|--------|-------|
+| M3 inference latency | ~0.09 ms/window |
+| Full pipeline FPS | 28–40 FPS on CPU |
+| Hardware | Laptop CPU (no GPU) |
+
+---
+
+## 16. False-Alarm Suppression Design
+
+Three mechanisms work together to eliminate false alarms:
+
+### 1. M4 CONFIRMING State (primary mechanism)
+Any fall candidate (kinematic impact or occluded fall) enters a 2.5 s confirmation window.
+- **Bending down to pick something up:** recovers in <1 s → no alert
+- **Exercise / squats:** repeated up-down motion → tilt recovers → no alert
+- **Stumbles that self-correct:** stand back up → no alert
+- **Genuine fall:** person stays down → alert fires after 2.5 s
+
+### 2. Rest Surface Suppression
+- `on_rest_surface = True` when hip point is within/near a bed/couch bounding box
+- Rest suppression ACTIVE: horizontal posture on a rest_surface does NOT trigger PRE_FALL
+- Exception: if M3 probability > 0.70 AND vertical velocity > 1.2 (strong fall signal), suppression is overridden — a genuine fall onto a bed still fires
+- Also applies in CONFIRMING: if person is horizontal on a rest_surface, abort the alert (they're lying down, not fallen)
+- **Sleeping in bed:** suppressed ✓
+- **Rolling over in bed (pose lost):** suppressed ✓
+- **Falling onto a bed:** passes through (strong kinematic signal) ✓
+
+### 3. YOLO Furniture Memory
+Bed/couch boxes persist in memory for 120 frames (~4 s) even when occluded by the person's body. The M4 suppressor keeps working even when YOLO can no longer see the furniture because the person is lying on top of it.
+
+---
+
+## 17. Build & Deployment
+
+### Python Backend
+
+```powershell
+# Install dependencies
+& .\venv\Scripts\python.exe -m pip install -r requirements.txt
+
+# Extract features (needs datasets at data/raw_datasets/)
+& .\venv\Scripts\python.exe extract_dataset_features.py
+
+# Train model
+& .\venv\Scripts\python.exe evaluate_m3.py
+
+# Run live detection
+& .\venv\Scripts\python.exe run_live.py --camera --elder G1H0IbdS2jNwPkAFoJh0AU1LzEv1
+
+# Run dashboard
+& .\venv\Scripts\python.exe -m streamlit run dashboard/app.py
+```
+
+### Mobile App
+
+```powershell
+# Install JS dependencies
+cd mobile_app
+npm install
+
+# Start Expo dev server (for testing in Expo Go)
+npx expo start
+
+# Build APK with EAS
+npx eas build --platform android --profile preview --non-interactive
+```
+
+### Current APK (v1.0.0)
+```
+URL: https://expo.dev/artifacts/eas/sE801WDGRcxAUKbdJlnq0Zx4gv-eh2PVdVj4csxcpLw.apk
+Build ID: 16411059-a6f4-47be-8c7b-620d39fc3455
+EAS Project: 792ec601-55f0-42ff-9456-1edfa21c2508
+Owner: vkvom
+```
+
+### EAS Build Profile (`eas.json`)
+- **preview**: generates a standalone `.apk` (no Play Store required, direct install)
+- **production**: would generate an `.aab` for Play Store
+
+### `.easignore`
+Excludes `node_modules/`, `venv/`, `.git/`, data/models directories (large binary files), logs. Does NOT exclude `android/` or `ios/` — those are needed by EAS for native builds.
+
+---
+
+## 18. Known Limitations & Next Steps
+
+### What Works Today ✅
+- Full M1→M2→M3→M4→Escalation pipeline
+- Live Firestore write on real fall detection
+- Mobile app: 3 roles, pairing code linking, live alert modal (foreground)
+- Login persistence (AsyncStorage)
+- False-alarm fixes: CONFIRMING window + rest_surface suppression
+- Preview APK built and downloadable
+- Streamlit dashboard
+
+### What Doesn't Work Yet (Known Gaps) ⚠️
+
+| Gap | Impact | Fix Plan |
+|-----|--------|----------|
+| Background/locked-phone push notifications | Caretaker must have app in FOREGROUND to receive alerts | expo-notifications + FCM + Cloud Function (requires Firebase Blaze plan) |
+| No alarm sound on alert modal | No audio alert | expo-av (grouped with push notification work) |
+| Firestore security rules open | Security risk in production | Add role-based Firestore rules |
+| OOD performance low (F1 0.29) | Less accurate for very different camera setups | More diverse training data, cross-subject training |
+| Single caretaker per elder | Can't handle shift changes | Multi-caretaker support in `users` schema |
+| No offline fallback | If Firestore unreachable, local JSON only | Retry queue in escalation gateway |
+
+### Next Milestone: Locked-Phone Push Notifications
+1. Upgrade Firebase project to Blaze plan (billing card required)
+2. Install `expo-notifications` (already in package.json)
+3. On app start: request permission → get Expo push token → save to `users/{uid}.pushToken`
+4. Cloud Function: triggers on `alerts` collection write → sends Expo push to `assignedCaretakerId`'s push token
+5. `expo-av`: play alarm sound in CaretakerAlertModal when push is received
+6. New EAS build to include native notification module
+
+---
+
+## 19. Environment & Dependencies
+
+### Python (venv)
+- **Python:** 3.12.10
+- **Location:** `.\venv\Scripts\python.exe`
+
+```
+opencv-python>=4.8.0
+mediapipe>=1.0.0
+ultralytics>=8.0.0
+numpy>=1.26.0
+scipy>=1.11.0
+torch>=2.2.0
+onnx>=1.16.0
+onnxruntime>=1.16.0
+streamlit>=1.32.0
+plotly>=5.18.0
+pandas>=2.0.0
+pillow>=10.0.0
+requests>=2.31.0
+firebase-admin>=6.5.0
+```
+
+### Node / JS
+- **Node:** v23.10
+- **npm:** 11.11
+- **Expo SDK:** 51
+- **React Native:** 0.74.5
+
+### Key JS Dependencies
+```json
+{
+  "@react-native-async-storage/async-storage": "1.23.1",
+  "@react-navigation/native": "^6.1.18",
+  "@react-navigation/native-stack": "^6.11.0",
+  "expo": "~51.0.0",
+  "expo-notifications": "~0.28.0",
+  "firebase": "^10.12.0",
+  "react": "18.2.0",
+  "react-native": "0.74.5",
+  "react-native-safe-area-context": "4.10.5",
+  "react-native-screens": "~3.31.1"
+}
+```
+
+### OS
+- Windows 11, PowerShell
+
+---
+
+## 20. Complete File Reference
+
+### Backend Python
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| `src/m1_perception.py` | ~280 | Perception: MediaPipe pose + YOLOv8 furniture |
+| `src/m2_kinematics.py` | ~180 | 72-D kinematic feature extractor |
+| `src/m3_temporal_model.py` | ~200 | 1D-CNN+GRU model, buffer, ONNX export |
+| `src/m4_state_machine.py` | ~260 | Fall state machine with false-alarm suppression |
+| `src/escalation.py` | ~220 | Alert gateway, Firestore sink, record schema |
+| `run_live.py` | ~170 | Main live detection runner |
+| `train_m3.py` | ~140 | M3 training script |
+| `evaluate_m3.py` | ~130 | Deployed model training + full metric report |
+| `extract_dataset_features.py` | ~200 | Dataset feature extraction pipeline |
+| `export_onnx.py` | ~30 | Standalone ONNX export |
+| `dashboard/app.py` | ~170 | Streamlit visual dashboard |
+| `dashboard/pipeline.py` | ~80 | Pipeline wrapper for dashboard |
+| `test_firebase_sync.py` | ~60 | Mock alert writer |
+| `test_m4_runner.py` | ~80 | M4 scenario runner |
+| `clear_firestore.py` | ~30 | Clear alerts collection |
+
+### Mobile App (src/)
+
+| File | Purpose |
+|------|---------|
+| `config/firebase.js` | Firebase init, long-polling, auth persistence |
+| `context/AuthContext.js` | Auth state, live profile, login persistence |
+| `navigation/AppNavigator.js` | Role-based routing, loading screen |
+| `theme.js` | Full design system (palette, type, spacing, shadows) |
+| `services/linking.js` | Pairing code generation, elder–caretaker linking |
+| `screens/auth/LoginScreen.js` | Sign-in |
+| `screens/auth/SignupScreen.js` | Registration + role selection |
+| `screens/auth/RoleSetupScreen.js` | Role-specific onboarding |
+| `screens/elder/ElderHomeScreen.js` | Elder dashboard (SOS, caretaker call) |
+| `screens/elder/SOSModal.js` | Manual SOS |
+| `screens/elder/CancelAlertScreen.js` | "I'm OK" cancel |
+| `screens/caretaker/CaretakerHomeScreen.js` | Live alert dashboard + onSnapshot |
+| `screens/caretaker/CaretakerAlertModal.js` | Emergency modal (vibrate, countdown, ACK) |
+| `screens/caretaker/ActiveResponseScreen.js` | Post-ACK response screen |
+| `screens/caretaker/AlertHistoryScreen.js` | Alert history list |
+| `screens/caretaker/ElderDetailsScreen.js` | Elder profile view |
+| `screens/volunteer/VolunteerHomeScreen.js` | Volunteer dashboard |
+| `screens/volunteer/VolunteerDispatchModal.js` | Dispatch accept/decline |
+| `components/Button.js` | Branded button (variants: primary, secondary, success, ghost) |
+| `components/BigButton.js` | Large action button for elder screens |
+| `components/Card.js` | Themed card container (tone: safe/danger/neutral) |
+| `components/TextField.js` | Labelled input with icon |
+| `components/ScreenContainer.js` | Scroll/safe area wrapper |
+| `components/StatusBadge.js` | Coloured status pill |
+
+---
+
+*Report generated: September 30, 2026*
+*System version: 1.0.0 (APK Build 16411059)*
+*G14 Team — Praveen (M1), Vinay (M2), Prajwal (M3), VK (M4 + Escalation + Mobile + Integration)*

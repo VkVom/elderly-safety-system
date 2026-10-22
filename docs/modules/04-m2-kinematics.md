@@ -32,8 +32,16 @@ Input:
 Output:
 
 - a 72-value feature array
-- `valid`: whether the frame contains reliable movement information
-- `info`: readable values such as trunk tilt and vertical hip velocity
+- `valid`: whether pose geometry can be used
+- `info`: tilt, sanitized motion, raw motion for diagnosis, and `motion_reliable`
+
+M2 rejects finite-difference spikes when torso-normalized hip speed exceeds 12 units/s,
+jerk exceeds 20,000, or M1 marks the pose as held. It keeps pose and tilt, zeros the
+five motion features for that frame, and rebases its history at the current pose.
+The same sanitizer is applied when rebuilding candidate training windows so live
+inference and training use matching feature rules. The bounds are engineering
+outlier limits, not physical speed measurements, and should be recalibrated with
+more labeled camera footage.
 
 If the pose is lost or insufficient, M2 marks the output invalid. Downstream modules then avoid treating missing data as normal movement.
 

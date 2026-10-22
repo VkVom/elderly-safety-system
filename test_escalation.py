@@ -18,7 +18,7 @@ from src.m1_perception import SingleAuthorityPerception
 from src.m2_kinematics import KinematicExtractor, L_HIP, R_HIP
 from src.m3_temporal_model import TemporalBufferManager, DEFAULT_ONNX_PATH, FEATURE_DIM
 from src.m4_state_machine import FallDecisionEngine, body_on_rest_surface
-from src.escalation import AlertGateway, LocalJsonSink, ElderContext
+from src.escalation import AlertGateway, ExpoPushNotifier, LocalJsonSink, ElderContext
 
 NORM_PATH = os.path.join("models", "m3_norm.npz")
 ALERTS_PATH = os.path.join("logs", "test_escalation_alerts.json")
@@ -39,6 +39,8 @@ def sigmoid(x):
 
 
 def main():
+    test_expo_push_payload()
+
     sess = ort.InferenceSession(DEFAULT_ONNX_PATH, providers=["CPUExecutionProvider"])
     input_name = sess.get_inputs()[0].name
     if os.path.isfile(NORM_PATH):
@@ -72,10 +74,11 @@ def main():
                 break
             i += 1
             h, w = frame.shape[:2]
-            kp, furniture, quality = m1.process_frame(frame)
-            feats, valid, info = m2.process(kp, quality, timestamp_s=i / fps)
+            timestamp_s = i / fps
+            kp, furniture, quality = m1.process_frame(frame, timestamp_ms=timestamp_s * 1000.0)
+            feats, valid, info = m2.process(kp, quality, timestamp_s=timestamp_s)
 
-            window = buf.update(feats, valid)
+            window = buf.update(feats, valid, timestamp_s=timestamp_s)
             if window is not None:
                 x = ((window - mean) / std)[None, ...].astype(np.float32)
                 logit = sess.run(None, {input_name: x})[0]
@@ -104,11 +107,16 @@ def main():
                          now=i * dt)  # use clip time so cooldown is per-clip
 
         cap.release(); m1.close()
-        n_emitted = len(gw.emitted) - emitted_before
+        # Tiered design: only emergency records (tier >= 2: impact / long-lie / SOS)
+        # count as "alerts". Tier-1 warnings and tier-0 auto-cancels are expected
+        # lifecycle events and must never fail the ADL (no-false-alert) clip.
+        transition_list = gw.emitted[emitted_before:]
+        emergency = [e for e in transition_list if e.get("tier", 2) >= 2]
+        n_emitted = len(emergency)
         name = os.path.basename(path)
         ok_result = (n_emitted > 0) == expect_alert
         results[name] = ("PASS" if ok_result else "FAIL", expect_alert, n_emitted,
-                         [e["eventType"] for e in gw.emitted[emitted_before:]])
+                         [e["eventType"] for e in emergency])
 
     print("\n================ ESCALATION SUMMARY ================")
     for name, (verdict, exp, n, types) in results.items():
@@ -124,6 +132,36 @@ def main():
         print(f"All records match schema: {ok_schema}")
         print("\nSample alert record:")
         print(json.dumps(all_records[0], indent=2))
+
+
+def test_expo_push_payload():
+    captured = []
+
+    def fake_transport(messages):
+        captured.extend(messages)
+        return {"data": [{"status": "ok"}]}
+
+    notifier = ExpoPushNotifier(
+        token_resolver=lambda record: [
+            "ExponentPushToken[caretaker-device]",
+            "ExponentPushToken[caretaker-device]",
+        ],
+        transport=fake_transport,
+    )
+    record = {
+        "alertId": "ALERT_TEST",
+        "elderId": "ELDER_1",
+        "elderName": "Test Resident",
+        "roomLocation": "Room 101",
+        "eventType": "FALL_IMPACT",
+        "assignedCaretakerId": "CARE_1",
+    }
+    notifier.notify(record)
+    assert len(captured) == 1
+    assert captured[0]["to"] == "ExponentPushToken[caretaker-device]"
+    assert captured[0]["priority"] == "high"
+    assert captured[0]["channelId"] == "emergency-alerts-v4"
+    assert captured[0]["data"]["alertId"] == "ALERT_TEST"
 
 
 if __name__ == "__main__":

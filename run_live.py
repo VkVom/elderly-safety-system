@@ -10,18 +10,28 @@ This is different from:
   - test_escalation.py     (runs the pipeline but writes to local JSON only)
 
 Usage:
-  # Webcam (default camera 0):
-  python run_live.py --camera --elder <ELDER_UID>
+  # Interactive wizard (recommended): pick source, then pick the elder:
+  python run_live.py
 
-  # A video clip:
-  python run_live.py --video data/manual_test_videos/gmdcsa24_s1_fall_chair_partial_original.mp4 --elder <ELDER_UID>
+  # Webcam + dynamic elder picker:
+  python run_live.py --camera
 
-  # Find an elder's UID + pairing code (so you know what to pass to --elder):
+  # Pick the elder by UID, pairing code, or name substring:
+  python run_live.py --camera --elder SAFE-3BS2
+  python run_live.py --camera --elder "Rahul"
+
+  # A video clip or a phone IP-camera stream (IP Webcam app):
+  python run_live.py --video data/manual_test_videos/....mp4 --elder <UID-OR-CODE>
+  python run_live.py --url "http://192.168.1.5:8080/video" --elder <UID-OR-CODE>
+
+  # List elders + linked caretakers + push-token status:
   python run_live.py --list-elders
 
 Notes:
-  - --elder is REQUIRED for alerts to route to the right caretaker. If omitted, alerts
-    still fire but use a placeholder elderId (won't match any caretaker's scoped query).
+  - The elder is the anchor: choosing an elder resolves their linked caretaker and
+    routes every alert to that caretaker's phone automatically.
+  - --caretaker <UID> force-routes alerts without changing the stored pairing.
+  - --demo shortens the long-lie timer to 10s for presentations.
   - Press Ctrl+C to stop. A small OpenCV preview window shows the live state.
 """
 
@@ -37,8 +47,18 @@ import onnxruntime as ort
 from src.m1_perception import SingleAuthorityPerception
 from src.m2_kinematics import KinematicExtractor, L_HIP, R_HIP
 from src.m3_temporal_model import TemporalBufferManager, DEFAULT_ONNX_PATH, FEATURE_DIM
-from src.m4_state_machine import FallDecisionEngine, body_on_rest_surface
-from src.escalation import AlertGateway, FirestoreSink, LocalJsonSink, ElderContext
+from src.m4_state_machine import FallDecisionEngine, M4Config, body_on_rest_surface
+from src.frame_timing import frame_interval, normalize_fps, reconnect_delay_s
+from src.stream_recovery import reopen_capture, reset_temporal_state
+from src.escalation import (
+    AlertGateway,
+    FirestoreExpoPushNotifier,
+    FirestoreSink,
+    LocalJsonSink,
+)
+from src.elder_picker import (
+    PickerError, load_elders, print_elders_table, resolve_live_elder, routing_banner,
+)
 
 NORM_PATH = os.path.join("models", "m3_norm.npz")
 
@@ -73,8 +93,12 @@ def _bar(frame, x, y, w, h, frac, color, label):
 
 
 def draw_demo_hud(frame, keypoints, furniture, quality, state, p_fall, tilt, vy, jerk,
-                  fps, ctx, alerting):
-    """Rich live overlay: skeleton + furniture + telemetry panel + state badge."""
+                  fps, ctx, banner=None):
+    """Rich live overlay: skeleton + furniture + telemetry panel + state badge.
+
+    `banner` is (text, bgr_color) for the tier flash (amber check / red alert /
+    green auto-cancel) or None when nothing recent fired.
+    """
     h, w = frame.shape[:2]
 
     # Furniture boxes
@@ -111,75 +135,80 @@ def draw_demo_hud(frame, keypoints, furniture, quality, state, p_fall, tilt, vy,
     _bar(frame, 10, 126, 135, 12, min(abs(vy) / 6.0, 1), (0, 0, 255) if abs(vy) > 2 else (80, 200, 80), f"Vy {vy:.2f}")
     cv2.putText(frame, f"FPS {fps:.0f}", (200, 138), cv2.FONT_HERSHEY_SIMPLEX, 0.45, (210, 210, 210), 1)
 
-    # Big ALERT banner when an alert just fired
-    if alerting:
-        cv2.rectangle(frame, (0, h - 60), (w, h), (0, 0, 200), -1)
-        cv2.putText(frame, "ALERT SENT -> CARETAKER NOTIFIED", (20, h - 22),
+    # Tier flash banner (warning amber / emergency red / recovered green)
+    if banner is not None:
+        text, color = banner
+        cv2.rectangle(frame, (0, h - 60), (w, h), color, -1)
+        cv2.putText(frame, text, (20, h - 22),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2)
     return frame
 
 
 def list_elders():
-    sink = FirestoreSink()
-    if not sink.available:
-        print("Firestore unavailable:", getattr(sink, "_init_error", "unknown"))
+    from src.escalation import get_firestore_db
+    try:
+        print_elders_table(load_elders(get_firestore_db()))
+    except Exception as e:
+        print("Firestore unavailable:", e)
+
+
+def run(source, elder_selection, is_camera, no_firestore, caretaker_override=None, demo=False):
+    try:
+        ctx, choice, _db = resolve_live_elder(
+            elder_selection, caretaker_override, local_only=no_firestore,
+        )
+    except PickerError as e:
+        print(f"[live] {e}")
         return
-    docs = sink._db.collection("users").where("role", "==", "elder").stream()
-    found = False
-    print(f"{'UID':<30} {'NAME':<20} {'ROOM':<18} CODE   CARETAKER")
-    for d in docs:
-        found = True
-        u = d.to_dict()
-        print(f"{d.id:<30} {str(u.get('name')):<20} {str(u.get('roomLocation')):<18} "
-              f"{str(u.get('pairingCode')):<7} {u.get('caretakerName') or '—'}")
-    if not found:
-        print("No elder users found. Sign up an elder in the app first.")
-
-
-def resolve_elder_context(elder_uid):
-    """Fill name/room/caretaker from the elder's Firestore profile when possible."""
-    ctx = ElderContext(elder_id=elder_uid or "ELDER_UNKNOWN", elder_name="Resident",
-                       room_location="Unknown", assigned_caretaker_id=None)
-    if not elder_uid:
-        return ctx, None
-    sink = FirestoreSink()
-    if sink.available:
-        try:
-            snap = sink._db.collection("users").document(elder_uid).get()
-            if snap.exists:
-                u = snap.to_dict()
-                ctx = ElderContext(
-                    elder_id=elder_uid,
-                    elder_name=u.get("name") or "Resident",
-                    room_location=u.get("roomLocation") or "Unknown",
-                    assigned_caretaker_id=u.get("caretakerId"),
-                )
-        except Exception:
-            pass
-    return ctx, (sink if sink.available else None)
-
-
-def run(source, elder_uid, is_camera, no_firestore):
-    ctx, fsink = resolve_elder_context(elder_uid)
+    if no_firestore:
+        # Offline test mode never looks up a resident or a push token in Firebase.
+        if caretaker_override:
+            print("[live] --caretaker is ignored in --no-firestore local-only mode.")
+        print("[live] Local-only camera test: no Firebase lookup or caretaker routing.")
+        print(f"[live] Local label: {ctx.elder_id}\n")
+    else:
+        print()
+        print(routing_banner(choice))
+        print()
 
     sinks = [LocalJsonSink()]
-    if fsink is not None and not no_firestore:
-        sinks.insert(0, fsink)
-        print(f"[live] Firestore ENABLED. Alerts route to elder={ctx.elder_id} "
-              f"({ctx.elder_name}), caretaker={ctx.assigned_caretaker_id}")
-    else:
-        print("[live] Firestore disabled or unavailable — writing to logs/alerts.json only.")
+    # Never let the gateway's default mock push/SMS channels masquerade as real
+    # delivery in the live camera process. Real push is added only when configured.
+    notifiers = []
+    if not no_firestore:
+        fsink = FirestoreSink()
+        if fsink.available:
+            sinks.insert(0, fsink)
+            push = FirestoreExpoPushNotifier()
+            if push.available:
+                notifiers.append(push)
+            else:
+                print(f"[live] Expo push unavailable: {getattr(push, '_init_error', 'unknown')}")
+            print(f"[live] Firestore ENABLED. Alerts route to elder={ctx.elder_id} "
+                  f"({ctx.elder_name}), caretaker={ctx.assigned_caretaker_id}")
+        else:
+            print(f"[live] Firestore unavailable: {getattr(fsink, '_init_error', 'unknown')}")
+    if no_firestore:
+        print("[live] Firestore disabled — writing to logs/alerts.json only.")
 
+    m4_cfg = M4Config(long_lie_s=10.0) if demo else M4Config()
+    if demo:
+        print("[live] DEMO mode: long-lie timer shortened to 10s.")
     m1 = SingleAuthorityPerception(); m2 = KinematicExtractor()
-    buf = TemporalBufferManager(); m4 = FallDecisionEngine()
-    gw = AlertGateway(ctx, sinks=sinks, cooldown_s=10.0)
+    buf = TemporalBufferManager(); m4 = FallDecisionEngine(m4_cfg)
+    gw = AlertGateway(ctx, sinks=sinks, notifiers=notifiers, cooldown_s=10.0)
     m1.reset_context()
 
-    cap = cv2.VideoCapture(0 if is_camera else source)
+    capture_source = 0 if is_camera else source
+    is_stream_source = is_camera or (
+        isinstance(source, str)
+        and source.lower().startswith(("rtsp://", "http://", "https://"))
+    )
+    cap = cv2.VideoCapture(capture_source)
     if not cap.isOpened():
         print(f"[live] ERROR: cannot open {'camera' if is_camera else source}")
         return
-    fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    fps = normalize_fps(cap.get(cv2.CAP_PROP_FPS))
     p_fall = 0.0
 
     sess = ort.InferenceSession(DEFAULT_ONNX_PATH, providers=["CPUExecutionProvider"])
@@ -191,19 +220,60 @@ def run(source, elder_uid, is_camera, no_firestore):
 
     print("[live] Running. Press Q in the window (or Ctrl+C) to stop.")
     i = 0
+    capture_origin_s = time.monotonic()
+    previous_capture_s = None
+    frame_gap_count = 0
+    reconnect_attempt = 0
     _last_t = time.time()
     _flash_until = 0.0
+    _banner = None
     try:
         while True:
             ok, frame = cap.read()
             if not ok:
-                break
+                if not is_stream_source:
+                    break
+                reconnect_attempt += 1
+                delay_s = reconnect_delay_s(reconnect_attempt)
+                source_label = "webcam" if is_camera else "network camera"
+                print(f"[live] {source_label} feed lost; retry {reconnect_attempt} "
+                      f"in {delay_s:.0f}s. Camera health is not being sent to the caretaker.")
+                failed_cap = cap
+                cap, _delay_s = reopen_capture(
+                    capture_source, reconnect_attempt, cap, cv2.VideoCapture,
+                )
+                if cap is None:
+                    print(f"[live] Reconnect attempt {reconnect_attempt} failed; retrying.")
+                    cap = failed_cap
+                    continue
+                fps = normalize_fps(cap.get(cv2.CAP_PROP_FPS), fallback=fps)
+                print(f"[live] {source_label} feed reopened; clearing motion history on next frame.")
+                continue
+            reconnect_attempt = 0
+            if is_stream_source:
+                capture_time_s = time.monotonic()
+                timestamp_s = capture_time_s - capture_origin_s
+                dt_s, frame_gap = frame_interval(timestamp_s, previous_capture_s, fps)
+            else:
+                # File playback is evaluated on the clip timeline, not the speed
+                # at which this computer happens to decode the file.
+                timestamp_s = i / fps
+                dt_s, frame_gap = 1.0 / fps, False
+            previous_capture_s = timestamp_s
+            decision_dt_s = 0.0 if frame_gap else dt_s
             i += 1
             h, w = frame.shape[:2]
-            kp, furniture, quality = m1.process_frame(frame.copy())
-            feats, valid, info = m2.process(kp, quality, timestamp_s=i / fps)
+            if frame_gap:
+                frame_gap_count += 1
+                print(f"[live] Frame gap ({dt_s:.2f}s): pausing confirmation time and "
+                      "resetting motion history for this discontinuity.")
+                p_fall = reset_temporal_state(m1, m2, buf)
 
-            window = buf.update(feats, valid)
+            kp, furniture, quality = m1.process_frame(
+                frame.copy(), timestamp_ms=timestamp_s * 1000.0)
+            feats, valid, info = m2.process(kp, quality, timestamp_s=timestamp_s)
+
+            window = buf.update(feats, valid, timestamp_s=timestamp_s)
             if window is not None:
                 x = ((window - mean) / std)[None, ...].astype(np.float32)
                 p_fall = float(_sigmoid(np.asarray(sess.run(None, {input_name: x})[0])).ravel()[0])
@@ -221,14 +291,29 @@ def run(source, elder_uid, is_camera, no_firestore):
                 pose_status=quality.get("pose_status", "LOST"),
                 trunk_tilt_deg=info.get("trunk_tilt_deg", 0.0) if valid else 0.0,
                 hip_v_y=info.get("hip_v_y", 0.0) if valid else 0.0,
-                jerk=float(feats[71]) if valid else 0.0,
-                p_fall=p_fall, on_rest_surface=on_rest, dt=1.0 / fps,
+                jerk=info.get("jerk", 0.0) if valid else 0.0,
+                p_fall=p_fall, on_rest_surface=on_rest, dt=decision_dt_s,
+                kinematics_reliable=bool(info.get("motion_reliable", False)) if valid else False,
             )
             rec = gw.handle_m4(out, p_fall=p_fall, furniture_context=furn_ctx)
             if rec:
-                _flash_until = time.time() + 3.0  # keep the ALERT banner up briefly
-                print(f"\n*** ALERT SENT: {rec['eventType']}  P(fall)={rec['fallProbability']}  "
-                      f"-> elder {rec['elderId']}  (alertId {rec['alertId']}) ***\n")
+                tier = rec.get("tier", 2)
+                if tier >= 2:
+                    _banner = ("EMERGENCY EVENT RECORDED", (0, 0, 200))
+                    _flash_until = time.time() + 3.0
+                    print(f"\n*** EMERGENCY EVENT: {rec['eventType']}  "
+                          f"P(fall)={rec['fallProbability']} -> elder {rec['elderId']} "
+                          f"(alertId {rec['alertId']}); phone delivery is not confirmed here. ***\n")
+                elif tier == 1:
+                    _banner = (f"CHECKING ON {ctx.elder_name.upper()}...", (0, 165, 255))
+                    _flash_until = time.time() + 3.0
+                    print(f"\n--- TIER-1 CHECK: {rec['elderName']} lost balance "
+                          f"(episode {rec['alertId']}) ---\n")
+                else:
+                    _banner = ("RECOVERED - AUTO-CANCELLED", (80, 180, 80))
+                    _flash_until = time.time() + 2.0
+                    print(f"\n--- RECOVERED: episode {rec['alertId']} auto-cancelled, "
+                          f"no emergency escalated ---\n")
 
             # Rich demo HUD.
             now = time.time()
@@ -236,9 +321,9 @@ def run(source, elder_uid, is_camera, no_firestore):
             tilt = info.get("trunk_tilt_deg", 0.0) if valid else 0.0
             vy = info.get("hip_v_y", 0.0) if valid else 0.0
             jerk = float(feats[71]) if valid else 0.0
-            alerting = now < _flash_until
+            alerting_banner = _banner if now < _flash_until else None
             draw_demo_hud(frame, kp, furniture, quality, out.state, p_fall, tilt, vy, jerk,
-                          fps_live, ctx, alerting)
+                          fps_live, ctx, alerting_banner)
             cv2.imshow("INSIGHT-Fall LIVE (press Q to stop)", frame)
             if (cv2.waitKey(1) & 0xFF) in (ord("q"), ord("Q"), 27):
                 break
@@ -246,7 +331,42 @@ def run(source, elder_uid, is_camera, no_firestore):
         pass
     finally:
         cap.release(); cv2.destroyAllWindows(); m1.close()
-    print(f"[live] Stopped. {len(gw.emitted)} alert(s) sent this session.")
+    n_emergency = sum(1 for e in gw.emitted if e.get("tier", 2) >= 2)
+    print(f"[live] Stopped. {n_emergency} emergency alert(s), "
+          f"{len(gw.emitted)} lifecycle event(s), {frame_gap_count} frame gap(s) this session.")
+
+
+def wizard(no_firestore: bool, demo: bool):
+    """Interactive demo flow: pick the video source, then pick the elder."""
+    print("\nSelect input source:")
+    print("  [1] Webcam (laptop)")
+    print("  [2] Phone IP camera (IP Webcam app URL)")
+    print("  [3] Video file")
+    print("  [4] Direct alert injection (no camera — tests the phone end-to-end)")
+    while True:
+        raw = input("Pick source # (or q to quit): ").strip().lower()
+        if raw in ("q", "quit", "exit", ""):
+            return
+        if raw == "1":
+            run(None, None, True, no_firestore, demo=demo)
+            return
+        if raw == "2":
+            url = input("Stream URL [http://192.168.1.5:8080/video]: ").strip() or \
+                "http://192.168.1.5:8080/video"
+            run(url, None, False, no_firestore, demo=demo)
+            return
+        if raw == "3":
+            path = input("Video path: ").strip().strip('"')
+            if not os.path.isfile(path):
+                print(f"  file not found: {path}")
+                continue
+            run(path, None, False, no_firestore, demo=demo)
+            return
+        if raw == "4":
+            from test_firebase_sync import inject
+            inject()
+            return
+        print("  enter 1-4")
 
 
 if __name__ == "__main__":
@@ -254,18 +374,22 @@ if __name__ == "__main__":
     ap.add_argument("--camera", action="store_true", help="use laptop webcam (device 0)")
     ap.add_argument("--video", help="path to a video clip")
     ap.add_argument("--url", help="MJPEG/RTSP stream URL, e.g. a phone IP Webcam: http://192.168.1.5:8080/video")
-    ap.add_argument("--elder", help="elder UID so alerts route to their caretaker")
+    ap.add_argument("--elder", help="production resident UID/code/name; local label with --no-firestore")
+    ap.add_argument("--caretaker", help="force-route alerts to this caretaker UID (debug override)")
+    ap.add_argument("--demo", action="store_true", help="demo timers (long-lie 10s)")
     ap.add_argument("--list-elders", action="store_true", help="list elder users + codes and exit")
-    ap.add_argument("--no-firestore", action="store_true", help="local JSON only (no cloud)")
+    ap.add_argument("--no-firestore", action="store_true", help="local-only test; no Firebase lookup, writes, or push")
     args = ap.parse_args()
 
     if args.list_elders:
         list_elders()
     elif args.camera:
-        run(None, args.elder, True, args.no_firestore)
+        run(None, args.elder, True, args.no_firestore, args.caretaker, args.demo)
     elif args.url:
-        run(args.url, args.elder, False, args.no_firestore)   # phone IP-camera stream
+        run(args.url, args.elder, False, args.no_firestore, args.caretaker, args.demo)   # phone IP-camera stream
     elif args.video:
-        run(args.video, args.elder, False, args.no_firestore)
+        run(args.video, args.elder, False, args.no_firestore, args.caretaker, args.demo)
+    elif sys.stdin.isatty():
+        wizard(args.no_firestore, args.demo)
     else:
         print("Specify --camera, --url <stream>, --video <path>, or --list-elders. See --help.")

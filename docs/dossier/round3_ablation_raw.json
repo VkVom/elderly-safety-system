@@ -1,0 +1,5406 @@
+[
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.35484105348587036,
+        "p_threshold": 0.4,
+        "tilt": 35.4,
+        "vy": 7.7539,
+        "jerk": 5702.1416015625,
+        "kinematic_rule_met": true,
+        "frame_time": 2.0439388489208645
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8612672090530396,
+        "p_threshold": 0.7,
+        "tilt": 37.5,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.0774460431654687
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/02.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/02.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.01585431769490242,
+        "p_threshold": 0.4,
+        "tilt": 54.4,
+        "vy": 11.6079,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 2.977366666666672
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 44.6,
+        "vy": 9.7599,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 2.3469366666666645
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.949106752872467,
+        "p_threshold": 0.7,
+        "tilt": 46.6,
+        "vy": 2.2434,
+        "jerk": 1222.291015625,
+        "kinematic_rule_met": false,
+        "frame_time": 2.8833793333333304
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/04.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/04.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.623253583908081,
+        "p_threshold": 0.4,
+        "tilt": 32.4,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.640828132387705
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/04.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9659273028373718,
+        "p_threshold": 0.7,
+        "tilt": 40.3,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.6743144208037806
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0011318987235426903,
+        "p_threshold": 0.4,
+        "tilt": 37.3,
+        "vy": 4.5325,
+        "jerk": 166.451416015625,
+        "kinematic_rule_met": true,
+        "frame_time": 2.8498589743589684
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0020909439772367477,
+        "p_threshold": 0.7,
+        "tilt": 71.6,
+        "vy": 2.0524,
+        "jerk": 1571.1717529296875,
+        "kinematic_rule_met": true,
+        "frame_time": 3.1180809954751063
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.006332773715257645,
+        "p_threshold": 0.4,
+        "tilt": 35.7,
+        "vy": 1.4871,
+        "jerk": 1027.739013671875,
+        "kinematic_rule_met": true,
+        "frame_time": 1.406801092896174
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.20643502473831177,
+        "p_threshold": 0.7,
+        "tilt": 70.3,
+        "vy": 3.1438,
+        "jerk": 2969.95654296875,
+        "kinematic_rule_met": true,
+        "frame_time": 1.9762205828779584
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.005072806961834431,
+        "p_threshold": 0.4,
+        "tilt": 40.2,
+        "vy": 2.3253,
+        "jerk": 624.2503662109375,
+        "kinematic_rule_met": true,
+        "frame_time": 1.7104079787234052
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7090432047843933,
+        "p_threshold": 0.7,
+        "tilt": 56.5,
+        "vy": 1.0585,
+        "jerk": 541.6441040039062,
+        "kinematic_rule_met": false,
+        "frame_time": 1.878095035460994
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.005547338165342808,
+        "p_threshold": 0.4,
+        "tilt": 37.3,
+        "vy": 4.9867,
+        "jerk": 2198.78076171875,
+        "kinematic_rule_met": true,
+        "frame_time": 2.4427803921568634
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.019869666546583176,
+        "p_threshold": 0.7,
+        "tilt": 60.2,
+        "vy": 1.4751,
+        "jerk": 2854.4775390625,
+        "kinematic_rule_met": true,
+        "frame_time": 2.6100941176470602
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0012066253693774343,
+        "p_threshold": 0.4,
+        "tilt": 39.7,
+        "vy": 1.9756,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 2.5469377532228394
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8365018367767334,
+        "p_threshold": 0.7,
+        "tilt": 74.1,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 3.1501598526703543
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0013197183143347502,
+        "p_threshold": 0.4,
+        "tilt": 35.8,
+        "vy": 1.9759,
+        "jerk": 466.5921325683594,
+        "kinematic_rule_met": true,
+        "frame_time": 2.0096291390728496
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8286424875259399,
+        "p_threshold": 0.7,
+        "tilt": 75.2,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.3780611479028697
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.015166733413934708,
+        "p_threshold": 0.4,
+        "tilt": 36.5,
+        "vy": 8.0427,
+        "jerk": 2230.734375,
+        "kinematic_rule_met": true,
+        "frame_time": 1.4422284313725497
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.762668251991272,
+        "p_threshold": 0.7,
+        "tilt": 55.7,
+        "vy": 7.4974,
+        "jerk": 1308.2061767578125,
+        "kinematic_rule_met": false,
+        "frame_time": 1.5093088235294125
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9091619253158569,
+        "p_threshold": 0.4,
+        "tilt": 9.9,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.8434299516908206
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9744706749916077,
+        "p_threshold": 0.7,
+        "tilt": 9.5,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.876946859903381
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 37.8,
+        "vy": 4.4286,
+        "jerk": 1023.0521850585938,
+        "kinematic_rule_met": true,
+        "frame_time": 0.5362004474272928
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.002057748381048441,
+        "p_threshold": 0.7,
+        "tilt": 85.2,
+        "vy": 3.3497,
+        "jerk": 3333.1474609375,
+        "kinematic_rule_met": true,
+        "frame_time": 0.7707881431767333
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0010935518657788634,
+        "p_threshold": 0.4,
+        "tilt": 36.2,
+        "vy": 1.7264,
+        "jerk": 277.198974609375,
+        "kinematic_rule_met": true,
+        "frame_time": 1.069975371549894
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0017909005982801318,
+        "p_threshold": 0.7,
+        "tilt": 62.9,
+        "vy": 2.9973,
+        "jerk": 3154.668212890625,
+        "kinematic_rule_met": true,
+        "frame_time": 1.2705957537154993
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/15.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/15.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7471383213996887,
+        "p_threshold": 0.4,
+        "tilt": 13.4,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.140454252873564
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/15.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9238439798355103,
+        "p_threshold": 0.7,
+        "tilt": 19.2,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.173898850574713
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/16.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "POSE_LOST_WHILE_FALLEN"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "POSE_LOST_WHILE_FALLEN"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/16.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9780445694923401,
+        "p_threshold": 0.4,
+        "tilt": 7.9,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.5137853773584906
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0011486514704301953,
+        "p_threshold": 0.4,
+        "tilt": 36.7,
+        "vy": 2.9697,
+        "jerk": 1043.531005859375,
+        "kinematic_rule_met": true,
+        "frame_time": 2.979321578099838
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+        "kind": "Fall",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0017557339742779732,
+        "p_threshold": 0.7,
+        "tilt": 67.2,
+        "vy": 1.5023,
+        "jerk": 1852.3092041015625,
+        "kinematic_rule_met": true,
+        "frame_time": 3.180174718196456
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/01.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/02.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9904271364212036,
+        "p_threshold": 0.4,
+        "tilt": 3.1,
+        "vy": -1.0159,
+        "jerk": 169.16909790039062,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6030808988764046
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.990391731262207,
+        "p_threshold": 0.7,
+        "tilt": 3.1,
+        "vy": 0.2667,
+        "jerk": 762.2167358398438,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6365853932584271
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8957775235176086,
+        "p_threshold": 0.4,
+        "tilt": 9.4,
+        "vy": 0.4835,
+        "jerk": 1419.7340087890625,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6133505617977546
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.920668363571167,
+        "p_threshold": 0.7,
+        "tilt": 8.7,
+        "vy": 0.4416,
+        "jerk": 1263.180908203125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6468550561797772
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.4776068925857544,
+        "p_threshold": 0.4,
+        "tilt": 5.5,
+        "vy": 0.6052,
+        "jerk": 352.2997131347656,
+        "kinematic_rule_met": false,
+        "frame_time": 4.6236202247191045
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7233507037162781,
+        "p_threshold": 0.7,
+        "tilt": 5.9,
+        "vy": 0.3763,
+        "jerk": 178.06724548339844,
+        "kinematic_rule_met": false,
+        "frame_time": 4.724133707865171
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.40029376745224,
+        "p_threshold": 0.4,
+        "tilt": 8.1,
+        "vy": 0.0344,
+        "jerk": 21.223894119262695,
+        "kinematic_rule_met": false,
+        "frame_time": 6.801412359550547
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9868144989013672,
+        "p_threshold": 0.4,
+        "tilt": 20.1,
+        "vy": 0.0101,
+        "jerk": 229.20669555664062,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6035319587628868
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9873650670051575,
+        "p_threshold": 0.7,
+        "tilt": 21.0,
+        "vy": 0.423,
+        "jerk": 13.587096214294434,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6370615120274916
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.988896369934082,
+        "p_threshold": 0.4,
+        "tilt": 19.9,
+        "vy": -0.2251,
+        "jerk": 277.6561584472656,
+        "kinematic_rule_met": false,
+        "frame_time": 2.615305154639175
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9886095523834229,
+        "p_threshold": 0.7,
+        "tilt": 19.9,
+        "vy": -0.0636,
+        "jerk": 197.2316131591797,
+        "kinematic_rule_met": false,
+        "frame_time": 2.64883470790378
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9887999296188354,
+        "p_threshold": 0.4,
+        "tilt": 19.4,
+        "vy": 0.7479,
+        "jerk": 484.6549987792969,
+        "kinematic_rule_met": false,
+        "frame_time": 4.627078350515463
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9887111186981201,
+        "p_threshold": 0.7,
+        "tilt": 19.4,
+        "vy": 0.1887,
+        "jerk": 239.3816375732422,
+        "kinematic_rule_met": false,
+        "frame_time": 4.660607903780067
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.986158013343811,
+        "p_threshold": 0.4,
+        "tilt": 19.0,
+        "vy": 0.1708,
+        "jerk": 89.18450927734375,
+        "kinematic_rule_met": false,
+        "frame_time": 6.638851546391733
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9859121441841125,
+        "p_threshold": 0.7,
+        "tilt": 19.0,
+        "vy": 0.0935,
+        "jerk": 7.744099140167236,
+        "kinematic_rule_met": false,
+        "frame_time": 6.672381099656337
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9880471229553223,
+        "p_threshold": 0.4,
+        "tilt": 21.8,
+        "vy": -0.7709,
+        "jerk": 653.9085083007812,
+        "kinematic_rule_met": false,
+        "frame_time": 8.65062474226802
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9882797002792358,
+        "p_threshold": 0.7,
+        "tilt": 21.9,
+        "vy": 0.168,
+        "jerk": 230.89971923828125,
+        "kinematic_rule_met": false,
+        "frame_time": 8.684154295532625
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9873520135879517,
+        "p_threshold": 0.4,
+        "tilt": 21.6,
+        "vy": 0.1998,
+        "jerk": 262.4703674316406,
+        "kinematic_rule_met": false,
+        "frame_time": 10.662397938144343
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9862972497940063,
+        "p_threshold": 0.7,
+        "tilt": 21.6,
+        "vy": 0.3313,
+        "jerk": 133.44248962402344,
+        "kinematic_rule_met": false,
+        "frame_time": 10.695927491408948
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9881673455238342,
+        "p_threshold": 0.4,
+        "tilt": 20.7,
+        "vy": -0.0096,
+        "jerk": 73.13038635253906,
+        "kinematic_rule_met": false,
+        "frame_time": 12.674171134020666
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9884107112884521,
+        "p_threshold": 0.7,
+        "tilt": 20.7,
+        "vy": -0.0382,
+        "jerk": 211.50289916992188,
+        "kinematic_rule_met": false,
+        "frame_time": 12.707700687285271
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.6735453009605408,
+        "p_threshold": 0.4,
+        "tilt": 12.7,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.3758106060606043
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8638563752174377,
+        "p_threshold": 0.7,
+        "tilt": 17.3,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.4092727272727257
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.014924854971468449,
+        "p_threshold": 0.4,
+        "tilt": 40.3,
+        "vy": 7.965,
+        "jerk": 520.2300415039062,
+        "kinematic_rule_met": true,
+        "frame_time": 1.1745714285714295
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9025576114654541,
+        "p_threshold": 0.7,
+        "tilt": 51.5,
+        "vy": 7.6747,
+        "jerk": 2743.755615234375,
+        "kinematic_rule_met": false,
+        "frame_time": 1.2752489795918378
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 49.1,
+        "vy": 2.5671,
+        "jerk": 2758.68212890625,
+        "kinematic_rule_met": true,
+        "frame_time": 0.36864026845637576
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9963744282722473,
+        "p_threshold": 0.7,
+        "tilt": 51.1,
+        "vy": 4.6305,
+        "jerk": 649.3864135742188,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6032295302013423
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/08.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8969836235046387,
+        "p_threshold": 0.4,
+        "tilt": 1.3,
+        "vy": -1.1326,
+        "jerk": 49.838619232177734,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6031226519337017
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8847672343254089,
+        "p_threshold": 0.7,
+        "tilt": 1.8,
+        "vy": -0.3515,
+        "jerk": 61.050636291503906,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6366294659300185
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8155841827392578,
+        "p_threshold": 0.4,
+        "tilt": 1.8,
+        "vy": 1.5019,
+        "jerk": 1941.2100830078125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.613531491712706
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8802868127822876,
+        "p_threshold": 0.7,
+        "tilt": 1.9,
+        "vy": 0.1384,
+        "jerk": 1620.4111328125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6470383057090228
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9212928414344788,
+        "p_threshold": 0.4,
+        "tilt": 1.4,
+        "vy": 1.059,
+        "jerk": 1550.7606201171875,
+        "kinematic_rule_met": false,
+        "frame_time": 4.623940331491703
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.899538516998291,
+        "p_threshold": 0.7,
+        "tilt": 1.5,
+        "vy": -0.8681,
+        "jerk": 844.5296020507812,
+        "kinematic_rule_met": false,
+        "frame_time": 4.657447145488019
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9817425012588501,
+        "p_threshold": 0.4,
+        "tilt": 1.5,
+        "vy": -0.0998,
+        "jerk": 204.2798614501953,
+        "kinematic_rule_met": false,
+        "frame_time": 6.634349171270699
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9790539741516113,
+        "p_threshold": 0.7,
+        "tilt": 1.5,
+        "vy": -0.1491,
+        "jerk": 66.68828582763672,
+        "kinematic_rule_met": false,
+        "frame_time": 6.667855985267016
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9724446535110474,
+        "p_threshold": 0.4,
+        "tilt": 0.8,
+        "vy": 0.4594,
+        "jerk": 1097.118408203125,
+        "kinematic_rule_met": false,
+        "frame_time": 8.644758011049696
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9729517698287964,
+        "p_threshold": 0.7,
+        "tilt": 1.0,
+        "vy": 0.1324,
+        "jerk": 1454.2901611328125,
+        "kinematic_rule_met": false,
+        "frame_time": 8.678264825046012
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7185468077659607,
+        "p_threshold": 0.4,
+        "tilt": 1.2,
+        "vy": 0.0263,
+        "jerk": 71.61497497558594,
+        "kinematic_rule_met": false,
+        "frame_time": 10.655166850828692
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7589085102081299,
+        "p_threshold": 0.7,
+        "tilt": 0.5,
+        "vy": -0.2432,
+        "jerk": 464.7593994140625,
+        "kinematic_rule_met": false,
+        "frame_time": 10.856207734806592
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.5388538241386414,
+        "p_threshold": 0.4,
+        "tilt": 9.1,
+        "vy": 3.6077,
+        "jerk": 169.43104553222656,
+        "kinematic_rule_met": false,
+        "frame_time": 1.7760827225130886
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7270034551620483,
+        "p_threshold": 0.7,
+        "tilt": 9.1,
+        "vy": -2.2454,
+        "jerk": 5764.0419921875,
+        "kinematic_rule_met": false,
+        "frame_time": 1.8095937172774865
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9144769906997681,
+        "p_threshold": 0.4,
+        "tilt": 2.5,
+        "vy": 1.2302,
+        "jerk": 365.027587890625,
+        "kinematic_rule_met": false,
+        "frame_time": 3.7867424083769743
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.895889937877655,
+        "p_threshold": 0.7,
+        "tilt": 1.8,
+        "vy": 7.7564,
+        "jerk": 5002.0341796875,
+        "kinematic_rule_met": false,
+        "frame_time": 3.8202534031413724
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9895315170288086,
+        "p_threshold": 0.4,
+        "tilt": 2.9,
+        "vy": 0.6664,
+        "jerk": 398.5058898925781,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6030824999999999
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9898770451545715,
+        "p_threshold": 0.7,
+        "tilt": 3.1,
+        "vy": 2.5764,
+        "jerk": 1538.566162109375,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6365870833333331
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9927141070365906,
+        "p_threshold": 0.4,
+        "tilt": 0.5,
+        "vy": -3.6209,
+        "jerk": 3614.578857421875,
+        "kinematic_rule_met": false,
+        "frame_time": 2.613357500000002
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9928374886512756,
+        "p_threshold": 0.7,
+        "tilt": 0.5,
+        "vy": -3.237,
+        "jerk": 3853.177490234375,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6468620833333354
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9940156936645508,
+        "p_threshold": 0.4,
+        "tilt": 3.6,
+        "vy": -1.0337,
+        "jerk": 1678.5279541015625,
+        "kinematic_rule_met": false,
+        "frame_time": 4.623632500000006
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9939367175102234,
+        "p_threshold": 0.7,
+        "tilt": 4.0,
+        "vy": 1.6715,
+        "jerk": 2010.095703125,
+        "kinematic_rule_met": false,
+        "frame_time": 4.657137083333339
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9944888353347778,
+        "p_threshold": 0.4,
+        "tilt": 4.5,
+        "vy": 0.0814,
+        "jerk": 218.90896606445312,
+        "kinematic_rule_met": false,
+        "frame_time": 6.633907500000009
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9946541786193848,
+        "p_threshold": 0.7,
+        "tilt": 4.6,
+        "vy": 1.4033,
+        "jerk": 386.86248779296875,
+        "kinematic_rule_met": false,
+        "frame_time": 6.667412083333343
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9938096404075623,
+        "p_threshold": 0.4,
+        "tilt": 5.3,
+        "vy": -0.1207,
+        "jerk": 245.27243041992188,
+        "kinematic_rule_met": false,
+        "frame_time": 8.644182499999996
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9938473105430603,
+        "p_threshold": 0.7,
+        "tilt": 5.0,
+        "vy": 0.5825,
+        "jerk": 622.7113037109375,
+        "kinematic_rule_met": false,
+        "frame_time": 8.677687083333328
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9950217008590698,
+        "p_threshold": 0.4,
+        "tilt": 3.2,
+        "vy": -3.281,
+        "jerk": 1923.1573486328125,
+        "kinematic_rule_met": false,
+        "frame_time": 10.654457499999946
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9949916005134583,
+        "p_threshold": 0.7,
+        "tilt": 3.2,
+        "vy": 1.8179,
+        "jerk": 2856.736572265625,
+        "kinematic_rule_met": false,
+        "frame_time": 10.687962083333279
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9909780025482178,
+        "p_threshold": 0.4,
+        "tilt": 1.0,
+        "vy": 6.1624,
+        "jerk": 608.2922973632812,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6029859922178991
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9906152486801147,
+        "p_threshold": 0.7,
+        "tilt": 1.0,
+        "vy": -0.0826,
+        "jerk": 1309.7783203125,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6364852140077824
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9771864414215088,
+        "p_threshold": 0.4,
+        "tilt": 5.9,
+        "vy": -0.493,
+        "jerk": 2053.23486328125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6129392996108964
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9799376130104065,
+        "p_threshold": 0.7,
+        "tilt": 5.7,
+        "vy": -1.2472,
+        "jerk": 5487.33349609375,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6464385214007797
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9834232330322266,
+        "p_threshold": 0.4,
+        "tilt": 2.0,
+        "vy": -0.5937,
+        "jerk": 372.44256591796875,
+        "kinematic_rule_met": false,
+        "frame_time": 4.622892607003894
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9824995994567871,
+        "p_threshold": 0.7,
+        "tilt": 1.6,
+        "vy": -0.1836,
+        "jerk": 609.8536376953125,
+        "kinematic_rule_met": false,
+        "frame_time": 4.656391828793777
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9805111289024353,
+        "p_threshold": 0.4,
+        "tilt": 0.6,
+        "vy": -0.0451,
+        "jerk": 307.2691345214844,
+        "kinematic_rule_met": false,
+        "frame_time": 6.632845914396891
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9801476001739502,
+        "p_threshold": 0.7,
+        "tilt": 0.7,
+        "vy": 0.0792,
+        "jerk": 82.63886260986328,
+        "kinematic_rule_met": false,
+        "frame_time": 6.6663451361867745
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/13.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.009269782342016697,
+        "p_threshold": 0.4,
+        "tilt": 38.5,
+        "vy": 2.5156,
+        "jerk": 572.3541870117188,
+        "kinematic_rule_met": true,
+        "frame_time": 2.813209677419351
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7544211745262146,
+        "p_threshold": 0.7,
+        "tilt": 57.5,
+        "vy": 0.6597,
+        "jerk": 136.28616333007812,
+        "kinematic_rule_met": false,
+        "frame_time": 3.081134408602146
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.755671501159668,
+        "p_threshold": 0.4,
+        "tilt": 36.9,
+        "vy": -1.5517,
+        "jerk": 2137.216796875,
+        "kinematic_rule_met": false,
+        "frame_time": 1.005578616352201
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8969494700431824,
+        "p_threshold": 0.7,
+        "tilt": 36.9,
+        "vy": -0.043,
+        "jerk": 961.5115966796875,
+        "kinematic_rule_met": false,
+        "frame_time": 1.039097903563941
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.48254141211509705,
+        "p_threshold": 0.4,
+        "tilt": 35.6,
+        "vy": -0.3379,
+        "jerk": 2671.972900390625,
+        "kinematic_rule_met": false,
+        "frame_time": 2.948853834115805
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.892637312412262,
+        "p_threshold": 0.7,
+        "tilt": 35.3,
+        "vy": 1.1256,
+        "jerk": 599.0133666992188,
+        "kinematic_rule_met": false,
+        "frame_time": 2.982363536776212
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.5973320007324219,
+        "p_threshold": 0.4,
+        "tilt": 1.0,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.204909677419355
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8823992609977722,
+        "p_threshold": 0.7,
+        "tilt": 35.5,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.075122222222224
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/18.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.001372368773445487,
+        "p_threshold": 0.4,
+        "tilt": 35.5,
+        "vy": 2.1438,
+        "jerk": 260.5367431640625,
+        "kinematic_rule_met": true,
+        "frame_time": 1.5393423423423434
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.027034232392907143,
+        "p_threshold": 0.7,
+        "tilt": 62.7,
+        "vy": 2.9221,
+        "jerk": 4133.51611328125,
+        "kinematic_rule_met": true,
+        "frame_time": 1.7066621621621634
+      }
+    ]
+  },
+  {
+    "mode": "full",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 36.1,
+        "vy": 2.3207,
+        "jerk": 1591.02099609375,
+        "kinematic_rule_met": true,
+        "frame_time": 0.40202065009560234
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8905325531959534,
+        "p_threshold": 0.7,
+        "tilt": 60.5,
+        "vy": 1.6627,
+        "jerk": 992.9618530273438,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6365326959847037
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.05997472256422043,
+        "p_threshold": 0.4,
+        "tilt": 35.8,
+        "vy": 2.3857,
+        "jerk": 728.1917724609375,
+        "kinematic_rule_met": true,
+        "frame_time": 14.33873652007652
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "full",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7224875688552856,
+        "p_threshold": 0.7,
+        "tilt": 39.8,
+        "vy": 1.2249,
+        "jerk": 185.51914978027344,
+        "kinematic_rule_met": false,
+        "frame_time": 14.439241682600422
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.4,
+        "vy": 7.7539,
+        "jerk": 5702.1416015625,
+        "kinematic_rule_met": true,
+        "frame_time": 2.0439388489208645
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 87.2,
+        "vy": 2.5857,
+        "jerk": 1766.4857177734375,
+        "kinematic_rule_met": true,
+        "frame_time": 2.613561151079135
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/02.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/02.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 54.4,
+        "vy": 11.6079,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 2.977366666666672
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 44.6,
+        "vy": 9.7599,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 2.3469366666666645
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 49.7,
+        "vy": 9.2427,
+        "jerk": 10786.8974609375,
+        "kinematic_rule_met": true,
+        "frame_time": 4.425652
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 51.1,
+        "vy": 2.7876,
+        "jerk": 1880.2803955078125,
+        "kinematic_rule_met": true,
+        "frame_time": 6.571422666666693
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/04.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 37.3,
+        "vy": 4.5325,
+        "jerk": 166.451416015625,
+        "kinematic_rule_met": true,
+        "frame_time": 2.8498589743589684
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 71.6,
+        "vy": 2.0524,
+        "jerk": 1571.1717529296875,
+        "kinematic_rule_met": true,
+        "frame_time": 3.1180809954751063
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.7,
+        "vy": 1.4871,
+        "jerk": 1027.739013671875,
+        "kinematic_rule_met": true,
+        "frame_time": 1.406801092896174
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 70.3,
+        "vy": 3.1438,
+        "jerk": 2969.95654296875,
+        "kinematic_rule_met": true,
+        "frame_time": 1.9762205828779584
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 40.2,
+        "vy": 2.3253,
+        "jerk": 624.2503662109375,
+        "kinematic_rule_met": true,
+        "frame_time": 1.7104079787234052
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 69.5,
+        "vy": 7.061,
+        "jerk": 1812.750732421875,
+        "kinematic_rule_met": true,
+        "frame_time": 2.5823806737588666
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 37.3,
+        "vy": 4.9867,
+        "jerk": 2198.78076171875,
+        "kinematic_rule_met": true,
+        "frame_time": 2.4427803921568634
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 60.2,
+        "vy": 1.4751,
+        "jerk": 2854.4775390625,
+        "kinematic_rule_met": true,
+        "frame_time": 2.6100941176470602
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 39.7,
+        "vy": 1.9756,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 2.5469377532228394
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 58.9,
+        "vy": 1.88,
+        "jerk": 161.10671997070312,
+        "kinematic_rule_met": true,
+        "frame_time": 4.691727440147328
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.8,
+        "vy": 1.9759,
+        "jerk": 466.5921325683594,
+        "kinematic_rule_met": true,
+        "frame_time": 2.0096291390728496
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 88.2,
+        "vy": 2.2903,
+        "jerk": 2727.011962890625,
+        "kinematic_rule_met": true,
+        "frame_time": 2.512036423841059
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 36.5,
+        "vy": 8.0427,
+        "jerk": 2230.734375,
+        "kinematic_rule_met": true,
+        "frame_time": 1.4422284313725497
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 79.4,
+        "vy": 1.9865,
+        "jerk": 5163.61962890625,
+        "kinematic_rule_met": true,
+        "frame_time": 1.5763892156862753
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.6,
+        "vy": 2.3616,
+        "jerk": 7137.341796875,
+        "kinematic_rule_met": true,
+        "frame_time": 3.050038647342994
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 37.8,
+        "vy": 4.4286,
+        "jerk": 1023.0521850585938,
+        "kinematic_rule_met": true,
+        "frame_time": 0.5362004474272928
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 85.2,
+        "vy": 3.3497,
+        "jerk": 3333.1474609375,
+        "kinematic_rule_met": true,
+        "frame_time": 0.7707881431767333
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 36.2,
+        "vy": 1.7264,
+        "jerk": 277.198974609375,
+        "kinematic_rule_met": true,
+        "frame_time": 1.069975371549894
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 62.9,
+        "vy": 2.9973,
+        "jerk": 3154.668212890625,
+        "kinematic_rule_met": true,
+        "frame_time": 1.2705957537154993
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/15.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/16.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 36.7,
+        "vy": 2.9697,
+        "jerk": 1043.531005859375,
+        "kinematic_rule_met": true,
+        "frame_time": 2.979321578099838
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+        "kind": "Fall",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 67.2,
+        "vy": 1.5023,
+        "jerk": 1852.3092041015625,
+        "kinematic_rule_met": true,
+        "frame_time": 3.180174718196456
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/01.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/02.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.8,
+        "vy": 4.0423,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 3.747757575757579
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 40.3,
+        "vy": 7.965,
+        "jerk": 520.2300415039062,
+        "kinematic_rule_met": true,
+        "frame_time": 1.1745714285714295
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 70.2,
+        "vy": 2.2469,
+        "jerk": 2214.51416015625,
+        "kinematic_rule_met": true,
+        "frame_time": 1.3423673469387767
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 49.1,
+        "vy": 2.5671,
+        "jerk": 2758.68212890625,
+        "kinematic_rule_met": true,
+        "frame_time": 0.36864026845637576
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 65.1,
+        "vy": 6.0683,
+        "jerk": 3066.468017578125,
+        "kinematic_rule_met": true,
+        "frame_time": 0.9383570469798662
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/08.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 42.5,
+        "vy": 1.7165,
+        "jerk": 1542.1328125,
+        "kinematic_rule_met": true,
+        "frame_time": 4.725050261780112
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 81.2,
+        "vy": 2.8903,
+        "jerk": 3813.588134765625,
+        "kinematic_rule_met": true,
+        "frame_time": 6.199534031413609
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/13.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 38.5,
+        "vy": 2.5156,
+        "jerk": 572.3541870117188,
+        "kinematic_rule_met": true,
+        "frame_time": 2.813209677419351
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 49.4,
+        "vy": 1.7914,
+        "jerk": 206.17352294921875,
+        "kinematic_rule_met": true,
+        "frame_time": 1.3072522012578611
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 62.0,
+        "vy": 4.1527,
+        "jerk": 2672.923828125,
+        "kinematic_rule_met": true,
+        "frame_time": 1.5418872117400413
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.6,
+        "vy": 2.2973,
+        "jerk": 328.384033203125,
+        "kinematic_rule_met": true,
+        "frame_time": 3.0158732394366186
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 65.7,
+        "vy": 1.6521,
+        "jerk": 1736.70703125,
+        "kinematic_rule_met": true,
+        "frame_time": 3.3174605633802794
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 44.5,
+        "vy": 2.308,
+        "jerk": 0.0,
+        "kinematic_rule_met": true,
+        "frame_time": 2.1420616487455213
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 70.3,
+        "vy": 5.7621,
+        "jerk": 2981.288330078125,
+        "kinematic_rule_met": true,
+        "frame_time": 2.2759405017921157
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/18.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.5,
+        "vy": 2.1438,
+        "jerk": 260.5367431640625,
+        "kinematic_rule_met": true,
+        "frame_time": 1.5393423423423434
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 62.7,
+        "vy": 2.9221,
+        "jerk": 4133.51611328125,
+        "kinematic_rule_met": true,
+        "frame_time": 1.7066621621621634
+      }
+    ]
+  },
+  {
+    "mode": "rules_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 36.1,
+        "vy": 2.3207,
+        "jerk": 1591.02099609375,
+        "kinematic_rule_met": true,
+        "frame_time": 0.40202065009560234
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "FALL_IMPACT",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.7,
+        "tilt": 67.8,
+        "vy": 1.9132,
+        "jerk": 2230.70263671875,
+        "kinematic_rule_met": true,
+        "frame_time": 0.670034416826004
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "rules_only",
+        "event": "PRE_FALL",
+        "trigger": "kinematic",
+        "p": 0.0,
+        "p_threshold": 0.4,
+        "tilt": 35.8,
+        "vy": 2.3857,
+        "jerk": 728.1917724609375,
+        "kinematic_rule_met": true,
+        "frame_time": 14.33873652007652
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8612672090530396,
+        "p_threshold": 0.4,
+        "tilt": 37.5,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.0774460431654687
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/01.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9525036215782166,
+        "p_threshold": 0.7,
+        "tilt": 39.8,
+        "vy": 2.6847,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.110953237410073
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/02.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.949106752872467,
+        "p_threshold": 0.4,
+        "tilt": 46.6,
+        "vy": 2.2434,
+        "jerk": 1222.291015625,
+        "kinematic_rule_met": false,
+        "frame_time": 2.8833793333333304
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/03.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8865604996681213,
+        "p_threshold": 0.7,
+        "tilt": 46.0,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.916906999999997
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/04.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/04.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.623253583908081,
+        "p_threshold": 0.4,
+        "tilt": 32.4,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.640828132387705
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/04.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9659273028373718,
+        "p_threshold": 0.7,
+        "tilt": 40.3,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.6743144208037806
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.6163422465324402,
+        "p_threshold": 0.4,
+        "tilt": 87.0,
+        "vy": -0.7703,
+        "jerk": 1659.43359375,
+        "kinematic_rule_met": false,
+        "frame_time": 4.4927188536953135
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/05.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8722244501113892,
+        "p_threshold": 0.7,
+        "tilt": 86.8,
+        "vy": 0.144,
+        "jerk": 142.0640411376953,
+        "kinematic_rule_met": false,
+        "frame_time": 4.526246606334831
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7512295842170715,
+        "p_threshold": 0.4,
+        "tilt": 78.4,
+        "vy": -0.9788,
+        "jerk": 65.71477508544922,
+        "kinematic_rule_met": false,
+        "frame_time": 2.8805927140254983
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/06.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9487197995185852,
+        "p_threshold": 0.7,
+        "tilt": 78.2,
+        "vy": -0.8188,
+        "jerk": 29.058208465576172,
+        "kinematic_rule_met": false,
+        "frame_time": 2.914087978142074
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7090432047843933,
+        "p_threshold": 0.4,
+        "tilt": 56.5,
+        "vy": 1.0585,
+        "jerk": 541.6441040039062,
+        "kinematic_rule_met": false,
+        "frame_time": 1.878095035460994
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/07.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.928911030292511,
+        "p_threshold": 0.7,
+        "tilt": 60.4,
+        "vy": 1.9535,
+        "jerk": 149.30625915527344,
+        "kinematic_rule_met": false,
+        "frame_time": 1.9116324468085117
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.6158110499382019,
+        "p_threshold": 0.4,
+        "tilt": 22.0,
+        "vy": 0.1799,
+        "jerk": 167.84910583496094,
+        "kinematic_rule_met": false,
+        "frame_time": 3.5470509803921626
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/08.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7185980081558228,
+        "p_threshold": 0.7,
+        "tilt": 26.4,
+        "vy": 4.6187,
+        "jerk": 1358.02001953125,
+        "kinematic_rule_met": false,
+        "frame_time": 3.6139764705882413
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8365018367767334,
+        "p_threshold": 0.4,
+        "tilt": 74.1,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 3.1501598526703543
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/09.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9452096223831177,
+        "p_threshold": 0.7,
+        "tilt": 71.0,
+        "vy": -0.6255,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 3.1836721915285495
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.4060767590999603,
+        "p_threshold": 0.4,
+        "tilt": 64.8,
+        "vy": -6.8425,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.3445673289183224
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/10.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8286424875259399,
+        "p_threshold": 0.7,
+        "tilt": 75.2,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.3780611479028697
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.762668251991272,
+        "p_threshold": 0.4,
+        "tilt": 55.7,
+        "vy": 7.4974,
+        "jerk": 1308.2061767578125,
+        "kinematic_rule_met": false,
+        "frame_time": 1.5093088235294125
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/11.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9581359624862671,
+        "p_threshold": 0.7,
+        "tilt": 65.2,
+        "vy": 9.0266,
+        "jerk": 943.5673828125,
+        "kinematic_rule_met": false,
+        "frame_time": 1.542849019607844
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9091619253158569,
+        "p_threshold": 0.4,
+        "tilt": 9.9,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.8434299516908206
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/12.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9744706749916077,
+        "p_threshold": 0.7,
+        "tilt": 9.5,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.876946859903381
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/13.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.5076164603233337,
+        "p_threshold": 0.4,
+        "tilt": 87.5,
+        "vy": -0.2785,
+        "jerk": 852.0450439453125,
+        "kinematic_rule_met": false,
+        "frame_time": 4.825804026845628
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.4749090373516083,
+        "p_threshold": 0.4,
+        "tilt": 78.6,
+        "vy": -0.7383,
+        "jerk": 150.42044067382812,
+        "kinematic_rule_met": false,
+        "frame_time": 1.9393303609341832
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/14.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7735356092453003,
+        "p_threshold": 0.7,
+        "tilt": 76.3,
+        "vy": -2.1635,
+        "jerk": 697.3538818359375,
+        "kinematic_rule_met": false,
+        "frame_time": 2.0062038216560514
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/15.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/15.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7471383213996887,
+        "p_threshold": 0.4,
+        "tilt": 13.4,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.140454252873564
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/15.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9238439798355103,
+        "p_threshold": 0.7,
+        "tilt": 19.2,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.173898850574713
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/16.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "POSE_LOST_WHILE_FALLEN"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "POSE_LOST_WHILE_FALLEN"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/16.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9780445694923401,
+        "p_threshold": 0.4,
+        "tilt": 7.9,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.5137853773584906
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "Fall",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8507373332977295,
+        "p_threshold": 0.4,
+        "tilt": 82.1,
+        "vy": 4.986,
+        "jerk": 1984.5040283203125,
+        "kinematic_rule_met": false,
+        "frame_time": 3.4145033816425108
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/Fall/17.mp4",
+        "kind": "Fall",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9399277567863464,
+        "p_threshold": 0.7,
+        "tilt": 83.3,
+        "vy": -0.8208,
+        "jerk": 6565.54443359375,
+        "kinematic_rule_met": false,
+        "frame_time": 3.447978904991947
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/01.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/02.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9904271364212036,
+        "p_threshold": 0.4,
+        "tilt": 3.1,
+        "vy": -1.0159,
+        "jerk": 169.16909790039062,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6030808988764046
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.990391731262207,
+        "p_threshold": 0.7,
+        "tilt": 3.1,
+        "vy": 0.2667,
+        "jerk": 762.2167358398438,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6365853932584271
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8957775235176086,
+        "p_threshold": 0.4,
+        "tilt": 9.4,
+        "vy": 0.4835,
+        "jerk": 1419.7340087890625,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6133505617977546
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.920668363571167,
+        "p_threshold": 0.7,
+        "tilt": 8.7,
+        "vy": 0.4416,
+        "jerk": 1263.180908203125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6468550561797772
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.4776068925857544,
+        "p_threshold": 0.4,
+        "tilt": 5.5,
+        "vy": 0.6052,
+        "jerk": 352.2997131347656,
+        "kinematic_rule_met": false,
+        "frame_time": 4.6236202247191045
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7233507037162781,
+        "p_threshold": 0.7,
+        "tilt": 5.9,
+        "vy": 0.3763,
+        "jerk": 178.06724548339844,
+        "kinematic_rule_met": false,
+        "frame_time": 4.724133707865171
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/03.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.40029376745224,
+        "p_threshold": 0.4,
+        "tilt": 8.1,
+        "vy": 0.0344,
+        "jerk": 21.223894119262695,
+        "kinematic_rule_met": false,
+        "frame_time": 6.801412359550547
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9868144989013672,
+        "p_threshold": 0.4,
+        "tilt": 20.1,
+        "vy": 0.0101,
+        "jerk": 229.20669555664062,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6035319587628868
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9873650670051575,
+        "p_threshold": 0.7,
+        "tilt": 21.0,
+        "vy": 0.423,
+        "jerk": 13.587096214294434,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6370615120274916
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.988896369934082,
+        "p_threshold": 0.4,
+        "tilt": 19.9,
+        "vy": -0.2251,
+        "jerk": 277.6561584472656,
+        "kinematic_rule_met": false,
+        "frame_time": 2.615305154639175
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9886095523834229,
+        "p_threshold": 0.7,
+        "tilt": 19.9,
+        "vy": -0.0636,
+        "jerk": 197.2316131591797,
+        "kinematic_rule_met": false,
+        "frame_time": 2.64883470790378
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9887999296188354,
+        "p_threshold": 0.4,
+        "tilt": 19.4,
+        "vy": 0.7479,
+        "jerk": 484.6549987792969,
+        "kinematic_rule_met": false,
+        "frame_time": 4.627078350515463
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9887111186981201,
+        "p_threshold": 0.7,
+        "tilt": 19.4,
+        "vy": 0.1887,
+        "jerk": 239.3816375732422,
+        "kinematic_rule_met": false,
+        "frame_time": 4.660607903780067
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.986158013343811,
+        "p_threshold": 0.4,
+        "tilt": 19.0,
+        "vy": 0.1708,
+        "jerk": 89.18450927734375,
+        "kinematic_rule_met": false,
+        "frame_time": 6.638851546391733
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9859121441841125,
+        "p_threshold": 0.7,
+        "tilt": 19.0,
+        "vy": 0.0935,
+        "jerk": 7.744099140167236,
+        "kinematic_rule_met": false,
+        "frame_time": 6.672381099656337
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9880471229553223,
+        "p_threshold": 0.4,
+        "tilt": 21.8,
+        "vy": -0.7709,
+        "jerk": 653.9085083007812,
+        "kinematic_rule_met": false,
+        "frame_time": 8.65062474226802
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9882797002792358,
+        "p_threshold": 0.7,
+        "tilt": 21.9,
+        "vy": 0.168,
+        "jerk": 230.89971923828125,
+        "kinematic_rule_met": false,
+        "frame_time": 8.684154295532625
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9873520135879517,
+        "p_threshold": 0.4,
+        "tilt": 21.6,
+        "vy": 0.1998,
+        "jerk": 262.4703674316406,
+        "kinematic_rule_met": false,
+        "frame_time": 10.662397938144343
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9862972497940063,
+        "p_threshold": 0.7,
+        "tilt": 21.6,
+        "vy": 0.3313,
+        "jerk": 133.44248962402344,
+        "kinematic_rule_met": false,
+        "frame_time": 10.695927491408948
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9881673455238342,
+        "p_threshold": 0.4,
+        "tilt": 20.7,
+        "vy": -0.0096,
+        "jerk": 73.13038635253906,
+        "kinematic_rule_met": false,
+        "frame_time": 12.674171134020666
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/04.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9884107112884521,
+        "p_threshold": 0.7,
+        "tilt": 20.7,
+        "vy": -0.0382,
+        "jerk": 211.50289916992188,
+        "kinematic_rule_met": false,
+        "frame_time": 12.707700687285271
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.6735453009605408,
+        "p_threshold": 0.4,
+        "tilt": 12.7,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.3758106060606043
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/05.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8638563752174377,
+        "p_threshold": 0.7,
+        "tilt": 17.3,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.4092727272727257
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.423367977142334,
+        "p_threshold": 0.4,
+        "tilt": 46.3,
+        "vy": 4.8514,
+        "jerk": 3524.447509765625,
+        "kinematic_rule_met": false,
+        "frame_time": 1.2416897959183684
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/06.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9025576114654541,
+        "p_threshold": 0.7,
+        "tilt": 51.5,
+        "vy": 7.6747,
+        "jerk": 2743.755615234375,
+        "kinematic_rule_met": false,
+        "frame_time": 1.2752489795918378
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9963744282722473,
+        "p_threshold": 0.4,
+        "tilt": 51.1,
+        "vy": 4.6305,
+        "jerk": 649.3864135742188,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6032295302013423
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/07.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.996355414390564,
+        "p_threshold": 0.7,
+        "tilt": 52.1,
+        "vy": -0.6423,
+        "jerk": 1871.0469970703125,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6367422818791947
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/08.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8969836235046387,
+        "p_threshold": 0.4,
+        "tilt": 1.3,
+        "vy": -1.1326,
+        "jerk": 49.838619232177734,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6031226519337017
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8847672343254089,
+        "p_threshold": 0.7,
+        "tilt": 1.8,
+        "vy": -0.3515,
+        "jerk": 61.050636291503906,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6366294659300185
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.8155841827392578,
+        "p_threshold": 0.4,
+        "tilt": 1.8,
+        "vy": 1.5019,
+        "jerk": 1941.2100830078125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.613531491712706
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8802868127822876,
+        "p_threshold": 0.7,
+        "tilt": 1.9,
+        "vy": 0.1384,
+        "jerk": 1620.4111328125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6470383057090228
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9212928414344788,
+        "p_threshold": 0.4,
+        "tilt": 1.4,
+        "vy": 1.059,
+        "jerk": 1550.7606201171875,
+        "kinematic_rule_met": false,
+        "frame_time": 4.623940331491703
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.899538516998291,
+        "p_threshold": 0.7,
+        "tilt": 1.5,
+        "vy": -0.8681,
+        "jerk": 844.5296020507812,
+        "kinematic_rule_met": false,
+        "frame_time": 4.657447145488019
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9817425012588501,
+        "p_threshold": 0.4,
+        "tilt": 1.5,
+        "vy": -0.0998,
+        "jerk": 204.2798614501953,
+        "kinematic_rule_met": false,
+        "frame_time": 6.634349171270699
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9790539741516113,
+        "p_threshold": 0.7,
+        "tilt": 1.5,
+        "vy": -0.1491,
+        "jerk": 66.68828582763672,
+        "kinematic_rule_met": false,
+        "frame_time": 6.667855985267016
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9724446535110474,
+        "p_threshold": 0.4,
+        "tilt": 0.8,
+        "vy": 0.4594,
+        "jerk": 1097.118408203125,
+        "kinematic_rule_met": false,
+        "frame_time": 8.644758011049696
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9729517698287964,
+        "p_threshold": 0.7,
+        "tilt": 1.0,
+        "vy": 0.1324,
+        "jerk": 1454.2901611328125,
+        "kinematic_rule_met": false,
+        "frame_time": 8.678264825046012
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7185468077659607,
+        "p_threshold": 0.4,
+        "tilt": 1.2,
+        "vy": 0.0263,
+        "jerk": 71.61497497558594,
+        "kinematic_rule_met": false,
+        "frame_time": 10.655166850828692
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/09.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7589085102081299,
+        "p_threshold": 0.7,
+        "tilt": 0.5,
+        "vy": -0.2432,
+        "jerk": 464.7593994140625,
+        "kinematic_rule_met": false,
+        "frame_time": 10.856207734806592
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.5388538241386414,
+        "p_threshold": 0.4,
+        "tilt": 9.1,
+        "vy": 3.6077,
+        "jerk": 169.43104553222656,
+        "kinematic_rule_met": false,
+        "frame_time": 1.7760827225130886
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7270034551620483,
+        "p_threshold": 0.7,
+        "tilt": 9.1,
+        "vy": -2.2454,
+        "jerk": 5764.0419921875,
+        "kinematic_rule_met": false,
+        "frame_time": 1.8095937172774865
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9144769906997681,
+        "p_threshold": 0.4,
+        "tilt": 2.5,
+        "vy": 1.2302,
+        "jerk": 365.027587890625,
+        "kinematic_rule_met": false,
+        "frame_time": 3.7867424083769743
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/10.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.895889937877655,
+        "p_threshold": 0.7,
+        "tilt": 1.8,
+        "vy": 7.7564,
+        "jerk": 5002.0341796875,
+        "kinematic_rule_met": false,
+        "frame_time": 3.8202534031413724
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9895315170288086,
+        "p_threshold": 0.4,
+        "tilt": 2.9,
+        "vy": 0.6664,
+        "jerk": 398.5058898925781,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6030824999999999
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9898770451545715,
+        "p_threshold": 0.7,
+        "tilt": 3.1,
+        "vy": 2.5764,
+        "jerk": 1538.566162109375,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6365870833333331
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9927141070365906,
+        "p_threshold": 0.4,
+        "tilt": 0.5,
+        "vy": -3.6209,
+        "jerk": 3614.578857421875,
+        "kinematic_rule_met": false,
+        "frame_time": 2.613357500000002
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9928374886512756,
+        "p_threshold": 0.7,
+        "tilt": 0.5,
+        "vy": -3.237,
+        "jerk": 3853.177490234375,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6468620833333354
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9940156936645508,
+        "p_threshold": 0.4,
+        "tilt": 3.6,
+        "vy": -1.0337,
+        "jerk": 1678.5279541015625,
+        "kinematic_rule_met": false,
+        "frame_time": 4.623632500000006
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9939367175102234,
+        "p_threshold": 0.7,
+        "tilt": 4.0,
+        "vy": 1.6715,
+        "jerk": 2010.095703125,
+        "kinematic_rule_met": false,
+        "frame_time": 4.657137083333339
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9944888353347778,
+        "p_threshold": 0.4,
+        "tilt": 4.5,
+        "vy": 0.0814,
+        "jerk": 218.90896606445312,
+        "kinematic_rule_met": false,
+        "frame_time": 6.633907500000009
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9946541786193848,
+        "p_threshold": 0.7,
+        "tilt": 4.6,
+        "vy": 1.4033,
+        "jerk": 386.86248779296875,
+        "kinematic_rule_met": false,
+        "frame_time": 6.667412083333343
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9938096404075623,
+        "p_threshold": 0.4,
+        "tilt": 5.3,
+        "vy": -0.1207,
+        "jerk": 245.27243041992188,
+        "kinematic_rule_met": false,
+        "frame_time": 8.644182499999996
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9938473105430603,
+        "p_threshold": 0.7,
+        "tilt": 5.0,
+        "vy": 0.5825,
+        "jerk": 622.7113037109375,
+        "kinematic_rule_met": false,
+        "frame_time": 8.677687083333328
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9950217008590698,
+        "p_threshold": 0.4,
+        "tilt": 3.2,
+        "vy": -3.281,
+        "jerk": 1923.1573486328125,
+        "kinematic_rule_met": false,
+        "frame_time": 10.654457499999946
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/11.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9949916005134583,
+        "p_threshold": 0.7,
+        "tilt": 3.2,
+        "vy": 1.8179,
+        "jerk": 2856.736572265625,
+        "kinematic_rule_met": false,
+        "frame_time": 10.687962083333279
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9909780025482178,
+        "p_threshold": 0.4,
+        "tilt": 1.0,
+        "vy": 6.1624,
+        "jerk": 608.2922973632812,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6029859922178991
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9906152486801147,
+        "p_threshold": 0.7,
+        "tilt": 1.0,
+        "vy": -0.0826,
+        "jerk": 1309.7783203125,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6364852140077824
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9771864414215088,
+        "p_threshold": 0.4,
+        "tilt": 5.9,
+        "vy": -0.493,
+        "jerk": 2053.23486328125,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6129392996108964
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9799376130104065,
+        "p_threshold": 0.7,
+        "tilt": 5.7,
+        "vy": -1.2472,
+        "jerk": 5487.33349609375,
+        "kinematic_rule_met": false,
+        "frame_time": 2.6464385214007797
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9834232330322266,
+        "p_threshold": 0.4,
+        "tilt": 2.0,
+        "vy": -0.5937,
+        "jerk": 372.44256591796875,
+        "kinematic_rule_met": false,
+        "frame_time": 4.622892607003894
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9824995994567871,
+        "p_threshold": 0.7,
+        "tilt": 1.6,
+        "vy": -0.1836,
+        "jerk": 609.8536376953125,
+        "kinematic_rule_met": false,
+        "frame_time": 4.656391828793777
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.9805111289024353,
+        "p_threshold": 0.4,
+        "tilt": 0.6,
+        "vy": -0.0451,
+        "jerk": 307.2691345214844,
+        "kinematic_rule_met": false,
+        "frame_time": 6.632845914396891
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/12.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9801476001739502,
+        "p_threshold": 0.7,
+        "tilt": 0.7,
+        "vy": 0.0792,
+        "jerk": 82.63886260986328,
+        "kinematic_rule_met": false,
+        "frame_time": 6.6663451361867745
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/13.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.46012404561042786,
+        "p_threshold": 0.4,
+        "tilt": 53.9,
+        "vy": 0.7203,
+        "jerk": 1118.3870849609375,
+        "kinematic_rule_met": false,
+        "frame_time": 3.014153225806447
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/14.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.7544211745262146,
+        "p_threshold": 0.7,
+        "tilt": 57.5,
+        "vy": 0.6597,
+        "jerk": 136.28616333007812,
+        "kinematic_rule_met": false,
+        "frame_time": 3.081134408602146
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.755671501159668,
+        "p_threshold": 0.4,
+        "tilt": 36.9,
+        "vy": -1.5517,
+        "jerk": 2137.216796875,
+        "kinematic_rule_met": false,
+        "frame_time": 1.005578616352201
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/15.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8969494700431824,
+        "p_threshold": 0.7,
+        "tilt": 36.9,
+        "vy": -0.043,
+        "jerk": 961.5115966796875,
+        "kinematic_rule_met": false,
+        "frame_time": 1.039097903563941
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": true,
+    "tier2_types": [
+      "FALL_IMPACT"
+    ],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "FALL_IMPACT"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.48254141211509705,
+        "p_threshold": 0.4,
+        "tilt": 35.6,
+        "vy": -0.3379,
+        "jerk": 2671.972900390625,
+        "kinematic_rule_met": false,
+        "frame_time": 2.948853834115805
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/16.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.892637312412262,
+        "p_threshold": 0.7,
+        "tilt": 35.3,
+        "vy": 1.1256,
+        "jerk": 599.0133666992188,
+        "kinematic_rule_met": false,
+        "frame_time": 2.982363536776212
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.5973320007324219,
+        "p_threshold": 0.4,
+        "tilt": 1.0,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 1.204909677419355
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/17.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8823992609977722,
+        "p_threshold": 0.7,
+        "tilt": 35.5,
+        "vy": 0.0,
+        "jerk": 0.0,
+        "kinematic_rule_met": false,
+        "frame_time": 2.075122222222224
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/18.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": false,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [],
+    "m4_events": []
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7184744477272034,
+        "p_threshold": 0.4,
+        "tilt": 70.3,
+        "vy": 2.132,
+        "jerk": 1200.011962890625,
+        "kinematic_rule_met": false,
+        "frame_time": 1.7735900900900914
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/19.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.9359063506126404,
+        "p_threshold": 0.7,
+        "tilt": 74.1,
+        "vy": 1.2003,
+        "jerk": 301.75274658203125,
+        "kinematic_rule_met": false,
+        "frame_time": 1.8070540540540554
+      }
+    ]
+  },
+  {
+    "mode": "m3_only",
+    "type": "ADL",
+    "path": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+    "final_state": "NOT MEASURED",
+    "tier1": true,
+    "tier2": false,
+    "tier2_types": [],
+    "emitted_types": [
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED",
+      "PRE_FALL_WARNING",
+      "SELF_RECOVERY_CANCELLED"
+    ],
+    "m4_events": [
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.6002199649810791,
+        "p_threshold": 0.4,
+        "tilt": 55.6,
+        "vy": 4.0628,
+        "jerk": 1782.8349609375,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6030309751434035
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8905325531959534,
+        "p_threshold": 0.7,
+        "tilt": 60.5,
+        "vy": 1.6627,
+        "jerk": 992.9618530273438,
+        "kinematic_rule_met": false,
+        "frame_time": 0.6365326959847037
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "PRE_FALL",
+        "trigger": "probability",
+        "p": 0.7224875688552856,
+        "p_threshold": 0.4,
+        "tilt": 39.8,
+        "vy": 1.2249,
+        "jerk": 185.51914978027344,
+        "kinematic_rule_met": false,
+        "frame_time": 14.439241682600422
+      },
+      {
+        "video": "data/raw_datasets/gmdcsa24/Subject 4/ADL/20.mp4",
+        "kind": "ADL",
+        "mode": "m3_only",
+        "event": "FALL_IMPACT",
+        "trigger": "probability",
+        "p": 0.8836796283721924,
+        "p_threshold": 0.7,
+        "tilt": 41.6,
+        "vy": -0.6943,
+        "jerk": 2221.547607421875,
+        "kinematic_rule_met": false,
+        "frame_time": 14.472743403441722
+      }
+    ]
+  }
+]

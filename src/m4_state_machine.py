@@ -23,6 +23,15 @@ States:
     POST_FALL_MONITOR       person is down; watching for recovery
     LONG_LIE_ALERT          down and immobile too long -> emergency escalation
 
+Tiered pre-impact events (beyond the emergency alerts):
+    PRE_FALL_WARNING        emitted once per episode at PRE_FALL entry (tier_event,
+                            alert=False) - the "are you OK?" tier, before impact.
+    SELF_RECOVERY_CANCELLED emitted on the same episode if the person recovers before
+                            impact is confirmed - no FALL_IMPACT ever fires.
+    Every episode gets an `episode_id` (EP_<hex>) at PRE_FALL entry, carried through
+    warning -> impact -> long-lie (and through cancel), so the gateway can update a
+    single alert document instead of creating a new one per event.
+
 Why this closes the chair-fall gap:
     M3 alone missed the chair fall because the subject fell into shadow/out-of-frame
     and M1 honestly reported LOST (buffer reset, nothing to classify). M4 remembers the
@@ -38,6 +47,7 @@ Design intent on the furniture suppressor:
 """
 
 import time
+import uuid
 from collections import deque
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
@@ -62,7 +72,7 @@ class M4Config:
 
     # POST_FALL / recovery
     recovery_tilt: float = 30.0       # tilt back below this = getting up
-    long_lie_s: float = 10.0          # prone & immobile longer than this -> alert
+    long_lie_s: float = 180.0         # prone & immobile longer than this -> alert
     recovery_confirm_s: float = 1.0   # sustained upright time to declare recovered
 
     # Fall CONFIRMATION window (the key false-alarm fix).
@@ -70,6 +80,14 @@ class M4Config:
     # it was bending / exercise / a stumble -> NO alert. Only a sustained "down" fires.
     confirm_s: float = 2.5            # seconds the person must stay down to confirm a fall
     confirm_upright_tilt: float = 35.0  # tilt below this during the window = recovered
+    confirm_down_tilt: float = 45.0     # explicit horizontal-posture evidence to accrue time
+    recovery_max_abs_vy: float = 12.0  # keep consistent with M2's normalized-speed gate
+    recovery_max_jerk: float = 20000.0 # keep consistent with M2's jerk outlier gate
+
+    # Tier-1 pre-impact warning + adaptive confirmation.
+    warning_cooldown_s: float = 2.0   # min gap between PRE_FALL warnings (anti-flap)
+    confirm_fast_s: float = 1.3       # confirm window for hard falls (impact vy > hard_fall_vy)
+    hard_fall_vy: float = 2.0         # downward velocity that marks a hard impact
 
 
 @dataclass
@@ -77,6 +95,8 @@ class M4Output:
     state: str
     alert: bool                 # True on the frame an escalation fires
     alert_type: Optional[str]   # e.g. "FALL_IMPACT", "POSE_LOST_WHILE_FALLEN", "LONG_LIE_ALERT"
+    episode_id: Optional[str] = None   # EP_<hex>; shared across one fall episode
+    tier_event: Optional[str] = None   # "PRE_FALL_WARNING" | "SELF_RECOVERY_CANCELLED"
     info: Dict = field(default_factory=dict)
 
 
@@ -96,9 +116,13 @@ class FallDecisionEngine:
         self._down_timer = 0.0            # time spent down since impact/loss
         self._upright_timer = 0.0         # sustained upright time (for recovery)
         self._confirm_timer = 0.0         # time elapsed in CONFIRMING (must stay down)
+        self._confirm_required = self.cfg.confirm_s  # adaptive per-episode window
         self._pending_type = None         # which event is being confirmed
         self._long_lie_fired = False
         self._recent_tilt = deque(maxlen=15)  # ~0.5 s of tilt history
+        self._t = 0.0                     # accumulated stream time (seconds)
+        self._episode_id = None           # EP_<hex> for the active fall episode
+        self._last_warning_t = -1e18      # stream time of the last PRE_FALL warning
 
     # -- helpers ----------------------------------------------------------------
     def _recent_max_tilt(self) -> float:
@@ -133,9 +157,11 @@ class FallDecisionEngine:
         p_fall: float,
         on_rest_surface: bool = False,
         dt: float = 1.0 / 30.0,
+        kinematics_reliable: bool = True,
     ) -> M4Output:
         cfg = self.cfg
         valid = pose_status in ("TRACKING", "HELD")
+        self._t += dt
         if valid:
             self._recent_tilt.append(trunk_tilt_deg)
 
@@ -145,6 +171,7 @@ class FallDecisionEngine:
 
         alert = False
         alert_type = None
+        tier_event = None
         pre_fall_active = self._pre_fall_timer > 0
 
         # On a rest_surface (bed/couch), the person is expected to be/lie there.
@@ -158,35 +185,88 @@ class FallDecisionEngine:
             if valid and not rest_suppressed and self._is_pre_fall_signal(p_fall, trunk_tilt_deg, hip_v_y):
                 already_horizontal = trunk_tilt_deg > cfg.impact_tilt
                 if not (already_horizontal and p_fall <= cfg.pre_fall_p):
-                    self.state = "PRE_FALL"
-                    self._pre_fall_timer = cfg.pre_fall_latch_s
+                    # Cooldown gate: don't re-warn while balance-loss is flapping.
+                    if (self._t - self._last_warning_t) >= cfg.warning_cooldown_s:
+                        self.state = "PRE_FALL"
+                        self._pre_fall_timer = cfg.pre_fall_latch_s
+                        self._episode_id = f"EP_{uuid.uuid4().hex[:8]}"
+                        self._last_warning_t = self._t
+                        self._upright_timer = 0.0
+                        self._confirm_required = cfg.confirm_s
+                        tier_event = "PRE_FALL_WARNING"
 
         # ---------------- PRE_FALL ----------------
         # Balance loss detected. Move to CONFIRMING on impact/loss, but DO NOT alert
         # yet -- we must first see the person STAY down (confirm_s). This is what
         # rejects bending / exercise / stumbles that recover quickly.
         elif self.state == "PRE_FALL":
-            if not valid and not rest_suppressed:
+            # Recovery while only a warning is outstanding -> cancel the episode.
+            if valid and trunk_tilt_deg < cfg.recovery_tilt:
+                self._upright_timer += dt
+            else:
+                self._upright_timer = 0.0
+            if self._upright_timer >= cfg.recovery_confirm_s:
+                self.state = "STAND_WALK"
+                self._upright_timer = 0.0
+                tier_event = "SELF_RECOVERY_CANCELLED"
+            elif not valid and not rest_suppressed:
                 self.state = "CONFIRMING"
                 self._pending_type = "POSE_LOST_WHILE_FALLEN"
                 self._confirm_timer = 0.0
+                self._confirm_required = cfg.confirm_s
                 self._down_timer = 0.0
+                self._upright_timer = 0.0
             elif self._is_impact(p_fall, trunk_tilt_deg, jerk, hip_v_y) and not rest_suppressed:
                 self.state = "CONFIRMING"
                 self._pending_type = "FALL_IMPACT"
+                # Adaptive confirmation: a hard descent (fast vy) needs less time down.
+                self._confirm_required = (
+                    cfg.confirm_fast_s if hip_v_y > cfg.hard_fall_vy else cfg.confirm_s
+                )
                 self._confirm_timer = 0.0
                 self._down_timer = 0.0
+                self._upright_timer = 0.0
             elif not pre_fall_active:
                 self.state = "STAND_WALK"
+                tier_event = "SELF_RECOVERY_CANCELLED"
 
         # ---------------- CONFIRMING (no alert yet) ----------------
-        # The person went down. If they get back UP within confirm_s -> it was a
-        # bend / exercise / stumble -> silently return to normal (NO alert).
-        # If they stay down past confirm_s -> confirmed fall -> fire the alert.
+        # The person went down. If they get back UP within the confirm window -> it was a
+        # bend / exercise / stumble -> cancel the episode (NO emergency alert).
+        # If they stay down past the window -> confirmed fall -> fire the alert.
         elif self.state == "CONFIRMING":
-            self._confirm_timer += dt
-            self._down_timer += dt
-            recovered = valid and trunk_tilt_deg < cfg.confirm_upright_tilt
+            # A high M3 score can start confirmation before an actual fall (for
+            # example, during walking with an object). Only count the required
+            # confirmation duration while the person is visibly down or tracking is
+            # lost after the fall sequence. Merely remaining in CONFIRMING is not
+            # evidence that the person stayed down.
+            down_evidence = (
+                not valid
+                or (valid and trunk_tilt_deg >= cfg.confirm_down_tilt)
+            )
+            if down_evidence:
+                self._confirm_timer += dt
+                self._down_timer += dt
+            else:
+                self._confirm_timer = 0.0
+                self._down_timer = 0.0
+
+            # Tilt alone is not enough to prove recovery: a jittering/incorrect pose
+            # can look upright while M2 reports impossible motion. Count only stable,
+            # physically plausible frames toward the sustained recovery timer.
+            upright_candidate = (
+                valid
+                and not down_evidence
+                and kinematics_reliable
+                and trunk_tilt_deg < cfg.confirm_upright_tilt
+                and abs(hip_v_y) <= cfg.recovery_max_abs_vy
+                and jerk <= cfg.recovery_max_jerk
+            )
+            if upright_candidate:
+                self._upright_timer += dt
+            else:
+                self._upright_timer = 0.0
+            recovered = self._upright_timer >= cfg.recovery_confirm_s
             # Resting on a bed/couch is NOT a fall: a genuine fall ends on the floor,
             # not on a rest_surface. If the person is horizontal but ON a rest_surface,
             # treat it as lying down / sleeping and abort the alert.
@@ -194,7 +274,8 @@ class FallDecisionEngine:
             if recovered or resting_on_furniture:
                 self.state = "STAND_WALK"
                 self._pending_type = None
-            elif self._confirm_timer >= cfg.confirm_s:
+                tier_event = "SELF_RECOVERY_CANCELLED"
+            elif self._confirm_timer >= self._confirm_required:
                 # Still down, NOT on furniture -> confirmed fall. Fire the alert.
                 alert, alert_type = True, self._pending_type
                 self.state = "POST_FALL_MONITOR"
@@ -246,6 +327,8 @@ class FallDecisionEngine:
             state=self.state,
             alert=alert,
             alert_type=alert_type,
+            episode_id=self._episode_id,
+            tier_event=tier_event,
             info={
                 "pre_fall_active": pre_fall_active,
                 "down_timer": round(self._down_timer, 2),

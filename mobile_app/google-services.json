@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "542353623576",
+    "project_id": "insight-fall-safety",
+    "storage_bucket": "insight-fall-safety.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542353623576:android:82d1213846732de350916d",
+        "android_client_info": {
+          "package_name": "com.insight.fallsafety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542353623576-no7jgvjb8r66tiu6t4evf6avvdske5r4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.insight.fallsafety",
+            "certificate_hash": "ad637ea3d2b9cd244ab8dbdf4d7fa71ac6421050"
+          }
+        },
+        {
+          "client_id": "542353623576-e7o3fg3o5boilcuil4dk4ejgf2bcutmo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDlxm_rtXCcdNRBoMMVkq0VYjHOiI3Y_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542353623576-e7o3fg3o5boilcuil4dk4ejgf2bcutmo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

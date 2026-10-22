@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, createNavigationContainerRef } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Ionicons } from "@expo/vector-icons";
+import * as Notifications from "expo-notifications";
+import { doc, getDoc } from "firebase/firestore";
 
 import { useAuth } from "../context/AuthContext";
+import { db, isFirebaseConfigured } from "../config/firebase";
+import { initCallAlerts } from "../services/callAlerts";
+import { ensureCallPermissions } from "../services/autoCall";
+import { decideAuthRoute } from "../services/authFlow";
 import { colors, palette, type, space } from "../theme";
 
 // Auth
 import LoginScreen from "../screens/auth/LoginScreen";
 import SignupScreen from "../screens/auth/SignupScreen";
 import RoleSetupScreen from "../screens/auth/RoleSetupScreen";
+import {
+  ForgotPasswordScreen,
+  SetupFailedScreen,
+  VerifyEmailScreen,
+} from "../screens/auth/AuthScreens";
 
 // Elder
 import ElderHomeScreen from "../screens/elder/ElderHomeScreen";
@@ -23,32 +33,95 @@ import CaretakerAlertModal from "../screens/caretaker/CaretakerAlertModal";
 import ActiveResponseScreen from "../screens/caretaker/ActiveResponseScreen";
 import AlertHistoryScreen from "../screens/caretaker/AlertHistoryScreen";
 import ElderDetailsScreen from "../screens/caretaker/ElderDetailsScreen";
+import ManageResidentsScreen from "../screens/caretaker/ManageResidentsScreen";
 
 // Volunteer
 import VolunteerHomeScreen from "../screens/volunteer/VolunteerHomeScreen";
 import VolunteerDispatchModal from "../screens/volunteer/VolunteerDispatchModal";
+import { UpSupportMark } from "../components/auth/WithyuComponents";
 
 const Stack = createNativeStackNavigator();
+const navigationRef = createNavigationContainerRef();
+
+/**
+ * Notification-tap deep link: a push tap (foreground, background, or cold start)
+ * carries data.alertId. We fetch the live alert doc and open the right screen for
+ * the signed-in role. Pending taps are held until auth + navigation are ready.
+ */
+function useNotificationDeepLink(role, loading) {
+  const [pendingAlertId, setPendingAlertId] = useState(null);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured) return;
+    const readAlertId = (response) =>
+      response?.notification?.request?.content?.data?.alertId || null;
+
+    const getLast = () => {
+      if (typeof Notifications.getLastNotificationResponseAsync === "function") {
+        return Notifications.getLastNotificationResponseAsync();
+      }
+      return Promise.resolve(Notifications.getLastNotificationResponse?.());
+    };
+
+    getLast()
+      .then((r) => { const id = readAlertId(r); if (id) setPendingAlertId(id); })
+      .catch(() => {});
+    const sub = Notifications.addNotificationResponseReceivedListener((r) => {
+      const id = readAlertId(r);
+      if (id) setPendingAlertId(id);
+    });
+    return () => sub.remove();
+  }, []);
+
+  useEffect(() => {
+    if (!pendingAlertId || loading) return;
+    if (role !== "caretaker" && role !== "volunteer") return;
+    let cancelled = false;
+    let timer = null;
+    const attempt = async () => {
+      if (cancelled) return;
+      if (!navigationRef.isReady()) {
+        timer = setTimeout(attempt, 300);
+        return;
+      }
+      const alertId = pendingAlertId;
+      setPendingAlertId(null);
+      try {
+        const snap = await getDoc(doc(db, "alerts", alertId));
+        if (!snap.exists()) return;
+        const alert = { id: snap.id, ...snap.data() };
+        if (role === "caretaker") navigationRef.navigate("CaretakerAlert", { alert });
+        else navigationRef.navigate("VolunteerDispatch", { alert });
+      } catch (e) {}
+    };
+    attempt();
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
+  }, [pendingAlertId, role, loading]);
+}
 
 function Loading() {
   return (
     <View style={styles.splash}>
-      <View style={styles.logoCircle}>
-        <Ionicons name="shield-checkmark" size={56} color={palette.white} />
-      </View>
-      <Text style={styles.brand}>INSIGHT-Fall</Text>
+      <UpSupportMark size={68} variant="white" />
+      <Text style={styles.brand}>UpSupport</Text>
       <Text style={styles.tagline}>Keeping watch, with care</Text>
       <ActivityIndicator size="large" color={palette.white} style={{ marginTop: space.lg }} />
     </View>
   );
 }
 
-function AuthStack() {
+function AuthStack({ initialRouteName = "Login" }) {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator key={initialRouteName} initialRouteName={initialRouteName} screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignupScreen} />
       <Stack.Screen name="RoleSetup" component={RoleSetupScreen} />
+      <Stack.Screen name="VerifyEmail" component={VerifyEmailScreen} />
+      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+      <Stack.Screen name="SetupFailed" component={SetupFailedScreen} />
     </Stack.Navigator>
   );
 }
@@ -71,6 +144,7 @@ function CaretakerStack() {
       <Stack.Screen name="ActiveResponse" component={ActiveResponseScreen} options={{ title: "Active Response" }} />
       <Stack.Screen name="AlertHistory" component={AlertHistoryScreen} options={{ title: "Alert History" }} />
       <Stack.Screen name="ElderDetails" component={ElderDetailsScreen} options={{ title: "Resident Details" }} />
+      <Stack.Screen name="ManageResidents" component={ManageResidentsScreen} options={{ title: "Manage Residents" }} />
     </Stack.Navigator>
   );
 }
@@ -85,46 +159,68 @@ function VolunteerStack() {
 }
 
 export default function AppNavigator() {
-  const { user, role, profile, loading, profileLoaded, configured } = useAuth();
+  const {
+    user,
+    role,
+    profile,
+    loading,
+    profileLoaded,
+    authSetupInProgress,
+    configured,
+    authFlowLoaded,
+    googleSignupRetry,
+    setupFailure,
+  } = useAuth();
 
-  // Setup is "complete" when the role's required linking/details are present.
-  // Elder: has a room set. Caretaker: linked to an elder. Volunteer: always ready.
-  const setupComplete =
-    role === "elder" ? Boolean(profile?.roomLocation)
-    : role === "caretaker" ? Boolean(profile?.assignedElderId)
-    : role === "volunteer" ? true
-    : false;
+  useNotificationDeepLink(role, loading);
 
-  function RoleSetupOnly() {
-    return (
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="RoleSetup" component={RoleSetupScreen} />
-      </Stack.Navigator>
-    );
-  }
+  // Call-style ringing for responders: foreground emergency pushes ring like a
+  // phone call (looping ring tone) until handled. No-op on binaries without the
+  // Notifee native module.
+  useEffect(() => {
+    if (role !== "caretaker" && role !== "volunteer") return;
+    return initCallAlerts({ navigationRef });
+  }, [role]);
 
-  // A logged-in user whose profile hasn't been fetched yet must NOT be routed to
-  // RoleSetup (that wrongly shows the volunteer fallback). Wait for the profile.
-  const profilePending = user && configured && !profileLoaded;
-  // Logged in, profile fetch resolved, but NO profile doc exists = orphan auth account
-  // (e.g. its Firestore profile was deleted). Send them to AuthStack to sign up fresh.
-  const orphan = user && configured && profileLoaded && !profile;
+  // Phone permissions for the tier-3 auto-call chain (elder auto-dials the
+  // caretaker; caretaker's app auto-dials back if unanswered). Elder also
+  // gets ANSWER_PHONE_CALLS so the callback connects hands-free.
+  useEffect(() => {
+    if (role === "elder") ensureCallPermissions({ needAnswer: true });
+    else if (role === "caretaker") ensureCallPermissions({ needAnswer: false });
+  }, [role]);
+
+  const destination = decideAuthRoute({
+    user,
+    profile,
+    loading: loading || !authFlowLoaded,
+    profileLoaded,
+    configured,
+    authSetupInProgress,
+    googleSignupRetry,
+    setupFailure: Boolean(setupFailure),
+  });
 
   return (
-    <NavigationContainer>
-      {loading || profilePending ? (
+    <NavigationContainer ref={navigationRef}>
+      {destination === "loading" ? (
         <Loading />
-      ) : !user || !configured || orphan ? (
-        <AuthStack />
-      ) : !role || !setupComplete ? (
-        // Authenticated, profile loaded, but role setup / linking not finished.
-        <RoleSetupOnly />
-      ) : role === "elder" ? (
+      ) : destination === "setupFailed" ? (
+        <AuthStack initialRouteName="SetupFailed" />
+      ) : destination === "googleSignupRetry" ? (
+        <AuthStack initialRouteName="Signup" />
+      ) : destination === "verifyEmail" ? (
+        <AuthStack initialRouteName="VerifyEmail" />
+      ) : destination === "roleSetup" ? (
+        <AuthStack initialRouteName="RoleSetup" />
+      ) : destination === "elderHome" ? (
         <ElderStack />
-      ) : role === "caretaker" ? (
+      ) : destination === "caretakerHome" ? (
         <CaretakerStack />
-      ) : (
+      ) : destination === "volunteerHome" ? (
         <VolunteerStack />
+      ) : (
+        <AuthStack initialRouteName={googleSignupRetry ? "Signup" : "Login"} />
       )}
     </NavigationContainer>
   );
@@ -133,10 +229,6 @@ export default function AppNavigator() {
 const styles = StyleSheet.create({
   center: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: colors.bg },
   splash: { flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: palette.safe },
-  logoCircle: {
-    width: 110, height: 110, borderRadius: 55, backgroundColor: palette.safeDark,
-    alignItems: "center", justifyContent: "center", marginBottom: space.lg,
-  },
   brand: { color: palette.white, fontSize: type.xxl, fontWeight: type.weightBold },
-  tagline: { color: palette.safeSoft, fontSize: type.md, marginTop: space.xs },
+  tagline: { color: palette.white, opacity: 0.88, fontSize: type.md, marginTop: space.xs },
 });

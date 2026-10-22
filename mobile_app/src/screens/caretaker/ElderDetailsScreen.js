@@ -4,18 +4,21 @@ import { Ionicons } from "@expo/vector-icons";
 import { doc, getDoc, collection, query, where, onSnapshot } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "../../config/firebase";
 import { useAuth } from "../../context/AuthContext";
-import { unlinkCaretaker } from "../../services/linking";
+import { linkedElderIds, unlinkCaretaker } from "../../services/linking";
 import ScreenContainer from "../../components/ScreenContainer";
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 import { palette, type, space, radius, EVENT_META } from "../../theme";
 
-export default function ElderDetailsScreen({ navigation }) {
-  const { profile, refreshProfile } = useAuth();
+export default function ElderDetailsScreen({ navigation, route }) {
+  const { user, profile, refreshProfile } = useAuth();
   const [elder, setElder] = useState(null);
   const [recentCount, setRecentCount] = useState(0);
   const [busy, setBusy] = useState(false);
-  const elderId = profile?.assignedElderId;
+  // Multi-elder: the selected resident is passed as a route param; fall back to
+  // the first linked resident for older navigation calls.
+  const elderId = route?.params?.elderId || linkedElderIds(profile)[0];
+  const uid = profile?.uid || user?.uid;
 
   useEffect(() => {
     if (!isFirebaseConfigured || !elderId) return;
@@ -25,15 +28,21 @@ export default function ElderDetailsScreen({ navigation }) {
         if (snap.exists()) setElder(snap.data());
       } catch (e) {}
     })();
-    // live count of active alerts for this elder
-    const q = query(collection(db, "alerts"), where("elderId", "==", elderId));
+    if (!uid) return;
+    // live count of active alerts for this elder (query must be provable:
+    // equality on the rule's assignedCaretakerId field, elder filtered here)
+    const q = query(collection(db, "alerts"), where("assignedCaretakerId", "==", uid));
     const unsub = onSnapshot(q, (snap) => {
       let n = 0;
-      snap.forEach((d) => { if (d.data().status === "CREATED") n++; });
+      snap.forEach((d) => {
+        const data = d.data();
+        if (data.elderId !== elderId) return;
+        if (data.status === "CREATED" || data.status === "WARNING") n++;
+      });
       setRecentCount(n);
     });
     return unsub;
-  }, [elderId]);
+  }, [elderId, uid]);
 
   const unlink = () => {
     Alert.alert("Unlink resident?", "You will stop receiving their alerts.", [
@@ -42,7 +51,7 @@ export default function ElderDetailsScreen({ navigation }) {
         text: "Unlink", style: "destructive",
         onPress: async () => {
           setBusy(true);
-          try { await unlinkCaretaker(profile); await refreshProfile(); } catch (e) {}
+          try { await unlinkCaretaker(profile, elderId); await refreshProfile(); } catch (e) {}
           setBusy(false);
           navigation.goBack();
         },
@@ -52,16 +61,18 @@ export default function ElderDetailsScreen({ navigation }) {
 
   const phone = elder?.emergencyContact;
   const statusTone = recentCount > 0 ? "danger" : "safe";
+  const displayName = elder?.name || (elderIdsMatchFirst(profile, elderId) ? profile?.assignedElderName : null) || "Resident";
+  const displayRoom = elder?.roomLocation || (elderIdsMatchFirst(profile, elderId) ? profile?.assignedElderRoom : null);
 
   return (
     <ScreenContainer scroll>
       <Card style={styles.hero}>
         <View style={styles.avatar}><Ionicons name="person" size={34} color={palette.safeDark} /></View>
-        <Text style={styles.name}>{profile?.assignedElderName || elder?.name || "Resident"}</Text>
-        {(profile?.assignedElderRoom || elder?.roomLocation) ? (
+        <Text style={styles.name}>{displayName}</Text>
+        {displayRoom ? (
           <View style={styles.roomRow}>
             <Ionicons name="location" size={16} color={palette.textMuted} />
-            <Text style={styles.room}>{profile?.assignedElderRoom || elder?.roomLocation}</Text>
+            <Text style={styles.room}>{displayRoom}</Text>
           </View>
         ) : null}
       </Card>
@@ -88,6 +99,10 @@ export default function ElderDetailsScreen({ navigation }) {
       <Button title="Unlink Resident" icon="unlink-outline" variant="ghost" onPress={unlink} loading={busy} />
     </ScreenContainer>
   );
+}
+
+function elderIdsMatchFirst(profile, elderId) {
+  return Boolean(elderId) && profile?.assignedElderId === elderId;
 }
 
 function DetailRow({ icon, label, value, mono }) {

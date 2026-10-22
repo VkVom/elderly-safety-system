@@ -14,15 +14,16 @@ The dashboard is a local Streamlit demonstration screen. It is not the caretaker
 - selected test video
 - body skeleton and furniture boxes
 - current M4 system state
-- fall probability from M3
 - trunk tilt, vertical velocity, and jerk from M2
 - recent local alert records
+
+M3 fall probability remains an internal input to the decision and alert pipeline; it is not presented as dashboard telemetry.
 
 ## How It Works
 
 `dashboard/app.py` opens a selected video from `data/manual_test_videos/`. For each frame it calls `DashboardPipeline.process()`.
 
-The pipeline creates M1, M2, M3, M4, and an `AlertGateway`. Its gateway uses a local JSON sink, not Firebase. This keeps a normal dashboard demo safe and independent of cloud credentials.
+The pipeline creates M1, M2, M3, M4, and an `AlertGateway`. By default, alert routing is local-only. Enable cloud routing to load linked residents, then select one before sending alerts to that resident's linked caretaker.
 
 ## Run It
 

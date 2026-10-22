@@ -28,7 +28,7 @@ from torch.utils.data import TensorDataset, DataLoader
 from src.m3_temporal_model import TemporalFallModel, export_onnx, count_parameters
 
 FEAT_DIR = os.path.join("data", "processed_features")
-PT_PATH = os.path.join("models", "m3_temporal_fall.pt")
+ARTIFACT_DIR = "models"
 SEED = 42
 
 
@@ -99,21 +99,26 @@ def main():
     ap.add_argument("--epochs", type=int, default=60)
     ap.add_argument("--batch", type=int, default=64)
     ap.add_argument("--lr", type=float, default=1e-3)
+    ap.add_argument("--feature-dir", default=FEAT_DIR,
+                    help="feature array directory (defaults to data/processed_features)")
+    ap.add_argument("--artifact-dir", default=ARTIFACT_DIR,
+                    help="model output directory (use a separate folder for candidates)")
     args = ap.parse_args()
 
     torch.manual_seed(SEED); np.random.seed(SEED)
 
-    Xtr = np.load(os.path.join(FEAT_DIR, "X_train.npy"))
-    ytr = np.load(os.path.join(FEAT_DIR, "y_train.npy"))
-    Xva = np.load(os.path.join(FEAT_DIR, "X_val.npy"))
-    yva = np.load(os.path.join(FEAT_DIR, "y_val.npy"))
+    Xtr = np.load(os.path.join(args.feature_dir, "X_train.npy"))
+    ytr = np.load(os.path.join(args.feature_dir, "y_train.npy"))
+    Xva = np.load(os.path.join(args.feature_dir, "X_val.npy"))
+    yva = np.load(os.path.join(args.feature_dir, "y_val.npy"))
+    groups_va = np.load(os.path.join(args.feature_dir, "groups_val.npy"))
     if len(Xva) == 0:
         print("No validation split found. Run extract_dataset_features.py first.")
         return
 
     print(f"Train: {len(ytr)} windows ({int(ytr.sum())} fall)   Val: {len(yva)} windows ({int(yva.sum())} fall)")
 
-    with open(os.path.join(FEAT_DIR, "norm_stats.json")) as f:
+    with open(os.path.join(args.feature_dir, "norm_stats.json")) as f:
         ns = json.load(f)
     mean = np.array(ns["mean"], np.float32); std = np.array(ns["std"], np.float32)
     Xtr = (Xtr - mean) / std; Xva = (Xva - mean) / std
@@ -179,16 +184,43 @@ def main():
     print(f"\nConfusion (thr {thr_best:.2f}): TP={m_best['tp']} FP={m_best['fp']} "
           f"FN={m_best['fn']} TN={m_best['tn']}")
 
-    os.makedirs("models", exist_ok=True)
+    by_source = {}
+    for source, mask in (
+        ("Le2i validation", np.array([str(g).startswith("le2i_") for g in groups_va])),
+        ("GMDCSA Subject 4 holdout", np.array([str(g).startswith("gmdcsa_Subject4_") for g in groups_va])),
+    ):
+        if mask.any():
+            source_prob = va_prob[mask]
+            source_y = yva[mask]
+            by_source[source] = {
+                "windows": int(mask.sum()),
+                "fall_windows": int(source_y.sum()),
+                "roc_auc": round(roc_auc(source_y, source_prob), 4),
+                "at_0.50": metrics_at(source_y, source_prob, 0.5),
+                "at_combined_best_threshold": metrics_at(source_y, source_prob, thr_best),
+            }
+    print("\nSource-specific validation:")
+    print(json.dumps(by_source, indent=2))
+
+    os.makedirs(args.artifact_dir, exist_ok=True)
+    pt_path = os.path.join(args.artifact_dir, "m3_temporal_fall.pt")
+    norm_path = os.path.join(args.artifact_dir, "m3_norm.npz")
+    onnx_path = os.path.join(args.artifact_dir, "m3_temporal_fall.onnx")
+    metrics_path = os.path.join(args.artifact_dir, "m3_metrics.json")
+    report = {"roc_auc": auc, "metrics_half": m_half, "metrics_best": m_best,
+              "best_threshold": thr_best, "source_validation": by_source}
     torch.save({"state_dict": model.state_dict(),
                 "feat_mean": mean, "feat_std": std,
                 "roc_auc": auc, "metrics_half": m_half, "metrics_best": m_best,
-                "best_threshold": thr_best}, PT_PATH)
-    np.savez(os.path.join("models", "m3_norm.npz"), mean=mean, std=std)
-    onnx_path = export_onnx(model)
-    print(f"\nSaved weights -> {PT_PATH}")
+                "best_threshold": thr_best, "source_validation": by_source}, pt_path)
+    np.savez(norm_path, mean=mean, std=std)
+    export_onnx(model, path=onnx_path)
+    with open(metrics_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2)
+    print(f"\nSaved weights -> {pt_path}")
     print(f"Exported ONNX -> {onnx_path} (parity-checked)")
-    print(f"NOTE: recommended decision threshold = {thr_best:.2f} (used by runtime if wired).")
+    print(f"Saved validation report -> {metrics_path}")
+    print(f"NOTE: recommended score threshold = {thr_best:.2f}; the live M4 policy is evaluated separately.")
 
 
 if __name__ == "__main__":

@@ -4,6 +4,8 @@
 **Scope:** Python detection pipeline, model/data workflow, dashboard, Firebase integration, Expo mobile app, repository/release readiness, documentation, and executable checks.  
 **Purpose:** candid feedback for improving the system. This is an engineering review, not a clinical safety certification.
 
+> **Status note (2026-10-22):** This dated audit is a historical snapshot. Later work added Expo push handoff support and offline M1-to-M4-to-alert integration coverage. These changes do not establish real handset delivery, secure production authorization, reliable monitoring, or deployment readiness; those gaps remain open until independently verified.
+
 ## Bottom Line
 
 This is **not a useless project**. It contains a real end-to-end prototype: camera input, pose/furniture perception, kinematic features, a temporal model, deterministic confirmation logic, cloud alert records, and a role-based mobile interface.

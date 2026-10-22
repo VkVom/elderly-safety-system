@@ -5,26 +5,43 @@ import { Ionicons } from "@expo/vector-icons";
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "../../config/firebase";
 import { useAuth } from "../../context/AuthContext";
+import { linkedElderIds } from "../../services/linking";
 import Card from "../../components/Card";
 import { palette, type, space, radius, shadow, EVENT_META } from "../../theme";
 
 export default function CaretakerHomeScreen({ navigation }) {
-  const { profile, logout } = useAuth();
+  const { user, profile, logout } = useAuth();
   const [alerts, setAlerts] = useState([]);
   const seenRef = useRef(new Set());
 
-  const elderId = profile?.assignedElderId;
+  const elderIds = linkedElderIds(profile);
+  const elderIdsKey = elderIds.join("|");
+  const uid = profile?.uid || user?.uid;
+  const multi = elderIds.length > 1;
 
   useEffect(() => {
-    if (!isFirebaseConfigured || !elderId) return;
-    // Single-field query on elderId (no composite index); filter status client-side.
-    const q = query(collection(db, "alerts"), where("elderId", "==", elderId));
+    if (!isFirebaseConfigured || !uid) return;
+    // Query by assignedCaretakerId: list queries must constrain the same field
+    // the security rule checks ("rules are not filters"), so an `elderId in`
+    // query cannot be authorized. Multi-elder filtering happens client-side.
+    const q = query(
+      collection(db, "alerts"),
+      where("assignedCaretakerId", "==", uid),
+      where("status", "in", ["CREATED", "WARNING", "CONFIRMED"])
+    );
     const unsub = onSnapshot(q, (snap) => {
+      const linked = new Set(elderIds);
       const list = [];
       snap.forEach((d) => {
         const data = d.data();
-        if (data.status === "CREATED") list.push({ id: d.id, ...data });
+        if (!linked.has(data.elderId)) return;
+        // Tier-1 (WARNING) and emergencies (CREATED) both surface; auto-cancelled
+        // episodes (AUTO_CANCELLED / tier 0) never pop a modal.
+        if (["CREATED", "WARNING", "CONFIRMED"].includes(data.status)) {
+          list.push({ id: d.id, ...data });
+        }
       });
+      list.sort((a, b) => String(b.timestamp || "").localeCompare(String(a.timestamp || "")));
       setAlerts(list);
       for (const a of list) {
         if (!seenRef.current.has(a.id)) {
@@ -35,24 +52,40 @@ export default function CaretakerHomeScreen({ navigation }) {
       }
     });
     return unsub;
-  }, [navigation, elderId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navigation, elderIdsKey]);
 
   const hasAlerts = alerts.length > 0;
 
   const renderItem = ({ item }) => {
     const meta = EVENT_META[item.eventType] || { label: item.eventType, color: palette.textMuted, icon: "alert" };
+    const responderOnWay =
+      ["ON_THE_WAY", "ARRIVED"].includes(item.caretakerResponse?.status)
+      || ["ON_THE_WAY", "ARRIVED"].includes(item.volunteerResponse?.status);
+    const iconColor = responderOnWay
+      ? palette.safeDark
+      : item.status === "WARNING" || item.escalatedToVolunteers ? palette.warn : palette.danger;
+    const iconBackground = responderOnWay
+      ? palette.safeSoft
+      : item.status === "WARNING" || item.escalatedToVolunteers ? palette.warnSoft : palette.dangerSoft;
     return (
       <Pressable onPress={() => navigation.navigate("CaretakerAlert", { alert: item })}
         style={({ pressed }) => [styles.alertCard, pressed && { opacity: 0.9 }]}>
-        <View style={[styles.alertIcon, { backgroundColor: palette.dangerSoft }]}>
-          <Ionicons name={meta.icon} size={24} color={meta.color} />
+        <View style={[styles.alertIcon, { backgroundColor: iconBackground }]}>
+          <Ionicons name={responderOnWay ? "walk" : meta.icon} size={24} color={iconColor} />
         </View>
         <View style={{ flex: 1, marginLeft: space.md }}>
           <Text style={styles.alertName}>{item.elderName}</Text>
           <Text style={styles.alertSub}>{meta.label} · {item.roomLocation}</Text>
+          {responseSummary(item) ? (
+            <View style={styles.responseSummary}>
+              <Ionicons name="walk" size={15} color={palette.safeDark} />
+              <Text style={styles.responseText}>{responseSummary(item)}</Text>
+            </View>
+          ) : null}
         </View>
         <View style={styles.probPill}>
-          <Text style={styles.probTxt}>{Math.round((item.fallProbability || 0) * 100)}%</Text>
+          <Text style={styles.probTxt}>{formatProbability(item.fallProbability)}</Text>
         </View>
       </Pressable>
     );
@@ -65,10 +98,15 @@ export default function CaretakerHomeScreen({ navigation }) {
         <View style={{ flex: 1 }}>
           <Text style={styles.title}>Monitoring</Text>
           <Text style={styles.subtitle} numberOfLines={1}>
-            {profile?.assignedElderName ? `Watching ${profile.assignedElderName}` : "No resident linked"}
+            {multi ? `Watching ${elderIds.length} residents`
+              : profile?.assignedElderName ? `Watching ${profile.assignedElderName}`
+              : "No resident linked"}
           </Text>
         </View>
-        <Pressable onPress={() => navigation.navigate("AlertHistory")} hitSlop={8} style={styles.iconBtn}>
+        <Pressable onPress={() => navigation.navigate("ManageResidents")} hitSlop={8} style={styles.iconBtn}>
+          <Ionicons name="people-outline" size={24} color={palette.textMuted} />
+        </Pressable>
+        <Pressable onPress={() => navigation.navigate("AlertHistory")} hitSlop={8} style={[styles.iconBtn, { marginLeft: space.sm }]}>
           <Ionicons name="time-outline" size={24} color={palette.textMuted} />
         </Pressable>
         <Pressable onPress={logout} hitSlop={8} style={[styles.iconBtn, { marginLeft: space.sm }]}>
@@ -80,7 +118,9 @@ export default function CaretakerHomeScreen({ navigation }) {
       <View style={styles.body}>
         {/* Linked resident — tap for full details */}
         <Pressable
-          onPress={() => navigation.navigate("ElderDetails")}
+          onPress={() => multi
+            ? navigation.navigate("ManageResidents")
+            : navigation.navigate("ElderDetails", { elderId: elderIds[0] })}
           accessibilityRole="button"
           style={({ pressed }) => [styles.elderCard, pressed && { opacity: 0.9 }]}
         >
@@ -89,9 +129,11 @@ export default function CaretakerHomeScreen({ navigation }) {
           </View>
           <View style={{ flex: 1, marginLeft: space.md }}>
             <Text style={styles.elderLabel}>Watching over</Text>
-            <Text style={styles.elderName} numberOfLines={1}>{profile?.assignedElderName || "—"}</Text>
+            <Text style={styles.elderName} numberOfLines={1}>
+              {multi ? `${elderIds.length} residents` : (profile?.assignedElderName || "—")}
+            </Text>
           </View>
-          {profile?.assignedElderRoom ? (
+          {!multi && profile?.assignedElderRoom ? (
             <View style={styles.roomPill}>
               <Ionicons name="location" size={14} color={palette.safeDark} />
               <Text style={styles.roomTxt}>{profile.assignedElderRoom}</Text>
@@ -99,6 +141,16 @@ export default function CaretakerHomeScreen({ navigation }) {
           ) : null}
           <Ionicons name="chevron-forward" size={20} color={palette.textFaint} style={{ marginLeft: space.xs }} />
         </Pressable>
+        {elderIds.length === 0 ? (
+          <Pressable
+            onPress={() => navigation.navigate("ManageResidents")}
+            accessibilityRole="button"
+            style={({ pressed }) => [styles.linkAction, pressed && { opacity: 0.88 }]}
+          >
+            <Ionicons name="link-outline" size={20} color={palette.white} />
+            <Text style={styles.linkActionText}>Link someone</Text>
+          </Pressable>
+        ) : null}
 
         <Card tone={hasAlerts ? "danger" : "safe"} style={styles.statusCard}>
           <Ionicons
@@ -132,6 +184,27 @@ export default function CaretakerHomeScreen({ navigation }) {
   );
 }
 
+function formatProbability(value) {
+  return typeof value === "number" ? `${Math.round(value * 100)}%` : "N/A";
+}
+
+function responseSummary(alert) {
+  const caretaker = alert.caretakerResponse;
+  const volunteer = alert.volunteerResponse;
+  const caretakerActive = caretaker && ["ON_THE_WAY", "ARRIVED"].includes(caretaker.status);
+  const volunteerActive = volunteer && ["ON_THE_WAY", "ARRIVED"].includes(volunteer.status);
+
+  if (volunteerActive && caretakerActive) {
+    return `${volunteer.name || "A volunteer"} is ${volunteer.status === "ARRIVED" ? "there" : "on the way"} · You are also responding`;
+  }
+  if (volunteerActive) {
+    return `${volunteer.name || "A volunteer"} is ${volunteer.status === "ARRIVED" ? "there" : "on the way"}`;
+  }
+  if (caretakerActive) return "You are responding";
+  if (alert.escalatedToVolunteers) return "Volunteer help requested · waiting for a response";
+  return "";
+}
+
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: palette.bg },
   topbar: { flexDirection: "row", alignItems: "center", paddingHorizontal: space.lg, paddingTop: space.sm, paddingBottom: space.md },
@@ -140,6 +213,8 @@ const styles = StyleSheet.create({
   iconBtn: { padding: space.xs, backgroundColor: palette.surfaceAlt, borderRadius: radius.pill },
   body: { flex: 1, paddingHorizontal: space.lg },
   elderCard: { flexDirection: "row", alignItems: "center", backgroundColor: palette.surface, borderRadius: radius.lg, padding: space.md, marginVertical: space.sm, ...shadow.card },
+  linkAction: { minHeight: 52, flexDirection: "row", gap: space.sm, alignItems: "center", justifyContent: "center", backgroundColor: palette.safe, borderRadius: radius.pill, marginBottom: space.md },
+  linkActionText: { color: palette.white, fontSize: type.md, fontWeight: type.weightSemi },
   elderAvatar: { width: 44, height: 44, borderRadius: 22, backgroundColor: palette.safeSoft, alignItems: "center", justifyContent: "center" },
   elderLabel: { fontSize: type.xs, color: palette.textMuted },
   elderName: { fontSize: type.lg, fontWeight: type.weightSemi, color: palette.text, marginTop: 1 },
@@ -152,6 +227,8 @@ const styles = StyleSheet.create({
   alertIcon: { width: 48, height: 48, borderRadius: 24, alignItems: "center", justifyContent: "center" },
   alertName: { fontSize: type.md, fontWeight: type.weightSemi, color: palette.text },
   alertSub: { fontSize: type.sm, color: palette.textMuted, marginTop: 2 },
+  responseSummary: { flexDirection: "row", alignItems: "center", gap: space.xs, marginTop: space.xs },
+  responseText: { flex: 1, fontSize: type.sm, color: palette.safeDark, fontWeight: type.weightMed },
   probPill: { backgroundColor: palette.dangerSoft, borderRadius: radius.pill, paddingHorizontal: space.md, paddingVertical: space.xs },
   probTxt: { color: palette.dangerDark, fontWeight: type.weightBold, fontSize: type.md },
   emptyWrap: { flexGrow: 1, justifyContent: "center" },

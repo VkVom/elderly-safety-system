@@ -1,4 +1,4 @@
-// Firebase configuration for the INSIGHT-Fall mobile app.
+// Firebase configuration for the UpSupport mobile app.
 //
 // NOTE: Analytics (getAnalytics) is intentionally NOT used - it is web-only and
 // throws in React Native. Auth uses in-memory persistence by default; that is fine

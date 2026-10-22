@@ -1,0 +1,350 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userPath(uid) {
+      return /databases/$(database)/documents/users/$(uid);
+    }
+
+    function myProfile() {
+      return get(userPath(request.auth.uid)).data;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isCaretaker() {
+      return isSignedIn() && myProfile().role == "caretaker";
+    }
+
+    function isVolunteer() {
+      return isSignedIn() && myProfile().role == "volunteer";
+    }
+
+    function isLinkedCaretakerFor(elderId) {
+      return isCaretaker() && (
+        myProfile().assignedElderId == elderId
+        || (myProfile().assignedElderIds is list && elderId in myProfile().assignedElderIds)
+      );
+    }
+
+    function hasOnlyUserProfileFields() {
+      return request.resource.data.keys().hasOnly([
+        "uid", "name", "email", "phone", "role", "authProvider", "setupComplete",
+        "onboardingStep", "onDuty", "assignedElderId", "assignedElderIds",
+        "assignedElderName", "assignedElderRoom", "expoPushToken", "pushToken", "pushTokens",
+        "pairingCode", "roomLocation", "emergencyContact", "caretakerId",
+        "caretakerName", "caretakerPhone", "caretakerPushToken", "createdAt", "updatedAt",
+        "notificationsUpdatedAt", "lastPairingAttemptAt", "verificationSentAt"
+      ]);
+    }
+
+    function canCreateOwnProfile(uid) {
+      return isOwner(uid)
+        && hasOnlyUserProfileFields()
+        && request.resource.data.uid == uid
+        && request.resource.data.role in ["elder", "caretaker", "volunteer"]
+        && request.resource.data.setupComplete == false
+        && request.resource.data.authProvider in ["password", "google"]
+        && request.resource.data.onDuty is bool
+        && request.resource.data.assignedElderId == null
+        && (!("assignedElderIds" in request.resource.data)
+            || (request.resource.data.assignedElderIds is list
+                && request.resource.data.assignedElderIds.size() == 0));
+    }
+
+    function canUpdateOwnProfile(uid) {
+      return isOwner(uid)
+        && hasOnlyUserProfileFields()
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.role == resource.data.role
+        && (!("authProvider" in request.resource.data)
+            || request.resource.data.authProvider in ["password", "google"])
+        && (!("setupComplete" in request.resource.data)
+            || request.resource.data.setupComplete is bool)
+        && (!("onDuty" in request.resource.data)
+            || request.resource.data.onDuty is bool);
+    }
+
+    function isCaretakerLinkingElder() {
+      return isCaretaker()
+        && resource.data.role == "elder"
+        && resource.data.pairingCode is string
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "caretakerId", "caretakerName", "caretakerPhone", "caretakerPushToken", "updatedAt"
+        ])
+        && request.resource.data.caretakerId == request.auth.uid;
+    }
+
+    function isCaretakerUnlinkingElder() {
+      return isCaretaker()
+        && resource.data.role == "elder"
+        && resource.data.caretakerId == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "caretakerId", "caretakerName", "caretakerPhone", "caretakerPushToken", "updatedAt"
+        ])
+        && request.resource.data.caretakerId == null
+        && request.resource.data.caretakerName == null
+        && request.resource.data.caretakerPhone == null
+        && request.resource.data.caretakerPushToken == null;
+    }
+
+    function isCaretakerRefreshingElderPushToken() {
+      return isCaretaker()
+        && resource.data.role == "elder"
+        && resource.data.caretakerId == request.auth.uid
+        && request.resource.data.caretakerId == resource.data.caretakerId
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "caretakerPushToken", "updatedAt"
+        ])
+        && request.resource.data.caretakerPushToken is string;
+    }
+
+    function alertVisibleToSignedInUser(data) {
+      return data.elderId == request.auth.uid
+        || data.assignedCaretakerId == request.auth.uid
+        || isLinkedCaretakerFor(data.elderId)
+        || (data.escalatedToVolunteers == true && isVolunteer());
+    }
+
+    function validAlertCreate() {
+      return request.resource.data.keys().hasAll([
+        "elderId", "eventType", "status", "timestamp"
+      ])
+      && request.resource.data.elderId == request.auth.uid
+      && request.resource.data.status in ["CREATED", "WARNING"]
+      && request.resource.data.eventType in [
+        "MANUAL_SOS", "FALL_IMPACT", "POSE_LOST_WHILE_FALLEN", "LONG_LIE_ALERT",
+        "PRE_FALL_WARNING", "SELF_RECOVERY_CANCELLED"
+      ];
+    }
+
+    function hasOneOwnResponseEvent() {
+      return request.resource.data.responseEvents is list
+        && (
+          (!("responseEvents" in resource.data)
+            && request.resource.data.responseEvents.size() == 1)
+          || (("responseEvents" in resource.data)
+            && resource.data.responseEvents is list
+            && request.resource.data.responseEvents.size() == resource.data.responseEvents.size() + 1
+            && request.resource.data.responseEvents.hasAll(resource.data.responseEvents))
+        )
+        && request.resource.data.responseEvents[
+          request.resource.data.responseEvents.size() - 1
+        ].actorUid == request.auth.uid
+        && request.resource.data.responseEvents[
+          request.resource.data.responseEvents.size() - 1
+        ].actorRole == myProfile().role;
+    }
+
+    function latestResponseAction() {
+      return request.resource.data.responseEvents[
+        request.resource.data.responseEvents.size() - 1
+      ].action;
+    }
+
+    function isActiveResponse(response) {
+      return response is map && response.status in ["ON_THE_WAY", "ARRIVED"];
+    }
+
+    function hasActiveCaretakerResponse() {
+      return ("caretakerResponse" in resource.data)
+        && isActiveResponse(resource.data.caretakerResponse);
+    }
+
+    function hasActiveVolunteerResponse() {
+      return ("volunteerResponse" in resource.data)
+        && isActiveResponse(resource.data.volunteerResponse);
+    }
+
+    function isValidCaretakerResponseTransition() {
+      return (
+        request.resource.data.caretakerResponse.status == "ON_THE_WAY"
+        && latestResponseAction() == "accept"
+        && !hasActiveCaretakerResponse()
+        && request.resource.data.status == resource.data.status
+      ) || (
+        request.resource.data.caretakerResponse.status == "ARRIVED"
+        && latestResponseAction() == "arrive"
+        && resource.data.caretakerResponse.uid == request.auth.uid
+        && resource.data.caretakerResponse.status == "ON_THE_WAY"
+        && request.resource.data.status == resource.data.status
+      ) || (
+        request.resource.data.caretakerResponse.status == "STOOD_DOWN"
+        && latestResponseAction() == "stand_down"
+        && resource.data.caretakerResponse.uid == request.auth.uid
+        && resource.data.caretakerResponse.status == "ON_THE_WAY"
+        && request.resource.data.status == resource.data.status
+      ) || (
+        latestResponseAction() == "resolve"
+        && resource.data.caretakerResponse.uid == request.auth.uid
+        && resource.data.caretakerResponse.status == "ARRIVED"
+        && request.resource.data.caretakerResponse.status == resource.data.caretakerResponse.status
+        && request.resource.data.status == "RESOLVED"
+      );
+    }
+
+    function isValidVolunteerResponseTransition() {
+      return (
+        request.resource.data.volunteerResponse.status == "ON_THE_WAY"
+        && latestResponseAction() == "accept"
+        && !hasActiveVolunteerResponse()
+        && !hasActiveCaretakerResponse()
+        && request.resource.data.status == resource.data.status
+      ) || (
+        request.resource.data.volunteerResponse.status == "ARRIVED"
+        && latestResponseAction() == "arrive"
+        && resource.data.volunteerResponse.uid == request.auth.uid
+        && resource.data.volunteerResponse.status == "ON_THE_WAY"
+        && request.resource.data.status == resource.data.status
+      ) || (
+        request.resource.data.volunteerResponse.status == "STOOD_DOWN"
+        && latestResponseAction() == "stand_down"
+        && resource.data.volunteerResponse.uid == request.auth.uid
+        && resource.data.volunteerResponse.status == "ON_THE_WAY"
+        && request.resource.data.status == resource.data.status
+      ) || (
+        latestResponseAction() == "resolve"
+        && resource.data.volunteerResponse.uid == request.auth.uid
+        && resource.data.volunteerResponse.status == "ARRIVED"
+        && request.resource.data.volunteerResponse.status == resource.data.volunteerResponse.status
+        && request.resource.data.status == "RESOLVED"
+      );
+    }
+
+    function isValidCaretakerResponseUpdate() {
+      return isCaretaker()
+        && request.auth.uid == resource.data.assignedCaretakerId
+        && resource.data.status in ["CREATED", "WARNING", "CONFIRMED"]
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "caretakerResponse", "responseEvents", "acknowledgedBy", "status", "resolvedAt",
+          "resolvedByUid", "resolvedByRole", "resolvedByName", "updatedAt"
+        ])
+        && request.resource.data.caretakerResponse is map
+        && request.resource.data.caretakerResponse.uid == request.auth.uid
+        && request.resource.data.caretakerResponse.role == "caretaker"
+        && request.resource.data.caretakerResponse.status in ["ON_THE_WAY", "ARRIVED", "STOOD_DOWN"]
+        && hasOneOwnResponseEvent()
+        && isValidCaretakerResponseTransition()
+        && (request.resource.data.acknowledgedBy == request.auth.uid
+          || request.resource.data.acknowledgedBy == resource.data.acknowledgedBy)
+        && (request.resource.data.status == resource.data.status
+          || (request.resource.data.status == "RESOLVED"
+            && request.resource.data.resolvedByUid == request.auth.uid
+            && request.resource.data.resolvedByRole == "caretaker"));
+    }
+
+    function isValidVolunteerResponseUpdate() {
+      return isVolunteer()
+        && resource.data.escalatedToVolunteers == true
+        && resource.data.status in ["CREATED", "WARNING", "CONFIRMED"]
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "volunteerResponse", "responseEvents", "acknowledgedBy", "status", "resolvedAt",
+          "resolvedByUid", "resolvedByRole", "resolvedByName", "updatedAt"
+        ])
+        && request.resource.data.volunteerResponse is map
+        && request.resource.data.volunteerResponse.uid == request.auth.uid
+        && request.resource.data.volunteerResponse.role == "volunteer"
+        && request.resource.data.volunteerResponse.status in ["ON_THE_WAY", "ARRIVED", "STOOD_DOWN"]
+        && hasOneOwnResponseEvent()
+        && isValidVolunteerResponseTransition()
+        && (request.resource.data.acknowledgedBy == request.auth.uid
+          || request.resource.data.acknowledgedBy == resource.data.acknowledgedBy)
+        && (request.resource.data.status == resource.data.status
+          || (request.resource.data.status == "RESOLVED"
+            && request.resource.data.resolvedByUid == request.auth.uid
+            && request.resource.data.resolvedByRole == "volunteer"));
+    }
+
+    function isValidElderSafeUpdate() {
+      return myProfile().role == "elder"
+        && resource.data.elderId == request.auth.uid
+        && resource.data.status in ["CREATED", "WARNING", "CONFIRMED"]
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          "status", "resolvedAt", "resolvedByUid", "resolvedByRole", "resolvedByName",
+          "elderConfirmation", "responseEvents", "updatedAt"
+        ])
+        && ((resource.data.status == "WARNING" && request.resource.data.status == "AUTO_CANCELLED")
+          || (resource.data.status in ["CREATED", "CONFIRMED"]
+            && request.resource.data.status == "RESOLVED"))
+        && request.resource.data.resolvedByUid == request.auth.uid
+        && request.resource.data.resolvedByRole == "elder"
+        && request.resource.data.elderConfirmation is map
+        && request.resource.data.elderConfirmation.uid == request.auth.uid
+        && request.resource.data.elderConfirmation.status == "SAFE"
+        && hasOneOwnResponseEvent()
+        && latestResponseAction() == "mark_safe";
+    }
+
+    function isValidLegacyAlertUpdate() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+        "status", "eventType", "tier", "acknowledgedBy", "escalatedToVolunteers",
+        "respondedByRole", "resolvedAt", "updatedAt", "callPlacedAt", "callBackAt"
+      ]);
+    }
+
+    function validAlertUpdate() {
+      return alertVisibleToSignedInUser(resource.data)
+        && (isValidLegacyAlertUpdate()
+          || isValidCaretakerResponseUpdate()
+          || isValidVolunteerResponseUpdate()
+          || isValidElderSafeUpdate());
+    }
+
+    match /users/{uid} {
+      allow create: if canCreateOwnProfile(uid);
+
+      allow get: if isOwner(uid)
+        || isLinkedCaretakerFor(uid)
+        || (isSignedIn() && resource.data.role == "elder" && resource.data.pairingCode is string);
+
+      // Demo/prototype pairing support: caretakers can perform a limit(1) lookup by
+      // pairingCode. This is intentionally less secure than the Cloud Function flow,
+      // but avoids requiring the Blaze plan for this project.
+      allow list: if isSignedIn() && request.query.limit != null && request.query.limit <= 1;
+
+      allow update: if canUpdateOwnProfile(uid)
+        || isCaretakerLinkingElder()
+        || isCaretakerUnlinkingElder()
+        || isCaretakerRefreshingElderPushToken();
+
+      allow delete: if false;
+    }
+
+    match /alerts/{alertId} {
+      allow get, list: if isSignedIn() && alertVisibleToSignedInUser(resource.data);
+      allow create: if isSignedIn() && validAlertCreate();
+      allow update: if isSignedIn() && validAlertUpdate();
+      allow delete: if false;
+    }
+
+    match /sos_alerts/{sosId} {
+      allow get, list: if isSignedIn() && alertVisibleToSignedInUser(resource.data);
+      allow create: if isSignedIn() && validAlertCreate();
+      allow update: if isSignedIn() && validAlertUpdate();
+      allow delete: if false;
+    }
+
+    match /volunteer_directory/{uid} {
+      // Push tokens + duty flag only; readable by signed-in apps so a caretaker
+      // can page on-duty volunteers when an emergency is escalated.
+      allow get, list: if isSignedIn();
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly([
+          "uid", "name", "expoPushToken", "onDuty", "updatedAt"
+        ])
+        && request.resource.data.uid == uid
+        && request.resource.data.expoPushToken is string
+        && request.resource.data.onDuty is bool;
+      allow delete: if isOwner(uid);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

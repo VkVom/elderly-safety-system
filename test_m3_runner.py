@@ -13,8 +13,8 @@ says so (values then meaningless - wiring/latency check only).
 """
 
 import os
-import sys
 import time
+import argparse
 
 import numpy as np
 import cv2
@@ -22,10 +22,7 @@ import onnxruntime as ort
 
 from src.m1_perception import SingleAuthorityPerception
 from src.m2_kinematics import KinematicExtractor
-from src.m3_temporal_model import (
-    TemporalFallModel, TemporalBufferManager, export_onnx,
-    DEFAULT_ONNX_PATH, FEATURE_DIM,
-)
+from src.m3_temporal_model import TemporalBufferManager, DEFAULT_ONNX_PATH
 
 NORM_PATH = os.path.join("models", "m3_norm.npz")
 THRESHOLD = 0.5
@@ -41,20 +38,15 @@ CLIPS = [
 ]
 
 
-def load_session():
-    trained = os.path.isfile(DEFAULT_ONNX_PATH) and os.path.isfile(NORM_PATH)
-    if not os.path.isfile(DEFAULT_ONNX_PATH):
-        print("No ONNX found - exporting untrained graph (values meaningless).")
-        export_onnx(TemporalFallModel())
-    if trained:
-        z = np.load(NORM_PATH)
-        mean, std = z["mean"].astype(np.float32), z["std"].astype(np.float32)
-        print("Loaded TRAINED model + normalisation stats.")
-    else:
-        mean = np.zeros(FEATURE_DIM, dtype=np.float32)
-        std = np.ones(FEATURE_DIM, dtype=np.float32)
-        print("WARNING: normalisation stats missing - results not meaningful.")
-    sess = ort.InferenceSession(DEFAULT_ONNX_PATH, providers=["CPUExecutionProvider"])
+def load_session(model_path=DEFAULT_ONNX_PATH, norm_path=NORM_PATH):
+    if not os.path.isfile(model_path):
+        raise FileNotFoundError(f"M3 model not found: {model_path}")
+    if not os.path.isfile(norm_path):
+        raise FileNotFoundError(f"M3 normalization stats not found: {norm_path}")
+    z = np.load(norm_path)
+    mean, std = z["mean"].astype(np.float32), z["std"].astype(np.float32)
+    print(f"Loaded model: {model_path}\nLoaded normalization: {norm_path}")
+    sess = ort.InferenceSession(model_path, providers=["CPUExecutionProvider"])
     return sess, sess.get_inputs()[0].name, mean, std
 
 
@@ -62,8 +54,8 @@ def sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 
 
-def run(clips):
-    sess, input_name, mean, std = load_session()
+def run(clips, model_path=DEFAULT_ONNX_PATH, norm_path=NORM_PATH):
+    sess, input_name, mean, std = load_session(model_path, norm_path)
     latencies = []
     print(f"\n{'clip':52s} {'exp':4s} {'peakP':>6s} {'meanP':>6s} {'>thr':>5s} {'wins':>5s}")
     for path, expected in clips:
@@ -82,9 +74,10 @@ def run(clips):
             if not ok:
                 break
             i += 1
-            kp, _f, quality = m1.process_frame(frame)
-            feats, valid, _info = m2.process(kp, quality, timestamp_s=i / fps)
-            window = buf.update(feats, valid)
+            timestamp_s = i / fps
+            kp, _f, quality = m1.process_frame(frame, timestamp_ms=timestamp_s * 1000.0)
+            feats, valid, _info = m2.process(kp, quality, timestamp_s=timestamp_s)
+            window = buf.update(feats, valid, timestamp_s=timestamp_s)
             if window is not None:
                 x = ((window - mean) / std)[None, ...].astype(np.float32)
                 t0 = time.perf_counter()
@@ -104,7 +97,10 @@ def run(clips):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        run([(p, "?") for p in sys.argv[1:]])
-    else:
-        run(CLIPS)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", default=DEFAULT_ONNX_PATH)
+    parser.add_argument("--norm", default=NORM_PATH)
+    parser.add_argument("clips", nargs="*")
+    args = parser.parse_args()
+    run([(p, "?") for p in args.clips] if args.clips else CLIPS,
+        model_path=args.model, norm_path=args.norm)

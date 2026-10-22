@@ -10,6 +10,7 @@ The cloud module connects confirmed events to the mobile app. The main file is `
 | --- | --- | --- |
 | Local JSON | Always available for local tests and dashboard demos | `logs/alerts.json` or dashboard alert log |
 | Firebase Firestore | Available when trusted Firebase credentials are present | Firestore `alerts` collection |
+| Expo push | Enabled in live mode when Firebase credentials and recipient push tokens are available | `FirestoreExpoPushNotifier` |
 
 ## Alert Information
 
@@ -56,12 +57,17 @@ This allows the caretaker app to query alerts only for their linked elder. Volun
 ## Alert Escalation
 
 1. A new alert is created with status `CREATED`.
-2. The caretaker app sees alerts for its linked elder while the app is open.
-3. The caretaker can acknowledge or indicate they cannot respond.
-4. The app can mark the alert for volunteer escalation after its countdown.
-5. On-duty volunteer apps read escalated, still-created alerts.
+2. The caretaker app observes alerts for linked elders through Firestore while open;
+   Expo push can notify it in the background when a token is registered and the OS
+   permits notifications.
+3. An alert remains active until the resident marks safe or an authorized responder marks arrival and then explicitly confirms the resident is safe. A responder accepting does not change the global alert status.
+4. Caretaker and volunteer responses are stored separately as `caretakerResponse` and `volunteerResponse`, with `ON_THE_WAY`, `ARRIVED`, or `STOOD_DOWN` state and timestamps.
+5. After the escalation countdown, `escalatedToVolunteers` pages on-duty volunteers. The caretaker's active list continues to show the alert and any volunteer who accepted.
+6. If the caretaker accepts after a volunteer, both responses remain visible. The volunteer stays marked as on the way until they explicitly stand down or the alert is resolved.
+7. `responseEvents` records who accepted, arrived, stood down, or resolved the alert. The volunteer queue moves caretaker-handled alerts to recent updates rather than treating them as unresolved volunteer work.
+8. Residents can view their active alerts on the home screen and open one to confirm they are safe or still need help. A resident safety confirmation closes the alert at any time. A caretaker or volunteer may resolve only after explicitly marking `ARRIVED` and confirming the resident is safe. Closure retains caretaker/volunteer response records; resident confirmation adds `elderConfirmation` and a `mark_safe` response event. Caretaker and escalated volunteer feeds observe the update; push delivery is best effort.
 
-The current version does not have real background push notifications. For testing, keep the caretaker app open and signed in.
+The mobile app uses Firestore transactions for responder actions and resident safety confirmation. Firestore rules must allow a first response when response maps and `responseEvents` are not yet present on a newly-created alert; rules guard these optional fields before reading them. `functions/index.js` can send counterpart push notifications when response state changes, but its deployment requires Blaze. On Spark, the Firestore document and live listeners remain the source of truth and the app sends best-effort client-side status pushes. An Expo acceptance receipt is an asynchronous handoff, not proof that the push reached or was seen on the caretaker phone. The camera console reports `EMERGENCY EVENT RECORDED`, not confirmed phone delivery.
 
 ## Cloud Utilities
 
@@ -72,4 +78,4 @@ The current version does not have real background push notifications. For testin
 
 ## Before Real Deployment
 
-Review Firestore security rules, restrict access by user role and linked elder/caretaker relationship, rotate any exposed service-account key, and implement real background notification delivery.
+Deploy the updated Firestore rules and `notifyAlertResponseChanges` function before testing cross-role push updates. Verify the project is on a Firebase plan that supports Cloud Functions. Keep each mobile app signed in for live Firestore updates, grant notification permission for background pushes, and test both caretaker-first and volunteer-first response sequences. Review access rules, rotate any exposed service-account key, and never use a successful push receipt as proof that a person is responding.

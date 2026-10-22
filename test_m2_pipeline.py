@@ -24,8 +24,8 @@ def run(video_path: str):
         if not ok:
             break
         i += 1
-        kp, furniture, quality = perception.process_frame(frame)
         t = i / src_fps
+        kp, furniture, quality = perception.process_frame(frame, timestamp_ms=t * 1000.0)
         feats, valid, info = kin.process(kp, quality, timestamp_s=t)
 
         if valid:

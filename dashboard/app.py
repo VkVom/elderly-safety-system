@@ -34,7 +34,9 @@ if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 
 from dashboard.pipeline import DashboardPipeline, STATE_COLORS
-from src.escalation import ElderContext
+from src.escalation import (
+    ElderContext, FirestoreExpoPushNotifier, FirestoreSink, LocalJsonSink,
+)
 
 CLIPS = {
     "Chair fall (occluded)": "data/manual_test_videos/gmdcsa24_s1_fall_chair_partial_original.mp4",
@@ -57,6 +59,90 @@ def _load_alerts():
 # --- Sidebar controls ---
 st.sidebar.title("Controls")
 clip_name = st.sidebar.selectbox("Test clip", list(CLIPS.keys()))
+
+
+@st.cache_data(ttl=30, show_spinner=False)
+def _linked_elders():
+    """Elders that can receive cloud alerts, with their caretaker routing."""
+    try:
+        from src.elder_picker import load_elders
+        from src.escalation import get_firestore_db
+        return [
+            {
+                "uid": c.uid, "name": c.name, "room": c.room, "phone": c.phone,
+                "caretaker_id": c.caretaker_id, "caretaker_name": c.caretaker_name,
+                "has_token": c.has_token,
+            }
+            for c in load_elders(get_firestore_db())
+        ]
+    except Exception:
+        return []
+
+
+st.sidebar.markdown("---")
+cloud_routing_enabled = st.sidebar.checkbox(
+    "Enable cloud alert routing",
+    value=False,
+    help="Turn this on to load linked residents and allow alerts to reach their caretakers.",
+)
+ELDERS = _linked_elders() if cloud_routing_enabled else []
+ROUTE_LABELS = ["Local only (no cloud)"] + [
+    f"{e['name']} - {e['room']}" + ("" if e["has_token"] else " [no push token]")
+    for e in ELDERS
+]
+route_label = st.sidebar.selectbox("Alert routing", ROUTE_LABELS, index=0)
+if cloud_routing_enabled and ELDERS:
+    st.sidebar.caption("Select a resident to route alerts to their linked caretaker.")
+elif cloud_routing_enabled:
+    st.sidebar.caption("No linked residents found - alerts stay in the local log.")
+else:
+    st.sidebar.caption("Local only is active. Enable cloud routing to load resident accounts.")
+
+
+def _selected_elder():
+    try:
+        idx = ROUTE_LABELS.index(route_label) - 1
+    except ValueError:
+        idx = -1
+    return ELDERS[idx] if 0 <= idx < len(ELDERS) else None
+
+
+def _routing_context(clip):
+    elder = _selected_elder()
+    if elder:
+        return ElderContext(
+            elder_id=elder["uid"], elder_name=elder["name"],
+            room_location=elder["room"],
+            assigned_caretaker_id=elder["caretaker_id"],
+            elder_phone=elder["phone"],
+        )
+    return ElderContext("ELDER_DEMO", clip, "Demo Room", None)
+
+
+def _alert_sinks():
+    sinks = [LocalJsonSink(ALERTS_PATH)]
+    if _selected_elder():
+        try:
+            fsink = FirestoreSink()
+            if fsink.available:
+                sinks.insert(0, fsink)
+        except Exception:
+            pass
+    return sinks
+
+
+def _alert_notifiers():
+    notifiers = []
+    if _selected_elder():
+        try:
+            push = FirestoreExpoPushNotifier()
+            if push.available:
+                notifiers.append(push)
+        except Exception:
+            pass
+    return notifiers
+
+
 speed = st.sidebar.slider("Playback speed", 0.5, 4.0, 2.0, 0.5)
 render_every = st.sidebar.slider("Render every N frames (higher = smoother)", 1, 6, 2, 1)
 disp_width = st.sidebar.select_slider("Display width (px)", [480, 640, 800, 960], value=640)
@@ -81,30 +167,27 @@ st.title("Proactive Elderly Safety System — Live Telemetry")
 video_col, tele_col = st.columns([2, 1])
 video_ph = video_col.empty()
 state_ph = tele_col.empty()
-pbar_txt = tele_col.empty()
-pbar_ph = tele_col.empty()
 metrics_ph = tele_col.empty()
 log_ph = st.empty()
 
 
 def render_state(state):
     color = STATE_COLORS.get(state, "#888")
+    label = state or "WAITING_FOR_FRAME"
     state_ph.markdown(
         f"<div style='padding:12px;border-radius:8px;background:{color};"
         f"color:white;font-size:20px;font-weight:700;text-align:center'>"
-        f"M4 STATE: {state}</div>", unsafe_allow_html=True)
-
-
-def render_pfall(p):
-    label = "LOW" if p < 0.4 else "ELEVATED" if p < 0.7 else "HIGH"
-    color = "#21c25a" if p < 0.4 else "#f2c037" if p < 0.7 else "#e53935"
-    pbar_txt.markdown(
-        f"<span style='color:{color};font-weight:700;font-size:18px'>"
-        f"P(fall) = {p:.2f} ({label})</span>", unsafe_allow_html=True)
-    pbar_ph.progress(min(max(p, 0.0), 1.0))
+        f"M4 STATE: {label}</div>", unsafe_allow_html=True)
 
 
 def _metric_card(label, value, unit, warn, alarm):
+    if value is None:
+        return (
+            f"<div style='padding:8px;border-radius:8px;background:#1b1b1b;margin-bottom:6px'>"
+            f"<div style='color:#aaa;font-size:12px'>{label}</div>"
+            f"<div style='color:#888;font-size:24px;font-weight:700'>N/A"
+            f"<span style='font-size:12px;color:#888'> no valid pose</span></div></div>"
+        )
     color = "#21c25a" if value < warn else "#f2c037" if value < alarm else "#e53935"
     return (
         f"<div style='padding:8px;border-radius:8px;background:#1b1b1b;margin-bottom:6px'>"
@@ -117,8 +200,8 @@ def _metric_card(label, value, unit, warn, alarm):
 def render_metrics(tilt, vy, jerk):
     html = (
         _metric_card("Trunk Tilt", tilt, "deg", 35, 60)
-        + _metric_card("Vertical Velocity", abs(vy), "u/s", 1.2, 2.0)
-        + _metric_card("Jerk", min(jerk, 9999), "", 1500, 3000)
+        + _metric_card("Vertical Velocity", abs(vy) if vy is not None else None, "u/s", 1.2, 2.0)
+        + _metric_card("Jerk", min(jerk, 9999) if jerk is not None else None, "", 1500, 3000)
     )
     metrics_ph.markdown(html, unsafe_allow_html=True)
 
@@ -127,8 +210,8 @@ def render_alerts():
     alerts = _load_alerts()
     if alerts:
         df = pd.DataFrame(alerts)[["timestamp", "eventType", "elderName",
-                                   "roomLocation", "fallProbability", "furnitureContext"]]
-        log_ph.dataframe(df.tail(10), use_container_width=True)
+                                   "roomLocation", "furnitureContext"]]
+        log_ph.dataframe(df.tail(10), width="stretch")
     else:
         log_ph.info("No alerts dispatched yet.")
 
@@ -141,13 +224,12 @@ def show_frame(frame_bgr, width):
     if w > width:
         frame_bgr = cv2.resize(frame_bgr, (width, int(h * width / w)))
     rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
-    video_ph.image(rgb, channels="RGB", use_container_width=True)
+    video_ph.image(rgb, channels="RGB", width="stretch")
 
 
-# Initial idle render.
-render_state("STAND_WALK")
-render_pfall(0.0)
-render_metrics(0.0, 0.0, 0.0)
+# Initial idle render. Do not display fake zero telemetry before a real frame exists.
+render_state("WAITING_FOR_FRAME")
+render_metrics(None, None, None)
 render_alerts()
 
 if st.session_state.running:
@@ -156,8 +238,10 @@ if st.session_state.running:
         st.error(f"Clip not found: {path}")
     else:
         pipe = DashboardPipeline(
-            ElderContext("ELDER_DEMO", clip_name, "Demo Room", "CARE_1"),
+            _routing_context(clip_name),
             alerts_path=ALERTS_PATH,
+            sinks=_alert_sinks(),
+            notifiers=_alert_notifiers(),
         )
         pipe.reset()
         cap = cv2.VideoCapture(path)
@@ -175,7 +259,6 @@ if st.session_state.running:
                 if frame_i % render_every == 0 or t["alert"]:
                     show_frame(t["frame"], disp_width)
                     render_state(t["state"])
-                    render_pfall(t["p_fall"])
                     render_metrics(t["tilt"], t["vy"], t["jerk"])
                     if t["alert"]:
                         render_alerts()

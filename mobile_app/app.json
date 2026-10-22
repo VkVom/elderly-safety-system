@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "INSIGHT-Fall Safety",
+    "name": "UpSupport",
     "slug": "insight-fall-safety",
+    "scheme": "com.insight.fallsafety",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
@@ -9,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#F8FAFC"
+      "backgroundColor": "#FBF8F3"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,16 +21,65 @@
     },
     "android": {
       "package": "com.insight.fallsafety",
+      "googleServicesFile": "./google-services.json",
+      "permissions": [
+        "android.permission.CALL_PHONE",
+        "android.permission.ANSWER_PHONE_CALLS",
+        "android.permission.READ_PHONE_STATE"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "insight-fall-safety.firebaseapp.com",
+              "pathPrefix": "/__/auth/action"
+            },
+            {
+              "scheme": "https",
+              "host": "insight-fall-safety.firebaseapp.com",
+              "path": "/email-verified"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#0D9488"
+        "backgroundColor": "#0B7468"
       }
     },
     "web": {
       "bundler": "metro",
       "favicon": "./assets/favicon.png"
     },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#0B7468",
+          "sounds": [
+            "./assets/alarm.wav",
+            "./assets/emergency_ring.wav"
+          ]
+        }
+      ],
+      "expo-font",
+      "expo-localization",
+      "./plugins/withPreviewArmArchitectures"
+    ],
     "extra": {
+      "googleAuth": {
+        "webClientId": "542353623576-e7o3fg3o5boilcuil4dk4ejgf2bcutmo.apps.googleusercontent.com",
+        "androidClientId": "542353623576-no7jgvjb8r66tiu6t4evf6avvdske5r4.apps.googleusercontent.com",
+        "iosClientId": ""
+      },
       "eas": {
         "projectId": "792ec601-55f0-42ff-9456-1edfa21c2508"
       }

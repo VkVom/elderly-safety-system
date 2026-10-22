@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// INSIGHT-Fall Design System
+// UpSupport app design system
 //
 // Light, high-contrast, age-inclusive. Teal = safety/trust, Red = emergency ONLY.
 // One source of truth for color, type, spacing, radius, elevation so every screen
@@ -8,19 +8,20 @@
 
 export const palette = {
   // Backgrounds & surfaces
-  bg: "#F8FAFC",          // off-white app background (no glare)
+  bg: "#FBF8F3",          // warm off-white
   surface: "#FFFFFF",     // cards
-  surfaceAlt: "#F1F5F9",  // subtle inset / secondary surface
+  surfaceAlt: "#E3F1EE",  // teal-tinted surface
 
   // Text (high contrast on light bg, all >= 4.5:1)
-  text: "#0F172A",        // slate-900 primary text
-  textMuted: "#475569",   // slate-600 secondary
-  textFaint: "#94A3B8",   // slate-400 hints
+  text: "#12403B",        // primary ink
+  textMuted: "#55626B",   // secondary ink
+  textFaint: "#55626B",   // slate-400 hints
 
   // Safety (primary brand)
-  safe: "#0D9488",        // deep teal
-  safeDark: "#0F766E",
-  safeSoft: "#CCFBF1",    // teal tint for backgrounds
+  safe: "#0B7468",        // UpSupport teal
+  safeDark: "#0B7468",
+  safeSoft: "#E3F1EE",    // teal tint for backgrounds
+  accent: "#E5A93C",
   success: "#059669",     // emerald
 
   // Emergency (reserved strictly for active alerts / SOS)
@@ -32,7 +33,7 @@ export const palette = {
   warn: "#D97706",
   warnSoft: "#FEF3C7",
 
-  border: "#E2E8F0",      // slate-200 hairlines
+  border: "#D9D2C7",
   white: "#FFFFFF",
   black: "#000000",
 };
@@ -114,4 +115,6 @@ export const EVENT_META = {
   POSE_LOST_WHILE_FALLEN: { label: "Fall (Obscured)", color: palette.danger, icon: "eye-off" },
   LONG_LIE_ALERT: { label: "Long Lie", color: palette.dangerDark, icon: "time" },
   MANUAL_SOS: { label: "Manual SOS", color: palette.danger, icon: "hand-left" },
+  PRE_FALL_WARNING: { label: "Possible Stumble", color: palette.warn, icon: "eye" },
+  SELF_RECOVERY_CANCELLED: { label: "Recovered", color: palette.success, icon: "checkmark-circle" },
 };

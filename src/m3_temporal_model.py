@@ -26,6 +26,7 @@ measure inference latency.
 
 import os
 from collections import deque
+import math
 from typing import Optional
 
 import numpy as np
@@ -40,6 +41,7 @@ except ImportError:  # pragma: no cover
 # Kept consistent with M2's output.
 SEQ_LEN = 15
 FEATURE_DIM = 72
+TRAINING_FPS = 25.0
 DEFAULT_ONNX_PATH = os.path.join("models", "m3_temporal_fall.onnx")
 
 
@@ -106,7 +108,9 @@ if HAS_TORCH:
 
 class TemporalBufferManager:
     """
-    Maintains a rolling window of the most recent SEQ_LEN M2 feature vectors.
+    Maintains a rolling M3 input. Timestamped calls are interpolated onto the fixed
+    training cadence (25 Hz), so a 15-frame model window always spans 0.56 seconds.
+    Calls without timestamps retain the legacy frame-count behaviour.
 
     Fall anticipation depends on a CONTINUOUS motion trajectory, so a tracking gap
     must not be bridged: when M1/M2 report the pose as lost (valid=False), the buffer
@@ -115,31 +119,86 @@ class TemporalBufferManager:
     perception principle.
     """
 
-    def __init__(self, seq_len: int = SEQ_LEN, feature_dim: int = FEATURE_DIM):
+    def __init__(self, seq_len: int = SEQ_LEN, feature_dim: int = FEATURE_DIM,
+                 target_fps: float = TRAINING_FPS, max_gap_s: float = 0.5):
         self.seq_len = seq_len
         self.feature_dim = feature_dim
         self._buf: deque = deque(maxlen=seq_len)
+        self.target_fps = float(target_fps)
+        if not math.isfinite(self.target_fps) or self.target_fps <= 0:
+            raise ValueError("target_fps must be a finite positive number")
+        self.max_gap_s = float(max_gap_s)
+        if not math.isfinite(self.max_gap_s) or self.max_gap_s <= 0:
+            raise ValueError("max_gap_s must be a finite positive number")
+        self._timed_buf: deque = deque(maxlen=max(seq_len * 8, 64))
+        self._last_timestamp_s = None
+        self._last_window = None
 
     def reset(self):
         self._buf.clear()
+        self._timed_buf.clear()
+        self._last_timestamp_s = None
+        self._last_window = None
 
     @property
     def ready(self) -> bool:
         """True once a full window of consecutive valid frames is available."""
-        return len(self._buf) == self.seq_len
+        return len(self._buf) == self.seq_len or self._last_window is not None
 
-    def update(self, features: np.ndarray, valid: bool) -> Optional[np.ndarray]:
+    def update(self, features: np.ndarray, valid: bool,
+               timestamp_s: Optional[float] = None) -> Optional[np.ndarray]:
         """
-        Push one M2 frame. Returns the (seq_len, feature_dim) window when full,
-        otherwise None. A lost/invalid frame resets the buffer.
+        Push one M2 frame. Timestamped inputs are time-resampled; a lost/invalid
+        frame or a discontinuity resets the buffer. No padding/extrapolation is used.
         """
         if not valid:
             self.reset()
             return None
-        self._buf.append(np.asarray(features, dtype=np.float32).reshape(self.feature_dim))
-        if self.ready:
-            return np.stack(self._buf, axis=0)
-        return None
+        feature_row = np.asarray(features, dtype=np.float32).reshape(self.feature_dim)
+        if not np.isfinite(feature_row).all():
+            self.reset()
+            return None
+        if timestamp_s is None:
+            # Keep the legacy frame-count mode for callers that have no source clock.
+            self._timed_buf.clear()
+            self._last_timestamp_s = None
+            self._last_window = None
+            self._buf.append(feature_row)
+            if self.ready:
+                return np.stack(self._buf, axis=0)
+            return None
+
+        timestamp_s = float(timestamp_s)
+        if not math.isfinite(timestamp_s):
+            self.reset()
+            return None
+        if self._last_timestamp_s is not None:
+            elapsed = timestamp_s - self._last_timestamp_s
+            if elapsed <= 0:
+                # Repeated or out-of-order frames cannot define a trustworthy trajectory.
+                self.reset()
+                return None
+            if elapsed > self.max_gap_s:
+                self.reset()
+        self._buf.clear()
+        self._timed_buf.append((timestamp_s, feature_row.copy()))
+        self._last_timestamp_s = timestamp_s
+
+        grid_step = 1.0 / self.target_fps
+        grid = timestamp_s - np.arange(self.seq_len - 1, -1, -1) * grid_step
+        samples = list(self._timed_buf)
+        times = np.asarray([sample[0] for sample in samples], dtype=np.float64)
+        values = np.stack([sample[1] for sample in samples], axis=0)
+        # A full grid needs observations on both sides of its endpoints. This avoids
+        # padding or extrapolating invented movement at startup.
+        if len(times) < 2 or grid[0] < times[0] - 1e-6 or grid[-1] > times[-1] + 1e-6:
+            self._last_window = None
+            return None
+        window = np.empty((self.seq_len, self.feature_dim), dtype=np.float32)
+        for feature_idx in range(self.feature_dim):
+            window[:, feature_idx] = np.interp(grid, times, values[:, feature_idx])
+        self._last_window = window
+        return window
 
 
 def export_onnx(model: "TemporalFallModel", path: str = DEFAULT_ONNX_PATH,

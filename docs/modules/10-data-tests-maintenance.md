@@ -31,10 +31,22 @@ Do not commit generated datasets, `.pt` weights, `.onnx` files, or model caches 
 | `test_m2_pipeline.py` / `test_m2_visual.py` | Kinematic feature extraction. |
 | `test_m3_runner.py` | Temporal model behaviour. |
 | `test_m4_runner.py` | End-to-end state logic on test clips. |
+| `test_m2_kinematics.py` | M2 motion outlier rejection and plausible fast-motion handling. |
+| `test_video_to_alert.py` | Actual fall/ADL clips through M1-M4 to local records and mocked caretaker push payloads. |
 | `test_escalation.py` | Alert record creation and de-duplication. |
 | `test_firebase_sync.py` | Real Firestore connectivity with a mock alert. |
 
 Some scripts are executable checks rather than a standard `pytest` test suite. Read each file's top usage comments before running it.
+
+Run the offline video-to-caretaker-payload integration from the project root:
+
+```powershell
+python test_video_to_alert.py
+```
+
+It uses local video files, a local JSON alert sink, and an in-memory fake Expo
+transport. It does not contact Firebase or deliver a real push. Run the mobile unit
+suite from `mobile_app/` with `npm test -- --runInBand`.
 
 ## Safe Git Rules
 

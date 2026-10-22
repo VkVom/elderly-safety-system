@@ -19,7 +19,8 @@ def run_m1_test(video_path: str):
         return
 
     total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    print(f"Total Frames: {total_frames} | Input FPS: {cap.get(cv2.CAP_PROP_FPS):.1f}")
+    src_fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
+    print(f"Total Frames: {total_frames} | Input FPS: {src_fps:.1f}")
     print("-" * 65)
 
     valid_pose_count = 0
@@ -34,7 +35,8 @@ def run_m1_test(video_path: str):
         frame_idx += 1
 
         # Process single frame
-        keypoints, furniture_boxes, quality = engine.process_frame(frame)
+        keypoints, furniture_boxes, quality = engine.process_frame(
+            frame, timestamp_ms=(frame_idx / src_fps) * 1000.0)
 
         if keypoints is not None and quality['visible_keypoints'] > 5:
             valid_pose_count += 1

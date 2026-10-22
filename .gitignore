@@ -250,6 +250,15 @@ serviceAccountKey.json
 *.keystore
 mobile_app/google-services.json
 mobile_app/GoogleService-Info.plist
+!mobile_app/google-services.json
+
+# Local analysis/tool state (rebuildable and machine-specific)
+graphify-out/
+.firebase/
+.cursor/
+.gemini/
+.opencode/
+**/.gradle/
 
 # Node / Expo local state and native build output
 **/node_modules/

@@ -136,8 +136,11 @@ def _play_one(m1, m2, window, video_path, index, total, saved_counter):
             frame_idx += 1
 
             loop_start = time.time()
+            timestamp_s = frame_idx / src_fps
+            # This preview reuses one MediaPipe VIDEO-mode engine across clips, so
+            # keep its internal timestamp monotonic. M2 still uses this clip's PTS.
             keypoints, furniture_boxes, quality = m1.process_frame(frame.copy())
-            feats, valid, kin_info = m2.process(keypoints, quality, timestamp_s=frame_idx / src_fps)
+            feats, valid, kin_info = m2.process(keypoints, quality, timestamp_s=timestamp_s)
             jerk = float(feats[71]) if valid else 0.0
             proc_fps = 1.0 / max(time.time() - loop_start, 1e-6)
 

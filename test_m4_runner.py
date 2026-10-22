@@ -10,7 +10,7 @@ Prints the state-transition log per clip and the alerts fired.
 """
 
 import os
-import sys
+import argparse
 
 import numpy as np
 import cv2
@@ -34,11 +34,11 @@ def sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 
 
-def run(clips):
-    sess = ort.InferenceSession(DEFAULT_ONNX_PATH, providers=["CPUExecutionProvider"])
+def run(clips, model_path=DEFAULT_ONNX_PATH, norm_path=NORM_PATH):
+    sess = ort.InferenceSession(model_path, providers=["CPUExecutionProvider"])
     input_name = sess.get_inputs()[0].name
-    if os.path.isfile(NORM_PATH):
-        z = np.load(NORM_PATH)
+    if os.path.isfile(norm_path):
+        z = np.load(norm_path)
         mean, std = z["mean"].astype(np.float32), z["std"].astype(np.float32)
     else:
         mean, std = np.zeros(FEATURE_DIM, np.float32), np.ones(FEATURE_DIM, np.float32)
@@ -67,11 +67,12 @@ def run(clips):
                 break
             i += 1
             h, w = frame.shape[:2]
-            kp, furniture, quality = m1.process_frame(frame)
-            feats, valid, info = m2.process(kp, quality, timestamp_s=i / fps)
+            timestamp_s = i / fps
+            kp, furniture, quality = m1.process_frame(frame, timestamp_ms=timestamp_s * 1000.0)
+            feats, valid, info = m2.process(kp, quality, timestamp_s=timestamp_s)
 
             # M3: only when a full continuous window exists.
-            window = buf.update(feats, valid)
+            window = buf.update(feats, valid, timestamp_s=timestamp_s)
             if window is not None:
                 x = ((window - mean) / std)[None, ...].astype(np.float32)
                 logit = sess.run(None, {input_name: x})[0]
@@ -91,10 +92,11 @@ def run(clips):
                 pose_status=quality.get("pose_status", "LOST"),
                 trunk_tilt_deg=info.get("trunk_tilt_deg", 0.0) if valid else 0.0,
                 hip_v_y=info.get("hip_v_y", 0.0) if valid else 0.0,
-                jerk=float(feats[71]) if valid else 0.0,
+                jerk=info.get("jerk", 0.0) if valid else 0.0,
                 p_fall=p_fall,
                 on_rest_surface=on_rest,
                 dt=dt,
+                kinematics_reliable=bool(info.get("motion_reliable", False)) if valid else False,
             )
             if out.state != prev_state:
                 transitions.append((i, out.state))
@@ -110,11 +112,20 @@ def run(clips):
         if alerts:
             print("  ALERTS: " + ", ".join(f"f{f}:{t}" for f, t in alerts))
         else:
-            print("  ALERTS: none")
+            if m4.state in ("PRE_FALL", "CONFIRMING"):
+                print(f"  ALERTS: none (INCOMPLETE: clip ended in {m4.state}; confirmation cannot finish without post-fall footage)")
+            else:
+                print("  ALERTS: none")
 
         fired = len(alerts) > 0
-        ok_result = (fired if expected == "FALL" else not fired)
-        overall[name] = ("PASS" if ok_result else "FAIL", expected, fired)
+        if expected not in ("FALL", "ADL"):
+            verdict = "UNLABELED"
+        elif not fired and m4.state in ("PRE_FALL", "CONFIRMING"):
+            verdict = "INCONCLUSIVE"
+        else:
+            ok_result = (fired if expected == "FALL" else not fired)
+            verdict = "PASS" if ok_result else "FAIL"
+        overall[name] = (verdict, expected, fired)
 
     print("\n================ SUMMARY ================")
     for name, (verdict, exp, fired) in overall.items():
@@ -122,7 +133,10 @@ def run(clips):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        run([(p, "?") for p in sys.argv[1:]])
-    else:
-        run(CLIPS)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--model", default=DEFAULT_ONNX_PATH)
+    parser.add_argument("--norm", default=NORM_PATH)
+    parser.add_argument("clips", nargs="*")
+    args = parser.parse_args()
+    run([(p, "?") for p in args.clips] if args.clips else CLIPS,
+        model_path=args.model, norm_path=args.norm)

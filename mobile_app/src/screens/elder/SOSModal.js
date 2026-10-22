@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, Pressable, Animated, Easing, Vibration } from "react-native";
+import { View, Text, StyleSheet, Pressable, Animated, Easing, Vibration, Alert } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { db, isFirebaseConfigured } from "../../config/firebase";
 import { useAuth } from "../../context/AuthContext";
+import { sendEmergencyPush } from "../../services/alertPush";
 import ScreenContainer from "../../components/ScreenContainer";
 import { palette, type, space, radius, shadow, touch } from "../../theme";
 
@@ -12,6 +13,8 @@ const COUNTDOWN = 5;
 export default function SOSModal({ navigation }) {
   const { user, profile } = useAuth();
   const [count, setCount] = useState(COUNTDOWN);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const firedRef = useRef(false);
   const ring = useRef(new Animated.Value(1)).current;
 
@@ -35,27 +38,89 @@ export default function SOSModal({ navigation }) {
   }, []);
 
   const fireSos = async () => {
-    if (firedRef.current) return;
+    if (firedRef.current || sending) return;
     firedRef.current = true;
+    setSending(true);
+    setError("");
     Vibration.vibrate([0, 300, 150, 300]);
-    if (isFirebaseConfigured && user) {
-      try {
-        await addDoc(collection(db, "alerts"), {
-          elderId: user.uid,
-          elderName: profile?.name || "Elder",
-          roomLocation: profile?.roomLocation || "Unknown",
-          eventType: "MANUAL_SOS",
-          status: "CREATED",
-          fallProbability: 1.0,
-          postureState: "UNKNOWN",
-          furnitureContext: "manual",
-          assignedCaretakerId: profile?.caretakerId || null,
-          acknowledgedBy: null,
-          escalatedToVolunteers: false,
-          escalationTimerStart: new Date().toISOString(),
-          timestamp: new Date().toISOString(),
-        });
-      } catch (e) {}
+    if (!isFirebaseConfigured || !user?.uid) {
+      setError("The safety service is unavailable. Please call your caretaker.");
+      setSending(false);
+      firedRef.current = false;
+      return;
+    }
+
+    let existing;
+    try {
+      existing = await getDocs(query(
+        collection(db, "alerts"),
+        where("elderId", "==", user.uid),
+        where("status", "in", ["CREATED", "WARNING", "CONFIRMED"])
+      ));
+    } catch (requestError) {
+      console.error("Unable to check for an existing active alert.", requestError?.message || requestError);
+      setError("We could not check whether another alert is active. Please try again or call your caretaker.");
+      setSending(false);
+      firedRef.current = false;
+      return;
+    }
+
+    if (!existing.empty) {
+      const snapshot = existing.docs[0];
+      navigation.replace("CancelAlert", {
+        alertId: snapshot.id,
+        alert: { id: snapshot.id, ...snapshot.data() },
+      });
+      return;
+    }
+
+    const now = new Date().toISOString();
+    const elderPhone = profile?.phone || profile?.emergencyContact || null;
+    let ref;
+    try {
+      ref = await addDoc(collection(db, "alerts"), {
+        elderId: user.uid,
+        elderName: profile?.name || "Elder",
+        roomLocation: profile?.roomLocation || "Unknown",
+        eventType: "MANUAL_SOS",
+        status: "CREATED",
+        tier: 2,
+        fallProbability: 1.0,
+        postureState: "UNKNOWN",
+        furnitureContext: "manual",
+        assignedCaretakerId: profile?.caretakerId || null,
+        elderPhone,
+        acknowledgedBy: null,
+        escalatedToVolunteers: false,
+        escalationTimerStart: now,
+        timestamp: now,
+      });
+    } catch (requestError) {
+      console.error("Unable to create the SOS alert.", requestError?.message || requestError);
+      setError("We could not send your SOS. Check your connection and try again or call your caretaker.");
+      setSending(false);
+      firedRef.current = false;
+      return;
+    }
+
+    const pushAccepted = await sendEmergencyPush({
+      token: profile?.caretakerPushToken,
+      alertId: ref.id,
+      elderId: user.uid,
+      elderName: profile?.name || "Elder",
+      roomLocation: profile?.roomLocation || "Unknown",
+      eventType: "MANUAL_SOS",
+      tier: 2,
+      elderPhone,
+      assignedCaretakerId: profile?.caretakerId || null,
+    });
+    if (!pushAccepted) {
+      Alert.alert(
+        "SOS is active",
+        "Your alert is saved, but we could not confirm a caretaker push notification. Keep the app open and call your caretaker if you can.",
+        [{ text: "Continue", onPress: () => navigation.goBack() }]
+      );
+      return;
     }
     navigation.goBack();
   };
@@ -66,22 +131,27 @@ export default function SOSModal({ navigation }) {
     <ScreenContainer center>
       <View style={styles.wrap}>
         <Text style={styles.header}>Getting help for you</Text>
-        <Text style={styles.sub}>Your caretaker will be alerted in</Text>
+        <Text style={styles.sub}>
+          {sending ? "Sending your alert to your caretaker…" : "Your caretaker will be alerted in"}
+        </Text>
 
         <Animated.View style={[styles.ring, { transform: [{ scale }] }]}>
           <Text style={styles.count}>{count}</Text>
         </Animated.View>
 
-        <Text style={styles.reassure}>Stay calm. Help is on the way.</Text>
+        <Text accessibilityRole={error ? "alert" : undefined} style={error ? styles.error : styles.reassure}>
+          {error || "Stay calm. Help is on the way."}
+        </Text>
 
         <Pressable
-          onPress={() => navigation.goBack()}
+          onPress={() => (error ? fireSos() : navigation.goBack())}
           accessibilityRole="button"
-          accessibilityLabel="Cancel SOS, I am okay"
-          style={({ pressed }) => [styles.cancel, pressed && { opacity: 0.9 }]}
+          accessibilityLabel={error ? "Retry sending SOS" : "Cancel SOS, I am okay"}
+          disabled={sending}
+          style={({ pressed }) => [styles.cancel, error && styles.retry, pressed && { opacity: 0.9 }, sending && { opacity: 0.6 }]}
         >
-          <Ionicons name="close-circle" size={30} color={palette.white} />
-          <Text style={styles.cancelTxt}>I'm OK — Cancel</Text>
+          <Ionicons name={error ? "refresh" : "close-circle"} size={30} color={palette.white} />
+          <Text style={styles.cancelTxt}>{error ? "Try Again" : "I'm OK — Cancel"}</Text>
         </Pressable>
       </View>
     </ScreenContainer>
@@ -104,4 +174,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: space.xl, width: "100%", ...shadow.card,
   },
   cancelTxt: { color: palette.white, fontSize: type.xl, fontWeight: type.weightBold, marginLeft: space.sm },
+  retry: { backgroundColor: palette.danger },
+  error: { fontSize: type.md, color: palette.danger, textAlign: "center", marginBottom: space.xl },
 });

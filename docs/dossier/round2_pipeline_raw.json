@@ -1,0 +1,4771 @@
+[
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\01.mp4",
+    "fps_source": 29.844337090713903,
+    "frames": 139,
+    "duration": 4.6575,
+    "final_state": "CONFIRMING",
+    "transitions": [
+      [
+        1,
+        0.03350719424460431,
+        "STAND_WALK"
+      ],
+      [
+        61,
+        2.043938848920863,
+        "PRE_FALL"
+      ],
+      [
+        62,
+        2.0774460431654678,
+        "CONFIRMING"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        61,
+        2.043938848920863
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.36,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:34.426971+00:00",
+        "timestamp": "2026-10-21T21:02:34.426971+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:34.426971+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 41.390443891588355,
+        "p95_ms": 89.66049997834487
+      },
+      "M2": {
+        "mean_ms": 0.1819741027764708,
+        "p95_ms": 0.23735995637252927
+      },
+      "M3": {
+        "mean_ms": 0.7310323727069249,
+        "p95_ms": 0.8710599970072508
+      },
+      "M4": {
+        "mean_ms": 0.02167625737999626,
+        "p95_ms": 0.02551006618887186
+      }
+    },
+    "wall_s": 5.883192600798793,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\02.mp4",
+    "fps_source": 29.892186607852576,
+    "frames": 89,
+    "duration": 2.9773666666666667,
+    "final_state": "PRE_FALL",
+    "transitions": [
+      [
+        1,
+        0.03345355805243446,
+        "STAND_WALK"
+      ],
+      [
+        89,
+        2.9773666666666667,
+        "PRE_FALL"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        89,
+        2.9773666666666667
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.02,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:38.336464+00:00",
+        "timestamp": "2026-10-21T21:02:38.336464+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:38.336464+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 19.80651460268817,
+        "p95_ms": 57.0825799833981
+      },
+      "M2": {
+        "mean_ms": 0.16582584704450343,
+        "p95_ms": 0.2057000063359737
+      },
+      "M3": {
+        "mean_ms": 0.5946191017296207,
+        "p95_ms": 0.8114200085401535
+      },
+      "M4": {
+        "mean_ms": 0.01974832240408391,
+        "p95_ms": 0.023739947937428948
+      }
+    },
+    "wall_s": 1.8322170007741079,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\03.mp4",
+    "fps_source": 29.82611375679787,
+    "frames": 200,
+    "duration": 6.705533333333333,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.033527666666666664,
+        "STAND_WALK"
+      ],
+      [
+        70,
+        2.3469366666666667,
+        "PRE_FALL"
+      ],
+      [
+        86,
+        2.883379333333333,
+        "CONFIRMING"
+      ],
+      [
+        134,
+        4.492707333333333,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        70,
+        2.3469366666666667
+      ],
+      [
+        "FALL_IMPACT",
+        134,
+        4.492707333333333
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:39.839551+00:00",
+        "timestamp": "2026-10-21T21:02:39.839551+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:39.839551+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.01,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:41.095391+00:00",
+        "timestamp": "2026-10-21T21:02:41.095391+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:39.839551+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 18.861089000711218,
+        "p95_ms": 40.443449927261014
+      },
+      "M2": {
+        "mean_ms": 0.13420750794466585,
+        "p95_ms": 0.2009450166951864
+      },
+      "M3": {
+        "mean_ms": 0.4386154975509271,
+        "p95_ms": 0.8429500099737197
+      },
+      "M4": {
+        "mean_ms": 0.019114501774311066,
+        "p95_ms": 0.024105061311274767
+      }
+    },
+    "wall_s": 3.8906053015962243,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\04.mp4",
+    "fps_source": 29.862969212196518,
+    "frames": 141,
+    "duration": 4.721566666666667,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03348628841607565,
+        "STAND_WALK"
+      ],
+      [
+        49,
+        1.6408281323877068,
+        "PRE_FALL"
+      ],
+      [
+        50,
+        1.6743144208037823,
+        "CONFIRMING"
+      ],
+      [
+        125,
+        4.1857860520094565,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        49,
+        1.6408281323877068
+      ],
+      [
+        "FALL_IMPACT",
+        125,
+        4.1857860520094565
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.63,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:43.888211+00:00",
+        "timestamp": "2026-10-21T21:02:43.888211+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:43.888211+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.93,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:45.726170+00:00",
+        "timestamp": "2026-10-21T21:02:45.726170+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:43.888211+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 20.220032626439334,
+        "p95_ms": 36.75920004025102
+      },
+      "M2": {
+        "mean_ms": 0.14255177114053186,
+        "p95_ms": 0.22089993581175804
+      },
+      "M3": {
+        "mean_ms": 0.46883333566869406,
+        "p95_ms": 0.8545999880880117
+      },
+      "M4": {
+        "mean_ms": 0.019055318932795356,
+        "p95_ms": 0.024399952962994576
+      }
+    },
+    "wall_s": 2.9399167003575712,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\05.mp4",
+    "fps_source": 29.826037275798623,
+    "frames": 221,
+    "duration": 7.409633333333334,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03352775263951734,
+        "STAND_WALK"
+      ],
+      [
+        85,
+        2.849858974358974,
+        "PRE_FALL"
+      ],
+      [
+        93,
+        3.118080995475113,
+        "CONFIRMING"
+      ],
+      [
+        132,
+        4.42566334841629,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        85,
+        2.849858974358974
+      ],
+      [
+        "FALL_IMPACT",
+        132,
+        4.42566334841629
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:48.599552+00:00",
+        "timestamp": "2026-10-21T21:02:48.599552+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:48.599552+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.08,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:49.856905+00:00",
+        "timestamp": "2026-10-21T21:02:49.856905+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:48.599552+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 24.836879184604435,
+        "p95_ms": 74.94479999877512
+      },
+      "M2": {
+        "mean_ms": 0.18341447715542164,
+        "p95_ms": 0.22489996626973152
+      },
+      "M3": {
+        "mean_ms": 0.7813104088059984,
+        "p95_ms": 0.8835000917315483
+      },
+      "M4": {
+        "mean_ms": 0.020044347970868667,
+        "p95_ms": 0.02459995448589325
+      }
+    },
+    "wall_s": 5.7065843004966155,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\06.mp4",
+    "fps_source": 29.85496685500492,
+    "frames": 183,
+    "duration": 6.1296333333333335,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03349526411657559,
+        "STAND_WALK"
+      ],
+      [
+        42,
+        1.406801092896175,
+        "PRE_FALL"
+      ],
+      [
+        59,
+        1.97622058287796,
+        "CONFIRMING"
+      ],
+      [
+        98,
+        3.282535883424408,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        42,
+        1.406801092896175
+      ],
+      [
+        "FALL_IMPACT",
+        98,
+        3.282535883424408
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.01,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:54.490317+00:00",
+        "timestamp": "2026-10-21T21:02:54.490317+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:54.490317+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 1.0,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:55.974419+00:00",
+        "timestamp": "2026-10-21T21:02:55.974419+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:54.490317+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 25.01779890878767,
+        "p95_ms": 86.48344997782266
+      },
+      "M2": {
+        "mean_ms": 0.19016011065900162,
+        "p95_ms": 0.22715998347848654
+      },
+      "M3": {
+        "mean_ms": 0.6992273138266036,
+        "p95_ms": 0.8745300234295428
+      },
+      "M4": {
+        "mean_ms": 0.021565028038791945,
+        "p95_ms": 0.02795998007059098
+      }
+    },
+    "wall_s": 4.744961499120109,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\07.mp4",
+    "fps_source": 29.817447436175332,
+    "frames": 188,
+    "duration": 6.305033333333333,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.033537411347517726,
+        "STAND_WALK"
+      ],
+      [
+        51,
+        1.710407978723404,
+        "PRE_FALL"
+      ],
+      [
+        56,
+        1.8780950354609929,
+        "CONFIRMING"
+      ],
+      [
+        131,
+        4.393400886524822,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        51,
+        1.710407978723404
+      ],
+      [
+        "FALL_IMPACT",
+        131,
+        4.393400886524822
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.01,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:02:59.959151+00:00",
+        "timestamp": "2026-10-21T21:02:59.959151+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:59.959151+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.99,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:02.205067+00:00",
+        "timestamp": "2026-10-21T21:03:02.205067+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:02:59.959151+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 22.731437767667575,
+        "p95_ms": 85.89650999638258
+      },
+      "M2": {
+        "mean_ms": 0.1818425476580779,
+        "p95_ms": 0.22319495328702033
+      },
+      "M3": {
+        "mean_ms": 0.6597138299765264,
+        "p95_ms": 0.8556299959309399
+      },
+      "M4": {
+        "mean_ms": 0.02019786947169044,
+        "p95_ms": 0.02399494987912476
+      }
+    },
+    "wall_s": 4.435520098777488,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\08.mp4",
+    "fps_source": 29.883979842962617,
+    "frames": 187,
+    "duration": 6.257533333333333,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03346274509803921,
+        "STAND_WALK"
+      ],
+      [
+        73,
+        2.4427803921568625,
+        "PRE_FALL"
+      ],
+      [
+        78,
+        2.610094117647059,
+        "CONFIRMING"
+      ],
+      [
+        185,
+        6.190607843137254,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        73,
+        2.4427803921568625
+      ],
+      [
+        "FALL_IMPACT",
+        185,
+        6.190607843137254
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.01,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:05.799418+00:00",
+        "timestamp": "2026-10-21T21:03:05.799418+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:05.799418+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.99,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:08.548543+00:00",
+        "timestamp": "2026-10-21T21:03:08.548543+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:05.799418+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 21.776258829672308,
+        "p95_ms": 71.83446001727133
+      },
+      "M2": {
+        "mean_ms": 0.17461390483546704,
+        "p95_ms": 0.2250199671834707
+      },
+      "M3": {
+        "mean_ms": 0.6284058824888764,
+        "p95_ms": 0.8665799978189169
+      },
+      "M4": {
+        "mean_ms": 0.01967005446593073,
+        "p95_ms": 0.02420006785541773
+      }
+    },
+    "wall_s": 4.226003401563503,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\09.mp4",
+    "fps_source": 29.839755566790494,
+    "frames": 181,
+    "duration": 6.065733333333333,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03351233885819521,
+        "STAND_WALK"
+      ],
+      [
+        76,
+        2.5469377532228363,
+        "PRE_FALL"
+      ],
+      [
+        94,
+        3.1501598526703503,
+        "CONFIRMING"
+      ],
+      [
+        169,
+        5.663585267034991,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        76,
+        2.5469377532228363
+      ],
+      [
+        "FALL_IMPACT",
+        169,
+        5.663585267034991
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:10.852661+00:00",
+        "timestamp": "2026-10-21T21:03:10.852661+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:10.852661+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.99,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:13.075200+00:00",
+        "timestamp": "2026-10-21T21:03:13.075200+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:10.852661+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 22.648641985624987,
+        "p95_ms": 77.35909998882562
+      },
+      "M2": {
+        "mean_ms": 0.18075579592124533,
+        "p95_ms": 0.22179994266480207
+      },
+      "M3": {
+        "mean_ms": 0.6462331534522837,
+        "p95_ms": 0.8641000604256988
+      },
+      "M4": {
+        "mean_ms": 0.02102486117748101,
+        "p95_ms": 0.02559996210038662
+      }
+    },
+    "wall_s": 4.252894699107856,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\10.mp4",
+    "fps_source": 29.856254984280977,
+    "frames": 151,
+    "duration": 5.057566666666667,
+    "final_state": "CONFIRMING",
+    "transitions": [
+      [
+        1,
+        0.033493818984547466,
+        "STAND_WALK"
+      ],
+      [
+        60,
+        2.009629139072848,
+        "PRE_FALL"
+      ],
+      [
+        71,
+        2.3780611479028697,
+        "CONFIRMING"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        60,
+        2.009629139072848
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "seat",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:15.910396+00:00",
+        "timestamp": "2026-10-21T21:03:15.910396+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:15.910396+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 26.097189406062544,
+        "p95_ms": 57.60370008647442
+      },
+      "M2": {
+        "mean_ms": 0.14473643039803433,
+        "p95_ms": 0.23049995070323348
+      },
+      "M3": {
+        "mean_ms": 0.38719403986134476,
+        "p95_ms": 0.8498999522998929
+      },
+      "M4": {
+        "mean_ms": 0.020225828402484488,
+        "p95_ms": 0.032699957955628633
+      }
+    },
+    "wall_s": 4.024051201413386,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\11.mp4",
+    "fps_source": 29.814971792698255,
+    "frames": 136,
+    "duration": 4.561466666666667,
+    "final_state": "CONFIRMING",
+    "transitions": [
+      [
+        1,
+        0.033540196078431374,
+        "STAND_WALK"
+      ],
+      [
+        43,
+        1.442228431372549,
+        "PRE_FALL"
+      ],
+      [
+        45,
+        1.5093088235294116,
+        "CONFIRMING"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        43,
+        1.442228431372549
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.02,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:19.649987+00:00",
+        "timestamp": "2026-10-21T21:03:19.649987+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:19.649987+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 37.659781610915054,
+        "p95_ms": 102.87629993399605
+      },
+      "M2": {
+        "mean_ms": 0.19742279683294542,
+        "p95_ms": 0.23892504395917058
+      },
+      "M3": {
+        "mean_ms": 0.7702860286158016,
+        "p95_ms": 0.9414249507244676
+      },
+      "M4": {
+        "mean_ms": 0.025270584635162616,
+        "p95_ms": 0.02994999522343278
+      }
+    },
+    "wall_s": 5.256775498855859,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\12.mp4",
+    "fps_source": 29.83568751801672,
+    "frames": 138,
+    "duration": 4.625333333333334,
+    "final_state": "CONFIRMING",
+    "transitions": [
+      [
+        1,
+        0.033516908212560384,
+        "STAND_WALK"
+      ],
+      [
+        55,
+        1.8434299516908212,
+        "PRE_FALL"
+      ],
+      [
+        56,
+        1.8769468599033816,
+        "CONFIRMING"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        55,
+        1.8434299516908212
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.91,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:26.920951+00:00",
+        "timestamp": "2026-10-21T21:03:26.920951+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:26.920951+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 30.051291304424513,
+        "p95_ms": 55.06182996323342
+      },
+      "M2": {
+        "mean_ms": 0.20580868864350993,
+        "p95_ms": 0.2110149769578129
+      },
+      "M3": {
+        "mean_ms": 0.25931159641755663,
+        "p95_ms": 0.7775249658152462
+      },
+      "M4": {
+        "mean_ms": 0.01926521139651321,
+        "p95_ms": 0.028959987685084346
+      }
+    },
+    "wall_s": 4.213923398521729,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\13.mp4",
+    "fps_source": 29.839587185666318,
+    "frames": 149,
+    "duration": 4.993366666666667,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03351252796420581,
+        "STAND_WALK"
+      ],
+      [
+        16,
+        0.536200447427293,
+        "PRE_FALL"
+      ],
+      [
+        23,
+        0.7707881431767337,
+        "CONFIRMING"
+      ],
+      [
+        62,
+        2.0777767337807607,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        16,
+        0.536200447427293
+      ],
+      [
+        "FALL_IMPACT",
+        62,
+        2.0777767337807607
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:30.077685+00:00",
+        "timestamp": "2026-10-21T21:03:30.077685+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:30.077685+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.01,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:32.320309+00:00",
+        "timestamp": "2026-10-21T21:03:32.320309+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:30.077685+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 37.76675301928998,
+        "p95_ms": 151.91107997670701
+      },
+      "M2": {
+        "mean_ms": 0.1797026895211647,
+        "p95_ms": 0.23120006080716843
+      },
+      "M3": {
+        "mean_ms": 1.0895489827548497,
+        "p95_ms": 0.8574000094085932
+      },
+      "M4": {
+        "mean_ms": 0.02050804968098266,
+        "p95_ms": 0.02655996941030025
+      }
+    },
+    "wall_s": 5.8194203984458,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\14.mp4",
+    "fps_source": 29.907230438067906,
+    "frames": 157,
+    "duration": 5.2495666666666665,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03343673036093418,
+        "STAND_WALK"
+      ],
+      [
+        32,
+        1.0699753715498939,
+        "PRE_FALL"
+      ],
+      [
+        38,
+        1.2705957537154988,
+        "CONFIRMING"
+      ],
+      [
+        77,
+        2.574628237791932,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        32,
+        1.0699753715498939
+      ],
+      [
+        "FALL_IMPACT",
+        77,
+        2.574628237791932
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:37.419345+00:00",
+        "timestamp": "2026-10-21T21:03:37.419345+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:37.419345+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.99,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:39.038266+00:00",
+        "timestamp": "2026-10-21T21:03:39.038266+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:37.419345+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 26.549029303418035,
+        "p95_ms": 54.59850002080142
+      },
+      "M2": {
+        "mean_ms": 0.13583948966234352,
+        "p95_ms": 0.21426000166684386
+      },
+      "M3": {
+        "mean_ms": 0.40993757863309543,
+        "p95_ms": 0.8337999461218715
+      },
+      "M4": {
+        "mean_ms": 0.03008088719835327,
+        "p95_ms": 0.03414002712816
+      }
+    },
+    "wall_s": 4.258607299649157,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\15.mp4",
+    "fps_source": 29.90019521046988,
+    "frames": 145,
+    "duration": 4.849466666666666,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03344459770114942,
+        "STAND_WALK"
+      ],
+      [
+        64,
+        2.140454252873563,
+        "PRE_FALL"
+      ],
+      [
+        65,
+        2.1738988505747123,
+        "CONFIRMING"
+      ],
+      [
+        114,
+        3.812684137931034,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        64,
+        2.140454252873563
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.75,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:43.144710+00:00",
+        "timestamp": "2026-10-21T21:03:43.144710+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:43.144710+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.75,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:43.144710+00:00",
+        "timestamp": "2026-10-21T21:03:43.144710+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:43.144710+00:00",
+        "resolvedAt": "2026-10-21T21:03:44.947621+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 31.37397517064779,
+        "p95_ms": 111.30105999764017
+      },
+      "M2": {
+        "mean_ms": 0.1914062039477044,
+        "p95_ms": 0.23536002263426772
+      },
+      "M3": {
+        "mean_ms": 0.6984027568250895,
+        "p95_ms": 0.9935399284586307
+      },
+      "M4": {
+        "mean_ms": 0.021613789080031986,
+        "p95_ms": 0.028379983268678178
+      }
+    },
+    "wall_s": 4.681382698472589,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\16.mp4",
+    "fps_source": 29.83548264522515,
+    "frames": 212,
+    "duration": 7.1056333333333335,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.033517138364779875,
+        "STAND_WALK"
+      ],
+      [
+        75,
+        2.5137853773584906,
+        "PRE_FALL"
+      ],
+      [
+        76,
+        2.5473025157232705,
+        "CONFIRMING"
+      ],
+      [
+        190,
+        6.368256289308176,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        75,
+        2.5137853773584906
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.98,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:48.187268+00:00",
+        "timestamp": "2026-10-21T21:03:48.187268+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:48.187268+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "POSE_LOST_WHILE_FALLEN",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.92,
+        "postureState": "OBSCURED_LIKELY_DOWN",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:52.804345+00:00",
+        "timestamp": "2026-10-21T21:03:52.804345+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:48.187268+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 33.100113212262755,
+        "p95_ms": 44.029205024708006
+      },
+      "M2": {
+        "mean_ms": 0.13682075264371651,
+        "p95_ms": 0.21528000943362713
+      },
+      "M3": {
+        "mean_ms": 0.4900372669513706,
+        "p95_ms": 0.9174900129437444
+      },
+      "M4": {
+        "mean_ms": 0.02176179616483596,
+        "p95_ms": 0.028189981821924445
+      }
+    },
+    "wall_s": 7.154731401940808,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\Fall\\17.mp4",
+    "fps_source": 29.8725725528302,
+    "frames": 207,
+    "duration": 6.929433333333333,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03347552334943639,
+        "STAND_WALK"
+      ],
+      [
+        89,
+        2.9793215780998388,
+        "PRE_FALL"
+      ],
+      [
+        95,
+        3.180174718196457,
+        "CONFIRMING"
+      ],
+      [
+        170,
+        5.6908389694041865,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        89,
+        2.9793215780998388
+      ],
+      [
+        "FALL_IMPACT",
+        170,
+        5.6908389694041865
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:57.138073+00:00",
+        "timestamp": "2026-10-21T21:03:57.138073+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:57.138073+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.24,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:03:59.443656+00:00",
+        "timestamp": "2026-10-21T21:03:59.443656+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:03:57.138073+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 24.421349271304077,
+        "p95_ms": 103.09092003153607
+      },
+      "M2": {
+        "mean_ms": 0.1945053126015093,
+        "p95_ms": 0.22969000274315476
+      },
+      "M3": {
+        "mean_ms": 0.7026961342103167,
+        "p95_ms": 0.9001699858345091
+      },
+      "M4": {
+        "mean_ms": 0.020863290354249556,
+        "p95_ms": 0.02530995989218354
+      }
+    },
+    "wall_s": 5.245258699753322,
+    "trace": [],
+    "type": "Fall"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\01.mp4",
+    "fps_source": 29.835341171158095,
+    "frames": 370,
+    "duration": 12.4014,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.0335172972972973,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [],
+    "tier1": false,
+    "tier2": false,
+    "emitted": [],
+    "timings": {
+      "M1": {
+        "mean_ms": 70.92660702702061,
+        "p95_ms": 221.3577500369868
+      },
+      "M2": {
+        "mean_ms": 0.21031135504410878,
+        "p95_ms": 0.2416999777778983
+      },
+      "M3": {
+        "mean_ms": 1.0242656763718538,
+        "p95_ms": 1.1516500439029203
+      },
+      "M4": {
+        "mean_ms": 0.023245128387635625,
+        "p95_ms": 0.028704985743388547
+      }
+    },
+    "wall_s": 26.708238799124956,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\02.mp4",
+    "fps_source": 29.82540303745692,
+    "frames": 315,
+    "duration": 10.561466666666666,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03352846560846561,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [],
+    "tier1": false,
+    "tier2": false,
+    "emitted": [],
+    "timings": {
+      "M1": {
+        "mean_ms": 29.177495560401844,
+        "p95_ms": 112.69682002021023
+      },
+      "M2": {
+        "mean_ms": 0.18366380550322078,
+        "p95_ms": 0.22026001242920756
+      },
+      "M3": {
+        "mean_ms": 0.7035707955115608,
+        "p95_ms": 0.8946300600655377
+      },
+      "M4": {
+        "mean_ms": 0.02044349140118039,
+        "p95_ms": 0.024359952658414844
+      }
+    },
+    "wall_s": 9.476829700637609,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\03.mp4",
+    "fps_source": 29.84674201012777,
+    "frames": 267,
+    "duration": 8.9457,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03350449438202247,
+        "STAND_WALK"
+      ],
+      [
+        18,
+        0.6030808988764045,
+        "PRE_FALL"
+      ],
+      [
+        19,
+        0.636585393258427,
+        "CONFIRMING"
+      ],
+      [
+        49,
+        1.6417202247191012,
+        "STAND_WALK"
+      ],
+      [
+        78,
+        2.613350561797753,
+        "PRE_FALL"
+      ],
+      [
+        79,
+        2.6468550561797755,
+        "CONFIRMING"
+      ],
+      [
+        109,
+        3.6519898876404495,
+        "STAND_WALK"
+      ],
+      [
+        138,
+        4.623620224719101,
+        "PRE_FALL"
+      ],
+      [
+        141,
+        4.724133707865168,
+        "CONFIRMING"
+      ],
+      [
+        171,
+        5.729268539325843,
+        "STAND_WALK"
+      ],
+      [
+        204,
+        6.834916853932585,
+        "PRE_FALL"
+      ],
+      [
+        234,
+        7.8400516853932585,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        18,
+        0.6030808988764045
+      ],
+      [
+        "PRE_FALL",
+        78,
+        2.613350561797753
+      ],
+      [
+        "PRE_FALL",
+        138,
+        4.623620224719101
+      ],
+      [
+        "PRE_FALL",
+        204,
+        6.834916853932585
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:40.588710+00:00",
+        "timestamp": "2026-10-21T21:04:40.588710+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:40.588710+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:40.588710+00:00",
+        "timestamp": "2026-10-21T21:04:40.588710+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:40.588710+00:00",
+        "resolvedAt": "2026-10-21T21:04:41.276630+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.9,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:42.137486+00:00",
+        "timestamp": "2026-10-21T21:04:42.137486+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:42.137486+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.9,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:42.137486+00:00",
+        "timestamp": "2026-10-21T21:04:42.137486+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:42.137486+00:00",
+        "resolvedAt": "2026-10-21T21:04:43.244720+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.48,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:44.531148+00:00",
+        "timestamp": "2026-10-21T21:04:44.532146+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:44.532146+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.48,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:44.531148+00:00",
+        "timestamp": "2026-10-21T21:04:44.532146+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:44.532146+00:00",
+        "resolvedAt": "2026-10-21T21:04:45.695582+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.54,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:46.830344+00:00",
+        "timestamp": "2026-10-21T21:04:46.830344+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:46.830344+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.54,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:46.830344+00:00",
+        "timestamp": "2026-10-21T21:04:46.830344+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:46.830344+00:00",
+        "resolvedAt": "2026-10-21T21:04:47.956041+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 30.18878801936835,
+        "p95_ms": 91.517479950562
+      },
+      "M2": {
+        "mean_ms": 0.18824719168134174,
+        "p95_ms": 0.2288699964992702
+      },
+      "M3": {
+        "mean_ms": 0.715517601580795,
+        "p95_ms": 0.9028900065459311
+      },
+      "M4": {
+        "mean_ms": 0.022328092039942963,
+        "p95_ms": 0.02761997748166322
+      }
+    },
+    "wall_s": 8.307673201547004,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\04.mp4",
+    "fps_source": 29.82443553924834,
+    "frames": 388,
+    "duration": 13.009466666666667,
+    "final_state": "CONFIRMING",
+    "transitions": [
+      [
+        1,
+        0.033529553264604814,
+        "STAND_WALK"
+      ],
+      [
+        18,
+        0.6035319587628866,
+        "PRE_FALL"
+      ],
+      [
+        19,
+        0.6370615120274914,
+        "CONFIRMING"
+      ],
+      [
+        49,
+        1.6429481099656358,
+        "STAND_WALK"
+      ],
+      [
+        78,
+        2.6153051546391755,
+        "PRE_FALL"
+      ],
+      [
+        79,
+        2.64883470790378,
+        "CONFIRMING"
+      ],
+      [
+        109,
+        3.6547213058419246,
+        "STAND_WALK"
+      ],
+      [
+        138,
+        4.627078350515464,
+        "PRE_FALL"
+      ],
+      [
+        139,
+        4.660607903780069,
+        "CONFIRMING"
+      ],
+      [
+        169,
+        5.666494501718213,
+        "STAND_WALK"
+      ],
+      [
+        198,
+        6.638851546391753,
+        "PRE_FALL"
+      ],
+      [
+        199,
+        6.6723810996563575,
+        "CONFIRMING"
+      ],
+      [
+        229,
+        7.678267697594502,
+        "STAND_WALK"
+      ],
+      [
+        258,
+        8.650624742268041,
+        "PRE_FALL"
+      ],
+      [
+        259,
+        8.684154295532647,
+        "CONFIRMING"
+      ],
+      [
+        289,
+        9.69004089347079,
+        "STAND_WALK"
+      ],
+      [
+        318,
+        10.66239793814433,
+        "PRE_FALL"
+      ],
+      [
+        319,
+        10.695927491408934,
+        "CONFIRMING"
+      ],
+      [
+        349,
+        11.70181408934708,
+        "STAND_WALK"
+      ],
+      [
+        378,
+        12.67417113402062,
+        "PRE_FALL"
+      ],
+      [
+        379,
+        12.707700687285223,
+        "CONFIRMING"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        18,
+        0.6035319587628866
+      ],
+      [
+        "PRE_FALL",
+        78,
+        2.6153051546391755
+      ],
+      [
+        "PRE_FALL",
+        138,
+        4.627078350515464
+      ],
+      [
+        "PRE_FALL",
+        198,
+        6.638851546391753
+      ],
+      [
+        "PRE_FALL",
+        258,
+        8.650624742268041
+      ],
+      [
+        "PRE_FALL",
+        318,
+        10.66239793814433
+      ],
+      [
+        "PRE_FALL",
+        378,
+        12.67417113402062
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:49.850959+00:00",
+        "timestamp": "2026-10-21T21:04:49.850959+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:49.850959+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:49.850959+00:00",
+        "timestamp": "2026-10-21T21:04:49.850959+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:49.850959+00:00",
+        "resolvedAt": "2026-10-21T21:04:50.941475+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:52.468069+00:00",
+        "timestamp": "2026-10-21T21:04:52.468069+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:52.468069+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:52.468069+00:00",
+        "timestamp": "2026-10-21T21:04:52.468069+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:52.468069+00:00",
+        "resolvedAt": "2026-10-21T21:04:54.072724+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:54.916389+00:00",
+        "timestamp": "2026-10-21T21:04:54.916389+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:54.916389+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:54.916389+00:00",
+        "timestamp": "2026-10-21T21:04:54.916389+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:54.916389+00:00",
+        "resolvedAt": "2026-10-21T21:04:55.779893+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:56.525288+00:00",
+        "timestamp": "2026-10-21T21:04:56.525288+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:56.525288+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:56.525288+00:00",
+        "timestamp": "2026-10-21T21:04:56.525288+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:56.525288+00:00",
+        "resolvedAt": "2026-10-21T21:04:57.396786+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:58.304508+00:00",
+        "timestamp": "2026-10-21T21:04:58.305886+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:58.305886+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:58.304508+00:00",
+        "timestamp": "2026-10-21T21:04:58.305886+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:58.305886+00:00",
+        "resolvedAt": "2026-10-21T21:04:59.133678+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:59.961314+00:00",
+        "timestamp": "2026-10-21T21:04:59.961314+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:59.961314+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:04:59.961314+00:00",
+        "timestamp": "2026-10-21T21:04:59.961314+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:04:59.961314+00:00",
+        "resolvedAt": "2026-10-21T21:05:00.795841+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:01.587189+00:00",
+        "timestamp": "2026-10-21T21:05:01.587189+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:01.587189+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 28.466674485111838,
+        "p95_ms": 102.68465995322912
+      },
+      "M2": {
+        "mean_ms": 0.18651520811770225,
+        "p95_ms": 0.2338149584829807
+      },
+      "M3": {
+        "mean_ms": 0.744350255735833,
+        "p95_ms": 0.905600027181208
+      },
+      "M4": {
+        "mean_ms": 0.024312112802044324,
+        "p95_ms": 0.02933006617240603
+      }
+    },
+    "wall_s": 11.415678599965759,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\05.mp4",
+    "fps_source": 29.88453701607426,
+    "frames": 220,
+    "duration": 7.361666666666666,
+    "final_state": "CONFIRMING",
+    "transitions": [
+      [
+        1,
+        0.033462121212121214,
+        "STAND_WALK"
+      ],
+      [
+        71,
+        2.375810606060606,
+        "PRE_FALL"
+      ],
+      [
+        72,
+        2.4092727272727275,
+        "CONFIRMING"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        71,
+        2.375810606060606
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.67,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:04.188009+00:00",
+        "timestamp": "2026-10-21T21:05:04.188009+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:04.188009+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 27.42915864166042,
+        "p95_ms": 112.06922001438168
+      },
+      "M2": {
+        "mean_ms": 0.17787272491576997,
+        "p95_ms": 0.22966000251471994
+      },
+      "M3": {
+        "mean_ms": 0.6025118176529015,
+        "p95_ms": 0.8604599162936211
+      },
+      "M4": {
+        "mean_ms": 0.02071044979278337,
+        "p95_ms": 0.025404960615560412
+      }
+    },
+    "wall_s": 6.210655799484812,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\06.mp4",
+    "fps_source": 29.79810265142301,
+    "frames": 196,
+    "duration": 6.5776,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03355918367346939,
+        "STAND_WALK"
+      ],
+      [
+        35,
+        1.1745714285714286,
+        "PRE_FALL"
+      ],
+      [
+        38,
+        1.2752489795918367,
+        "CONFIRMING"
+      ],
+      [
+        77,
+        2.584057142857143,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        35,
+        1.1745714285714286
+      ],
+      [
+        "FALL_IMPACT",
+        77,
+        2.584057142857143
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.01,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:10.121562+00:00",
+        "timestamp": "2026-10-21T21:05:10.121562+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:10.121562+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 1.0,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:11.227115+00:00",
+        "timestamp": "2026-10-21T21:05:11.227115+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:10.121562+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 26.878185715759173,
+        "p95_ms": 108.3348499960266
+      },
+      "M2": {
+        "mean_ms": 0.18584846378760222,
+        "p95_ms": 0.2367249398957938
+      },
+      "M3": {
+        "mean_ms": 0.6683316296774285,
+        "p95_ms": 0.8742249046918005
+      },
+      "M4": {
+        "mean_ms": 0.020495410984838192,
+        "p95_ms": 0.024399952962994576
+      }
+    },
+    "wall_s": 5.439560799160972,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\07.mp4",
+    "fps_source": 29.83938799214964,
+    "frames": 149,
+    "duration": 4.993399999999999,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.033512751677852344,
+        "STAND_WALK"
+      ],
+      [
+        11,
+        0.3686402684563758,
+        "PRE_FALL"
+      ],
+      [
+        18,
+        0.6032295302013423,
+        "CONFIRMING"
+      ],
+      [
+        57,
+        1.9102268456375837,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        11,
+        0.3686402684563758
+      ],
+      [
+        "FALL_IMPACT",
+        57,
+        1.9102268456375837
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:15.773068+00:00",
+        "timestamp": "2026-10-21T21:05:15.773068+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:15.773068+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.0,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:16.851209+00:00",
+        "timestamp": "2026-10-21T21:05:16.851209+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:15.773068+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 21.83211409493081,
+        "p95_ms": 70.97586002200836
+      },
+      "M2": {
+        "mean_ms": 0.18173691913510528,
+        "p95_ms": 0.21337999496608973
+      },
+      "M3": {
+        "mean_ms": 0.6543268455854998,
+        "p95_ms": 0.86646000854671
+      },
+      "M4": {
+        "mean_ms": 0.02004497375139254,
+        "p95_ms": 0.023559993132948875
+      }
+    },
+    "wall_s": 3.380545202177018,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\08.mp4",
+    "fps_source": 29.82776089159068,
+    "frames": 368,
+    "duration": 12.3375,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03352581521739131,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [],
+    "tier1": false,
+    "tier2": false,
+    "emitted": [],
+    "timings": {
+      "M1": {
+        "mean_ms": 29.398829349109132,
+        "p95_ms": 105.06309994962056
+      },
+      "M2": {
+        "mean_ms": 0.188028806208066,
+        "p95_ms": 0.22862499463371933
+      },
+      "M3": {
+        "mean_ms": 0.7531339689866519,
+        "p95_ms": 0.9161199908703564
+      },
+      "M4": {
+        "mean_ms": 0.021148912745284968,
+        "p95_ms": 0.026064965641126033
+      }
+    },
+    "wall_s": 11.172899901634082,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\09.mp4",
+    "fps_source": 29.84467577579668,
+    "frames": 362,
+    "duration": 12.129466666666668,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03350681399631676,
+        "STAND_WALK"
+      ],
+      [
+        18,
+        0.6031226519337017,
+        "PRE_FALL"
+      ],
+      [
+        19,
+        0.6366294659300185,
+        "CONFIRMING"
+      ],
+      [
+        49,
+        1.6418338858195212,
+        "STAND_WALK"
+      ],
+      [
+        78,
+        2.6135314917127075,
+        "PRE_FALL"
+      ],
+      [
+        79,
+        2.647038305709024,
+        "CONFIRMING"
+      ],
+      [
+        109,
+        3.652242725598527,
+        "STAND_WALK"
+      ],
+      [
+        138,
+        4.623940331491713,
+        "PRE_FALL"
+      ],
+      [
+        139,
+        4.65744714548803,
+        "CONFIRMING"
+      ],
+      [
+        169,
+        5.662651565377533,
+        "STAND_WALK"
+      ],
+      [
+        198,
+        6.634349171270719,
+        "PRE_FALL"
+      ],
+      [
+        199,
+        6.667855985267035,
+        "CONFIRMING"
+      ],
+      [
+        229,
+        7.673060405156538,
+        "STAND_WALK"
+      ],
+      [
+        258,
+        8.644758011049724,
+        "PRE_FALL"
+      ],
+      [
+        259,
+        8.67826482504604,
+        "CONFIRMING"
+      ],
+      [
+        289,
+        9.683469244935544,
+        "STAND_WALK"
+      ],
+      [
+        318,
+        10.65516685082873,
+        "PRE_FALL"
+      ],
+      [
+        324,
+        10.856207734806631,
+        "CONFIRMING"
+      ],
+      [
+        354,
+        11.861412154696133,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        18,
+        0.6031226519337017
+      ],
+      [
+        "PRE_FALL",
+        78,
+        2.6135314917127075
+      ],
+      [
+        "PRE_FALL",
+        138,
+        4.623940331491713
+      ],
+      [
+        "PRE_FALL",
+        198,
+        6.634349171270719
+      ],
+      [
+        "PRE_FALL",
+        258,
+        8.644758011049724
+      ],
+      [
+        "PRE_FALL",
+        318,
+        10.65516685082873
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.9,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:32.364111+00:00",
+        "timestamp": "2026-10-21T21:05:32.364111+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:32.364111+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.9,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:32.364111+00:00",
+        "timestamp": "2026-10-21T21:05:32.364111+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:32.364111+00:00",
+        "resolvedAt": "2026-10-21T21:05:33.257964+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.82,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:34.046652+00:00",
+        "timestamp": "2026-10-21T21:05:34.046652+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:34.046652+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.82,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:34.046652+00:00",
+        "timestamp": "2026-10-21T21:05:34.046652+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:34.046652+00:00",
+        "resolvedAt": "2026-10-21T21:05:35.280589+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.92,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:36.078944+00:00",
+        "timestamp": "2026-10-21T21:05:36.078944+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:36.078944+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.92,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:36.078944+00:00",
+        "timestamp": "2026-10-21T21:05:36.078944+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:36.078944+00:00",
+        "resolvedAt": "2026-10-21T21:05:36.901687+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.98,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:37.748143+00:00",
+        "timestamp": "2026-10-21T21:05:37.748143+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:37.748143+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.98,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:37.748143+00:00",
+        "timestamp": "2026-10-21T21:05:37.748143+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:37.748143+00:00",
+        "resolvedAt": "2026-10-21T21:05:38.829551+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.97,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:39.711905+00:00",
+        "timestamp": "2026-10-21T21:05:39.711905+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:39.711905+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.97,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:39.711905+00:00",
+        "timestamp": "2026-10-21T21:05:39.711905+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:39.711905+00:00",
+        "resolvedAt": "2026-10-21T21:05:40.577367+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.72,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:41.513319+00:00",
+        "timestamp": "2026-10-21T21:05:41.513319+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:41.513319+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.72,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:41.513319+00:00",
+        "timestamp": "2026-10-21T21:05:41.513319+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:41.513319+00:00",
+        "resolvedAt": "2026-10-21T21:05:42.488315+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 26.620146683391532,
+        "p95_ms": 98.22473499225448
+      },
+      "M2": {
+        "mean_ms": 0.18930663187468413,
+        "p95_ms": 0.23615994141437113
+      },
+      "M3": {
+        "mean_ms": 0.7720165734837933,
+        "p95_ms": 0.9158949949778616
+      },
+      "M4": {
+        "mean_ms": 0.02308729688703849,
+        "p95_ms": 0.02817498170770704
+      }
+    },
+    "wall_s": 9.992849701200612,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\10.mp4",
+    "fps_source": 29.840952410711495,
+    "frames": 382,
+    "duration": 12.8012,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.03351099476439791,
+        "STAND_WALK"
+      ],
+      [
+        53,
+        1.776082722513089,
+        "PRE_FALL"
+      ],
+      [
+        54,
+        1.809593717277487,
+        "CONFIRMING"
+      ],
+      [
+        90,
+        3.015989528795812,
+        "STAND_WALK"
+      ],
+      [
+        113,
+        3.7867424083769636,
+        "PRE_FALL"
+      ],
+      [
+        114,
+        3.8202534031413613,
+        "CONFIRMING"
+      ],
+      [
+        195,
+        6.534643979057591,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        53,
+        1.776082722513089
+      ],
+      [
+        "PRE_FALL",
+        113,
+        3.7867424083769636
+      ],
+      [
+        "FALL_IMPACT",
+        195,
+        6.534643979057591
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.54,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:44.727950+00:00",
+        "timestamp": "2026-10-21T21:05:44.727950+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:44.727950+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.54,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:44.727950+00:00",
+        "timestamp": "2026-10-21T21:05:44.727950+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:44.727950+00:00",
+        "resolvedAt": "2026-10-21T21:05:45.587824+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.91,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:46.336651+00:00",
+        "timestamp": "2026-10-21T21:05:46.336651+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:46.336651+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.0,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:48.415703+00:00",
+        "timestamp": "2026-10-21T21:05:48.415703+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:46.336651+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 26.681148689069556,
+        "p95_ms": 103.43546494259493
+      },
+      "M2": {
+        "mean_ms": 0.16484581237580842,
+        "p95_ms": 0.22327995975501835
+      },
+      "M3": {
+        "mean_ms": 0.5973086406535308,
+        "p95_ms": 0.8862799964845179
+      },
+      "M4": {
+        "mean_ms": 0.02499895063058244,
+        "p95_ms": 0.03042999887838958
+      }
+    },
+    "wall_s": 10.49289139942266,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\11.mp4",
+    "fps_source": 29.846662770019027,
+    "frames": 320,
+    "duration": 10.721466666666666,
+    "final_state": "CONFIRMING",
+    "transitions": [
+      [
+        1,
+        0.03350458333333333,
+        "STAND_WALK"
+      ],
+      [
+        18,
+        0.6030825,
+        "PRE_FALL"
+      ],
+      [
+        19,
+        0.6365870833333334,
+        "CONFIRMING"
+      ],
+      [
+        49,
+        1.6417245833333334,
+        "STAND_WALK"
+      ],
+      [
+        78,
+        2.6133575,
+        "PRE_FALL"
+      ],
+      [
+        79,
+        2.6468620833333336,
+        "CONFIRMING"
+      ],
+      [
+        109,
+        3.6519995833333336,
+        "STAND_WALK"
+      ],
+      [
+        138,
+        4.6236325,
+        "PRE_FALL"
+      ],
+      [
+        139,
+        4.657137083333334,
+        "CONFIRMING"
+      ],
+      [
+        169,
+        5.662274583333334,
+        "STAND_WALK"
+      ],
+      [
+        198,
+        6.6339075,
+        "PRE_FALL"
+      ],
+      [
+        199,
+        6.667412083333334,
+        "CONFIRMING"
+      ],
+      [
+        229,
+        7.672549583333334,
+        "STAND_WALK"
+      ],
+      [
+        258,
+        8.6441825,
+        "PRE_FALL"
+      ],
+      [
+        259,
+        8.677687083333334,
+        "CONFIRMING"
+      ],
+      [
+        289,
+        9.682824583333334,
+        "STAND_WALK"
+      ],
+      [
+        318,
+        10.6544575,
+        "PRE_FALL"
+      ],
+      [
+        319,
+        10.687962083333334,
+        "CONFIRMING"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        18,
+        0.6030825
+      ],
+      [
+        "PRE_FALL",
+        78,
+        2.6133575
+      ],
+      [
+        "PRE_FALL",
+        138,
+        4.6236325
+      ],
+      [
+        "PRE_FALL",
+        198,
+        6.6339075
+      ],
+      [
+        "PRE_FALL",
+        258,
+        8.6441825
+      ],
+      [
+        "PRE_FALL",
+        318,
+        10.6544575
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:55.029571+00:00",
+        "timestamp": "2026-10-21T21:05:55.029571+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:55.029571+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:55.029571+00:00",
+        "timestamp": "2026-10-21T21:05:55.029571+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:55.029571+00:00",
+        "resolvedAt": "2026-10-21T21:05:55.933476+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:56.831784+00:00",
+        "timestamp": "2026-10-21T21:05:56.831784+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:56.831784+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:56.831784+00:00",
+        "timestamp": "2026-10-21T21:05:56.831784+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:56.831784+00:00",
+        "resolvedAt": "2026-10-21T21:05:57.508997+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:58.468662+00:00",
+        "timestamp": "2026-10-21T21:05:58.468662+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:58.468662+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:05:58.468662+00:00",
+        "timestamp": "2026-10-21T21:05:58.468662+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:05:58.468662+00:00",
+        "resolvedAt": "2026-10-21T21:05:59.372867+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:00.089988+00:00",
+        "timestamp": "2026-10-21T21:06:00.089988+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:00.089988+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:00.089988+00:00",
+        "timestamp": "2026-10-21T21:06:00.089988+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:00.089988+00:00",
+        "resolvedAt": "2026-10-21T21:06:00.939335+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:01.654723+00:00",
+        "timestamp": "2026-10-21T21:06:01.654723+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:01.654723+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:01.654723+00:00",
+        "timestamp": "2026-10-21T21:06:01.654723+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:01.654723+00:00",
+        "resolvedAt": "2026-10-21T21:06:02.437820+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 1.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:03.121672+00:00",
+        "timestamp": "2026-10-21T21:06:03.121672+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:03.121672+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 23.48247468507907,
+        "p95_ms": 73.29643999692055
+      },
+      "M2": {
+        "mean_ms": 0.17299500068475027,
+        "p95_ms": 0.2122699865140021
+      },
+      "M3": {
+        "mean_ms": 0.6612621891690651,
+        "p95_ms": 0.8520200790371746
+      },
+      "M4": {
+        "mean_ms": 0.020885938647552393,
+        "p95_ms": 0.0256499624811113
+      }
+    },
+    "wall_s": 7.78803770034574,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\12.mp4",
+    "fps_source": 29.85143972216092,
+    "frames": 257,
+    "duration": 8.6093,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.033499221789883266,
+        "STAND_WALK"
+      ],
+      [
+        18,
+        0.6029859922178988,
+        "PRE_FALL"
+      ],
+      [
+        19,
+        0.6364852140077821,
+        "CONFIRMING"
+      ],
+      [
+        49,
+        1.6414618677042803,
+        "STAND_WALK"
+      ],
+      [
+        78,
+        2.612939299610895,
+        "PRE_FALL"
+      ],
+      [
+        79,
+        2.6464385214007784,
+        "CONFIRMING"
+      ],
+      [
+        109,
+        3.6514151750972763,
+        "STAND_WALK"
+      ],
+      [
+        138,
+        4.622892607003891,
+        "PRE_FALL"
+      ],
+      [
+        139,
+        4.656391828793774,
+        "CONFIRMING"
+      ],
+      [
+        169,
+        5.661368482490272,
+        "STAND_WALK"
+      ],
+      [
+        198,
+        6.632845914396888,
+        "PRE_FALL"
+      ],
+      [
+        199,
+        6.666345136186771,
+        "CONFIRMING"
+      ],
+      [
+        229,
+        7.671321789883269,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        18,
+        0.6029859922178988
+      ],
+      [
+        "PRE_FALL",
+        78,
+        2.612939299610895
+      ],
+      [
+        "PRE_FALL",
+        138,
+        4.622892607003891
+      ],
+      [
+        "PRE_FALL",
+        198,
+        6.632845914396888
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.99,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:03.894689+00:00",
+        "timestamp": "2026-10-21T21:06:03.894689+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:03.894689+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.99,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:03.894689+00:00",
+        "timestamp": "2026-10-21T21:06:03.894689+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:03.894689+00:00",
+        "resolvedAt": "2026-10-21T21:06:04.642396+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.98,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:05.510864+00:00",
+        "timestamp": "2026-10-21T21:06:05.510864+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:05.510864+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.98,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:05.510864+00:00",
+        "timestamp": "2026-10-21T21:06:05.510864+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:05.510864+00:00",
+        "resolvedAt": "2026-10-21T21:06:06.178429+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.98,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:07.089224+00:00",
+        "timestamp": "2026-10-21T21:06:07.089224+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:07.089224+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.98,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:07.089224+00:00",
+        "timestamp": "2026-10-21T21:06:07.089224+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:07.089224+00:00",
+        "resolvedAt": "2026-10-21T21:06:08.052579+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.98,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:08.705905+00:00",
+        "timestamp": "2026-10-21T21:06:08.705905+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:08.705905+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.98,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:08.705905+00:00",
+        "timestamp": "2026-10-21T21:06:08.705905+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:08.705905+00:00",
+        "resolvedAt": "2026-10-21T21:06:09.587000+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 24.384369254692054,
+        "p95_ms": 76.95517998654395
+      },
+      "M2": {
+        "mean_ms": 0.17652957399415597,
+        "p95_ms": 0.21289999131113288
+      },
+      "M3": {
+        "mean_ms": 0.6620984421209487,
+        "p95_ms": 0.8493000641465186
+      },
+      "M4": {
+        "mean_ms": 0.02103384787122563,
+        "p95_ms": 0.024999980814754963
+      }
+    },
+    "wall_s": 6.487715997500345,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\13.mp4",
+    "fps_source": 29.875034914929017,
+    "frames": 164,
+    "duration": 5.489533333333333,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.033472764227642275,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [],
+    "tier1": false,
+    "tier2": false,
+    "emitted": [],
+    "timings": {
+      "M1": {
+        "mean_ms": 24.05902439027048,
+        "p95_ms": 71.11221003578972
+      },
+      "M2": {
+        "mean_ms": 0.1735390240621821,
+        "p95_ms": 0.21276999032124874
+      },
+      "M3": {
+        "mean_ms": 0.6408993915722865,
+        "p95_ms": 0.8698800054844469
+      },
+      "M4": {
+        "mean_ms": 0.019481710851101612,
+        "p95_ms": 0.023185042664408684
+      }
+    },
+    "wall_s": 4.082442900747992,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\14.mp4",
+    "fps_source": 29.859132319300077,
+    "frames": 248,
+    "duration": 8.305666666666667,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03349059139784946,
+        "STAND_WALK"
+      ],
+      [
+        84,
+        2.813209677419355,
+        "PRE_FALL"
+      ],
+      [
+        92,
+        3.0811344086021504,
+        "CONFIRMING"
+      ],
+      [
+        132,
+        4.420758064516129,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        84,
+        2.813209677419355
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.01,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "seat",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:17.607338+00:00",
+        "timestamp": "2026-10-21T21:06:17.607338+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:17.607338+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.01,
+        "postureState": "RECOVERED",
+        "furnitureContext": "seat",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:17.607338+00:00",
+        "timestamp": "2026-10-21T21:06:17.607338+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:17.607338+00:00",
+        "resolvedAt": "2026-10-21T21:06:18.691215+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 22.079287497270403,
+        "p95_ms": 73.84558497578826
+      },
+      "M2": {
+        "mean_ms": 0.1792116977852739,
+        "p95_ms": 0.21403499995358283
+      },
+      "M3": {
+        "mean_ms": 0.6980245947958,
+        "p95_ms": 0.8767749648541212
+      },
+      "M4": {
+        "mean_ms": 0.020344353434930164,
+        "p95_ms": 0.024630071129649874
+      }
+    },
+    "wall_s": 5.698263299535029,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\15.mp4",
+    "fps_source": 29.83356995878339,
+    "frames": 159,
+    "duration": 5.329566666666667,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.033519287211740044,
+        "STAND_WALK"
+      ],
+      [
+        30,
+        1.0055786163522014,
+        "PRE_FALL"
+      ],
+      [
+        31,
+        1.0390979035639414,
+        "CONFIRMING"
+      ],
+      [
+        91,
+        3.050255136268344,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        30,
+        1.0055786163522014
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.75,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:23.035784+00:00",
+        "timestamp": "2026-10-21T21:06:23.035784+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:23.035784+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.75,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:23.035784+00:00",
+        "timestamp": "2026-10-21T21:06:23.035784+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:23.035784+00:00",
+        "resolvedAt": "2026-10-21T21:06:25.299613+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 26.817739617559802,
+        "p95_ms": 75.23825995158398
+      },
+      "M2": {
+        "mean_ms": 0.19696225784133253,
+        "p95_ms": 0.23869995493441815
+      },
+      "M3": {
+        "mean_ms": 0.7075679257113792,
+        "p95_ms": 0.860349927097559
+      },
+      "M4": {
+        "mean_ms": 0.01951257417083911,
+        "p95_ms": 0.0257600680924952
+      }
+    },
+    "wall_s": 4.410943397670053,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\16.mp4",
+    "fps_source": 29.842103050993103,
+    "frames": 213,
+    "duration": 7.137566666666666,
+    "final_state": "POST_FALL_MONITOR",
+    "transitions": [
+      [
+        1,
+        0.033509702660406884,
+        "STAND_WALK"
+      ],
+      [
+        88,
+        2.948853834115806,
+        "PRE_FALL"
+      ],
+      [
+        89,
+        2.9823635367762127,
+        "CONFIRMING"
+      ],
+      [
+        170,
+        5.69664945226917,
+        "POST_FALL_MONITOR"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        88,
+        2.948853834115806
+      ],
+      [
+        "FALL_IMPACT",
+        170,
+        5.69664945226917
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.48,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:29.602953+00:00",
+        "timestamp": "2026-10-21T21:06:29.602953+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:29.602953+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.0,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:31.512120+00:00",
+        "timestamp": "2026-10-21T21:06:31.512120+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:29.602953+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 21.52383192103496,
+        "p95_ms": 73.51302003953596
+      },
+      "M2": {
+        "mean_ms": 0.1803962475545879,
+        "p95_ms": 0.2326800255104899
+      },
+      "M3": {
+        "mean_ms": 0.6579295759408477,
+        "p95_ms": 0.8674999698996543
+      },
+      "M4": {
+        "mean_ms": 0.019474652434039005,
+        "p95_ms": 0.02347994595766067
+      }
+    },
+    "wall_s": 4.767287700553425,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\17.mp4",
+    "fps_source": 29.877758204336022,
+    "frames": 186,
+    "duration": 6.225366666666667,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03346971326164875,
+        "STAND_WALK"
+      ],
+      [
+        36,
+        1.2049096774193548,
+        "PRE_FALL"
+      ],
+      [
+        62,
+        2.0751222222222223,
+        "CONFIRMING"
+      ],
+      [
+        121,
+        4.049835304659498,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        36,
+        1.2049096774193548
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.61,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:33.714400+00:00",
+        "timestamp": "2026-10-21T21:06:33.714400+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:33.714400+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.61,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:33.714400+00:00",
+        "timestamp": "2026-10-21T21:06:33.714400+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:33.714400+00:00",
+        "resolvedAt": "2026-10-21T21:06:36.038215+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 21.598582791279682,
+        "p95_ms": 73.84295004885644
+      },
+      "M2": {
+        "mean_ms": 0.15492043182534235,
+        "p95_ms": 0.20640005823224783
+      },
+      "M3": {
+        "mean_ms": 0.5553268861295956,
+        "p95_ms": 0.8473249617964029
+      },
+      "M4": {
+        "mean_ms": 0.019672580854466524,
+        "p95_ms": 0.024750072043389082
+      }
+    },
+    "wall_s": 4.15310150035657,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\18.mp4",
+    "fps_source": 29.863592190540594,
+    "frames": 421,
+    "duration": 14.097433333333333,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.033485589865399845,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [],
+    "tier1": false,
+    "tier2": false,
+    "emitted": [],
+    "timings": {
+      "M1": {
+        "mean_ms": 21.87307078348176,
+        "p95_ms": 97.64339996036142
+      },
+      "M2": {
+        "mean_ms": 0.17107862176156807,
+        "p95_ms": 0.20220002625137568
+      },
+      "M3": {
+        "mean_ms": 0.7328750649157407,
+        "p95_ms": 0.8549999911338091
+      },
+      "M4": {
+        "mean_ms": 0.020586224626794,
+        "p95_ms": 0.022699940018355846
+      }
+    },
+    "wall_s": 9.59779410250485,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\19.mp4",
+    "fps_source": 29.882891371651635,
+    "frames": 296,
+    "duration": 9.905333333333333,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.033463963963963964,
+        "STAND_WALK"
+      ],
+      [
+        46,
+        1.5393423423423425,
+        "PRE_FALL"
+      ],
+      [
+        51,
+        1.7066621621621623,
+        "CONFIRMING"
+      ],
+      [
+        90,
+        3.011756756756757,
+        "POST_FALL_MONITOR"
+      ],
+      [
+        126,
+        4.216459459459459,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        46,
+        1.5393423423423425
+      ],
+      [
+        "FALL_IMPACT",
+        90,
+        3.011756756756757
+      ]
+    ],
+    "tier1": true,
+    "tier2": true,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:48.835558+00:00",
+        "timestamp": "2026-10-21T21:06:48.835558+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:48.835558+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "FALL_IMPACT",
+        "status": "CREATED",
+        "tier": 2,
+        "fallProbability": 0.99,
+        "postureState": "HORIZONTAL_FLOOR",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:49.643691+00:00",
+        "timestamp": "2026-10-21T21:06:49.643691+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:48.835558+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 24.572691888425727,
+        "p95_ms": 77.26487496984191
+      },
+      "M2": {
+        "mean_ms": 0.17685033782146167,
+        "p95_ms": 0.21667502005584538
+      },
+      "M3": {
+        "mean_ms": 0.8723351316262238,
+        "p95_ms": 0.9257999481633306
+      },
+      "M4": {
+        "mean_ms": 0.0218456080875586,
+        "p95_ms": 0.024324952391907573
+      }
+    },
+    "wall_s": 7.590541997924447,
+    "trace": [],
+    "type": "ADL"
+  },
+  {
+    "path": "data\\raw_datasets\\gmdcsa24\\Subject 4\\ADL\\20.mp4",
+    "fps_source": 29.84921296243451,
+    "frames": 523,
+    "duration": 17.5214,
+    "final_state": "STAND_WALK",
+    "transitions": [
+      [
+        1,
+        0.03350172084130019,
+        "STAND_WALK"
+      ],
+      [
+        12,
+        0.4020206500956023,
+        "PRE_FALL"
+      ],
+      [
+        19,
+        0.6365326959847036,
+        "CONFIRMING"
+      ],
+      [
+        81,
+        2.713639388145315,
+        "STAND_WALK"
+      ],
+      [
+        428,
+        14.33873652007648,
+        "PRE_FALL"
+      ],
+      [
+        431,
+        14.439241682600382,
+        "CONFIRMING"
+      ],
+      [
+        497,
+        16.650355258126194,
+        "STAND_WALK"
+      ]
+    ],
+    "events": [
+      [
+        "PRE_FALL",
+        12,
+        0.4020206500956023
+      ],
+      [
+        "PRE_FALL",
+        428,
+        14.33873652007648
+      ]
+    ],
+    "tier1": true,
+    "tier2": false,
+    "emitted": [
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.0,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:56.088865+00:00",
+        "timestamp": "2026-10-21T21:06:56.088865+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:56.088865+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.0,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:06:56.088865+00:00",
+        "timestamp": "2026-10-21T21:06:56.088865+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:06:56.088865+00:00",
+        "resolvedAt": "2026-10-21T21:06:57.467027+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "PRE_FALL_WARNING",
+        "status": "WARNING",
+        "tier": 1,
+        "fallProbability": 0.06,
+        "postureState": "BALANCE_LOSS",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:07:04.618249+00:00",
+        "timestamp": "2026-10-21T21:07:04.618249+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:07:04.618249+00:00"
+      },
+      {
+        "alertId": "[REDACTED]",
+        "elderId": "[REDACTED]",
+        "elderName": "[REDACTED]",
+        "roomLocation": "Unknown",
+        "eventType": "SELF_RECOVERY_CANCELLED",
+        "status": "AUTO_CANCELLED",
+        "tier": 0,
+        "fallProbability": 0.06,
+        "postureState": "RECOVERED",
+        "furnitureContext": "open_floor",
+        "assignedCaretakerId": "[REDACTED]",
+        "elderPhone": "[REDACTED]",
+        "acknowledgedBy": null,
+        "escalatedToVolunteers": false,
+        "escalationTimerStart": "2026-10-21T21:07:04.618249+00:00",
+        "timestamp": "2026-10-21T21:07:04.618249+00:00",
+        "episodeId": "[REDACTED]",
+        "warningTimestamp": "2026-10-21T21:07:04.618249+00:00",
+        "resolvedAt": "2026-10-21T21:07:06.172808+00:00"
+      }
+    ],
+    "timings": {
+      "M1": {
+        "mean_ms": 19.43030745684958,
+        "p95_ms": 84.99587000114839
+      },
+      "M2": {
+        "mean_ms": 0.17675162821894166,
+        "p95_ms": 0.21409000037238002
+      },
+      "M3": {
+        "mean_ms": 0.7580609942731192,
+        "p95_ms": 0.8585800183936954
+      },
+      "M4": {
+        "mean_ms": 0.020885657978530824,
+        "p95_ms": 0.023689959198236462
+      }
+    },
+    "wall_s": 10.66188100061845,
+    "trace": [],
+    "type": "ADL"
+  }
+]

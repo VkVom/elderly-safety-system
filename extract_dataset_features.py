@@ -32,7 +32,6 @@ Outputs (data/processed_features/):
 import os
 import glob
 import json
-from collections import deque
 from typing import List, Tuple
 
 import cv2
@@ -40,7 +39,8 @@ import numpy as np
 
 from src.m1_perception import SingleAuthorityPerception
 from src.m2_kinematics import KinematicExtractor
-from src.m3_temporal_model import SEQ_LEN, FEATURE_DIM
+from src.m3_temporal_model import SEQ_LEN, FEATURE_DIM, TemporalBufferManager
+from src.frame_timing import normalize_fps
 
 LE2I_ROOT = os.path.join("data", "raw_datasets", "le2i_frames")
 OUT_DIR = os.path.join("data", "processed_features")
@@ -64,7 +64,7 @@ def _windows_from_clip(frame_paths: List[str], label: int) -> Tuple[List[np.ndar
     m1 = SingleAuthorityPerception()
     m2 = KinematicExtractor()
     m1.reset_context()
-    buf = deque(maxlen=SEQ_LEN)
+    buf = TemporalBufferManager()
     Xs, ys = [], []
     i = 0
     for p in frame_paths:
@@ -72,14 +72,12 @@ def _windows_from_clip(frame_paths: List[str], label: int) -> Tuple[List[np.ndar
         if frame is None:
             continue
         i += 1
-        kp, _furn, quality = m1.process_frame(frame)
-        feats, valid, _info = m2.process(kp, quality, timestamp_s=i / 25.0)  # Le2i ~25 FPS
-        if not valid:
-            buf.clear()
-            continue
-        buf.append(feats.astype(np.float32))
-        if len(buf) == SEQ_LEN:
-            Xs.append(np.stack(buf, axis=0))
+        timestamp_s = i / 25.0  # Le2i ~25 FPS
+        kp, _furn, quality = m1.process_frame(frame, timestamp_ms=timestamp_s * 1000.0)
+        feats, valid, _info = m2.process(kp, quality, timestamp_s=timestamp_s)
+        window = buf.update(feats, valid, timestamp_s=timestamp_s)
+        if window is not None:
+            Xs.append(window)
             ys.append(label)
     m1.close()
     return Xs, ys
@@ -123,20 +121,18 @@ TILT_FALL_DEG, VY_FALL = 60.0, 2.0
 
 def _windows_from_video(path, clip_is_fall):
     m1 = SingleAuthorityPerception(); m2 = KinematicExtractor(); m1.reset_context()
-    cap = cv2.VideoCapture(path); fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
-    buf = deque(maxlen=SEQ_LEN); Xs, ys = [], []; i = 0
+    cap = cv2.VideoCapture(path); fps = normalize_fps(cap.get(cv2.CAP_PROP_FPS))
+    buf = TemporalBufferManager(); Xs, ys = [], []; i = 0
     while True:
         ok, frame = cap.read()
         if not ok:
             break
         i += 1
-        kp, _f, q = m1.process_frame(frame)
-        feats, valid, _info = m2.process(kp, q, timestamp_s=i / fps)
-        if not valid:
-            buf.clear(); continue
-        buf.append(feats.astype(np.float32))
-        if len(buf) == SEQ_LEN:
-            win = np.stack(buf, axis=0)
+        timestamp_s = i / fps
+        kp, _f, q = m1.process_frame(frame, timestamp_ms=timestamp_s * 1000.0)
+        feats, valid, _info = m2.process(kp, q, timestamp_s=timestamp_s)
+        win = buf.update(feats, valid, timestamp_s=timestamp_s)
+        if win is not None:
             if clip_is_fall:
                 lbl = 1 if (np.degrees(win[:, IDX_TILT]).max() >= TILT_FALL_DEG and win[:, IDX_HIP_VY].max() >= VY_FALL) else 0
             else:

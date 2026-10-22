@@ -33,6 +33,13 @@ Interpretation:
 
 The live runner uses the CPU version of ONNX Runtime. These generated model files are not committed to GitHub.
 
+Timestamped inputs are interpolated onto the 25 FPS cadence used during training.
+The 15 model samples therefore span 0.56 seconds even when a camera delivers fewer
+frames per second. A window is withheld until its full time span has real observations
+at both ends; invalid poses, non-increasing timestamps, and gaps over 0.5 seconds reset
+the temporal buffer. This reduces cadence mismatch but cannot restore motion that a
+slow or stalled camera never captured.
+
 ## Training and Export
 
 - `extract_dataset_features.py`: builds features from prepared datasets.

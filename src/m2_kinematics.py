@@ -41,10 +41,43 @@ L_HIP, R_HIP = 23, 24
 
 FEATURE_DIM = 72
 NUM_LANDMARKS = 33
+MAX_NORMALIZED_SPEED = 12.0
+MAX_NORMALIZED_JERK = 20000.0
 
 # A representative subset of landmarks used to approximate the body centre of mass.
 # (shoulders, hips, knees, ankles) - stable, high-visibility joints.
 COM_LANDMARKS = [11, 12, 23, 24, 25, 26, 27, 28]
+
+
+def sanitize_motion_features(
+    features: np.ndarray,
+    *,
+    held_frame: bool = False,
+    max_normalized_speed: float = MAX_NORMALIZED_SPEED,
+    max_normalized_jerk: float = MAX_NORMALIZED_JERK,
+) -> Tuple[np.ndarray, bool]:
+    """Keep pose/tilt while dropping implausible or stale finite-difference motion.
+
+    M2 motion values use torso-normalized units, not physical units. Extreme spikes
+    are usually landmark jumps and get magnified by velocity/jerk differentiation.
+    The learned model still receives the pose and tilt for these frames, while all
+    five motion channels are set to neutral values and reliability is reported.
+    """
+    clean = np.asarray(features, dtype=np.float32).copy()
+    if clean.shape != (FEATURE_DIM,):
+        raise ValueError(f"Expected one {FEATURE_DIM}-D M2 feature row")
+    motion = clean[67:72]
+    hip_speed = float(np.linalg.norm(motion[0:2]))
+    jerk = float(abs(motion[4]))
+    reliable = (
+        not held_frame
+        and bool(np.all(np.isfinite(motion)))
+        and hip_speed <= max_normalized_speed
+        and jerk <= max_normalized_jerk
+    )
+    if not reliable:
+        clean[67:72] = 0.0
+    return clean, reliable
 
 
 class KinematicExtractor:
@@ -128,6 +161,8 @@ class KinematicExtractor:
         v_shoulder_y = 0.0
         v_com_y = 0.0
         jerk = 0.0
+        velocity_ready = bool(self._hist)
+        jerk_ready = False
 
         if self._hist:
             t_prev, prev = self._hist[-1]
@@ -138,10 +173,38 @@ class KinematicExtractor:
                 v_com_y = float((com_n[1] - prev["com"][1]) / dt)
                 # Jerk from change in hip acceleration (needs 2 prior samples).
                 if len(self._hist) >= 2 and self._last_valid_timestamp is not None:
+                    jerk_ready = self._last_hip_accel is not None
                     accel = float(np.linalg.norm(v_hip - prev["v_hip"]) / dt)
                     if self._last_hip_accel is not None:
                         jerk = abs(accel - self._last_hip_accel) / dt
                     self._last_hip_accel = accel
+
+        # Retain the raw derivative values for audit, but do not feed extreme spikes
+        # or held-pose motion into M3/M4. Rebase at the current pose after an outlier
+        # so the next frame can recover promptly rather than inherit the spike.
+        raw_hip_v_y = float(v_hip[1])
+        raw_jerk = float(jerk)
+
+        # --- Assemble the 72-D feature vector --------------------------------------
+        features = np.empty(FEATURE_DIM, dtype=np.float32)
+        features[0:66] = norm_xy.reshape(-1)
+        features[66] = tilt
+        features[67] = float(v_hip[1])
+        features[68] = float(v_hip[0])
+        features[69] = v_shoulder_y
+        features[70] = v_com_y
+        features[71] = float(jerk)
+        features, motion_reliable = sanitize_motion_features(
+            features,
+            held_frame=bool(quality.get("held_frame", False)) if quality else False,
+        )
+
+        if not motion_reliable:
+            self._hist.clear()
+            self._last_hip_accel = None
+            self._last_valid_timestamp = None
+            v_hip = np.zeros(2, dtype=np.float32)
+            self._last_hip_accel = None
 
         # Record this frame's centres for the next difference.
         self._hist.append((timestamp_s, {
@@ -152,20 +215,16 @@ class KinematicExtractor:
         }))
         self._last_valid_timestamp = timestamp_s
 
-        # --- Assemble the 72-D feature vector --------------------------------------
-        features = np.empty(FEATURE_DIM, dtype=np.float32)
-        features[0:66] = norm_xy.reshape(-1)
-        features[66] = tilt
-        features[67] = float(v_hip[1])       # hip vertical velocity
-        features[68] = float(v_hip[0])       # hip horizontal velocity
-        features[69] = v_shoulder_y
-        features[70] = v_com_y
-        features[71] = float(jerk)
-
         info["reason"] = "ok"
         info["held_frame"] = bool(quality.get("held_frame", False)) if quality else False
         info["trunk_tilt_deg"] = round(math.degrees(tilt), 1)
-        info["hip_v_y"] = round(float(v_hip[1]), 4)
+        info["hip_v_y"] = round(float(features[67]), 4)
+        info["jerk"] = float(features[71])
+        info["raw_hip_v_y"] = round(raw_hip_v_y, 4)
+        info["raw_jerk"] = raw_jerk
+        info["motion_reliable"] = motion_reliable
+        info["velocity_ready"] = bool(velocity_ready and motion_reliable)
+        info["jerk_ready"] = bool(jerk_ready and motion_reliable)
         return features, True, info
 
 

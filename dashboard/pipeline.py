@@ -20,6 +20,7 @@ from src.m1_perception import SingleAuthorityPerception
 from src.m2_kinematics import KinematicExtractor, L_HIP, R_HIP
 from src.m3_temporal_model import TemporalBufferManager, DEFAULT_ONNX_PATH, FEATURE_DIM
 from src.m4_state_machine import FallDecisionEngine, body_on_rest_surface
+from src.frame_timing import normalize_fps
 from src.escalation import AlertGateway, LocalJsonSink, ElderContext, DEFAULT_ALERTS_PATH
 
 POSE_CONNECTIONS = [
@@ -49,13 +50,18 @@ def _sigmoid(x):
 class DashboardPipeline:
     """Runs one clip frame-by-frame, yielding a telemetry dict per frame."""
 
-    def __init__(self, elder_context: ElderContext = None, alerts_path: str = DEFAULT_ALERTS_PATH):
+    def __init__(self, elder_context: ElderContext = None, alerts_path: str = DEFAULT_ALERTS_PATH,
+                 sinks=None, notifiers=None):
         self.m1 = SingleAuthorityPerception()
         self.m2 = KinematicExtractor()
         self.buf = TemporalBufferManager()
         self.m4 = FallDecisionEngine()
         self.ctx = elder_context or ElderContext("ELDER_DEMO", "Demo Resident", "Demo Room", "CARE_1")
-        self.gateway = AlertGateway(self.ctx, sinks=[LocalJsonSink(alerts_path)])
+        self.gateway = AlertGateway(
+            self.ctx,
+            sinks=sinks if sinks is not None else [LocalJsonSink(alerts_path)],
+            notifiers=notifiers if notifiers is not None else [],
+        )
 
         self.sess = ort.InferenceSession(DEFAULT_ONNX_PATH, providers=["CPUExecutionProvider"])
         self.input_name = self.sess.get_inputs()[0].name
@@ -68,7 +74,7 @@ class DashboardPipeline:
             self.std = np.ones(FEATURE_DIM, np.float32)
 
         self._frame_idx = 0
-        self.p_fall = 0.0
+        self.p_fall = None
 
     def reset(self):
         self.m1.reset_context()
@@ -76,21 +82,25 @@ class DashboardPipeline:
         self.buf.reset()
         self.m4.reset()
         self._frame_idx = 0
-        self.p_fall = 0.0
+        self.p_fall = None
 
     def process(self, frame_bgr, fps: float = 30.0) -> dict:
         self._frame_idx += 1
+        fps = normalize_fps(fps)
+        timestamp_s = self._frame_idx / fps
         h, w = frame_bgr.shape[:2]
-        kp, furniture, quality = self.m1.process_frame(frame_bgr.copy())
-        feats, valid, info = self.m2.process(kp, quality, timestamp_s=self._frame_idx / fps)
+        kp, furniture, quality = self.m1.process_frame(
+            frame_bgr.copy(), timestamp_ms=timestamp_s * 1000.0)
+        feats, valid, info = self.m2.process(kp, quality, timestamp_s=timestamp_s)
 
-        window = self.buf.update(feats, valid)
+        window = self.buf.update(feats, valid, timestamp_s=timestamp_s)
+        model_ready = window is not None
         if window is not None:
             x = ((window - self.mean) / self.std)[None, ...].astype(np.float32)
             logit = self.sess.run(None, {self.input_name: x})[0]
             self.p_fall = float(_sigmoid(np.asarray(logit)).ravel()[0])
         elif not valid:
-            self.p_fall = 0.0
+            self.p_fall = None
 
         hip_px = None
         if kp is not None:
@@ -102,13 +112,17 @@ class DashboardPipeline:
                     else "open_floor")
 
         tilt = info.get("trunk_tilt_deg", 0.0) if valid else 0.0
+        velocity_ready = bool(info.get("velocity_ready", False)) if valid else False
+        jerk_ready = bool(info.get("jerk_ready", False)) if valid else False
         vy = info.get("hip_v_y", 0.0) if valid else 0.0
-        jerk = float(feats[71]) if valid else 0.0
+        jerk = info.get("jerk", 0.0) if valid else 0.0
 
+        p_fall_for_decision = self.p_fall if self.p_fall is not None else 0.0
         out = self.m4.update(
             pose_status=quality.get("pose_status", "LOST"),
             trunk_tilt_deg=tilt, hip_v_y=vy, jerk=jerk,
-            p_fall=self.p_fall, on_rest_surface=on_rest, dt=1.0 / fps,
+            p_fall=p_fall_for_decision, on_rest_surface=on_rest, dt=1.0 / fps,
+            kinematics_reliable=bool(info.get("motion_reliable", False)) if valid else False,
         )
         record = self.gateway.handle_m4(out, p_fall=self.p_fall, furniture_context=furn_ctx,
                                         now=self._frame_idx / fps)
@@ -117,7 +131,13 @@ class DashboardPipeline:
         return {
             "frame": annotated,
             "pose_status": quality.get("pose_status", "LOST"),
-            "tilt": tilt, "vy": vy, "jerk": jerk,
+            "valid_pose": valid,
+            "model_ready": model_ready,
+            "velocity_ready": velocity_ready,
+            "jerk_ready": jerk_ready,
+            "tilt": tilt if valid else None,
+            "vy": vy if valid and velocity_ready else None,
+            "jerk": jerk if valid and jerk_ready else None,
             "p_fall": self.p_fall,
             "state": out.state,
             "alert": out.alert,

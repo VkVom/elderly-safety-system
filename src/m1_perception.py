@@ -268,6 +268,7 @@ class SingleAuthorityPerception:
             min_confidence=furniture_min_confidence,
         )
         self._frame_index = 0  # monotonic counter used for VIDEO-mode timestamps
+        self._last_video_timestamp_ms: Optional[int] = None
 
         # Furniture is static context, so YOLO runs every `yolo_interval` frames and
         # the memory tracker persists it in between. This keeps the pipeline above
@@ -301,7 +302,28 @@ class SingleAuthorityPerception:
             except Exception as e:
                 print(f"[M1 Warning] YOLO model load warning: {e}")
 
-    def process_frame(self, frame_bgr: np.ndarray) -> Tuple[Optional[np.ndarray], List[Dict], Dict]:
+    def _resolve_video_timestamp_ms(self, timestamp_ms: Optional[float]) -> int:
+        """Return a strictly increasing MediaPipe timestamp for this frame.
+
+        Callers processing recorded video or a live stream should supply its source
+        timestamp. The 30 FPS fallback preserves compatibility with older callers.
+        """
+        candidate = (
+            int(round(timestamp_ms)) if timestamp_ms is not None
+            else int(round(self._frame_index * (1000.0 / 30.0)))
+        )
+        if candidate < 0:
+            raise ValueError("timestamp_ms must be non-negative")
+        if self._last_video_timestamp_ms is not None:
+            candidate = max(candidate, self._last_video_timestamp_ms + 1)
+        self._last_video_timestamp_ms = candidate
+        return candidate
+
+    def process_frame(
+        self,
+        frame_bgr: np.ndarray,
+        timestamp_ms: Optional[float] = None,
+    ) -> Tuple[Optional[np.ndarray], List[Dict], Dict]:
         """
         Processes a single BGR frame in RAM:
         Returns:
@@ -319,8 +341,8 @@ class SingleAuthorityPerception:
             rgb_frame = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
             mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb_frame)
             # VIDEO mode requires a monotonically increasing timestamp in milliseconds.
-            timestamp_ms = int(self._frame_index * (1000.0 / 30.0))
-            result = self.pose_landmarker.detect_for_video(mp_image, timestamp_ms)
+            frame_timestamp_ms = self._resolve_video_timestamp_ms(timestamp_ms)
+            result = self.pose_landmarker.detect_for_video(mp_image, frame_timestamp_ms)
             if result.pose_landmarks:
                 landmarks = result.pose_landmarks[0]  # single tracked person
                 pts = [[lm.x, lm.y, lm.z, lm.visibility] for lm in landmarks]

@@ -2,6 +2,7 @@
 # (EAS re-installs node_modules on the build server, so we never need to upload them.)
 node_modules/
 .expo/
+.audit-web-export/
 dist/
 web-build/
 
@@ -16,4 +17,8 @@ _validate.js
 
 # Nothing below mobile_app needs the Python side, but guard anyway in case of nesting:
 **/venv/
+**/data/
+**/models/
+**/output/
+**/logs/
 **/__pycache__/
